@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class NetProvider internal fun provideApi(): CalculatorApi {
 
-    val apiSource = "https://www.cryptunit.com/"
+    val apiSource = "https://www.cryptunit.com/api/"
 
     val clientBuilder = Builder()
     if (BuildConfig.DEBUG) {

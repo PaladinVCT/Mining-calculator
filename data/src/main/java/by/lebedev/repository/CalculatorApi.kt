@@ -6,14 +6,14 @@ import retrofit2.http.Path
 
 interface CalculatorApi  {
 
-    @GET("{coin}/prices")
-    fun getPrice(@Path("coin") coin: String): Single<Price>
+    @GET("coins")
+    fun getAllCoins(): Single<Coins>
 
-    @GET("{coin}/pool/hashrate")
-    fun getHashrate(@Path("coin") coin: String): Single<Hashrate>
+    @GET("history?{coinId}")
+    fun getCoinHistory(@Path("coinId") coinId: Int): Single<CoinHistory>
 
-    @GET("{coin}/pool/activeminers")
-    fun getMiners(@Path("coin") coin: String): Single<Miners>
+    @GET("algos")
+    fun getAllAlgos(): Single<Algos>
 
     @GET("{coin}/user/{wallet}")
     fun getGeneralInfo(@Path("coin") coin: String, @Path("wallet") wallet: String): Single<GeneralInfo>
