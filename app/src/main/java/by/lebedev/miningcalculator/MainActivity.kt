@@ -1,10 +1,17 @@
 package by.lebedev.miningcalculator
 
-import android.os.Build
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
+import android.graphics.drawable.AnimationDrawable
+import android.view.Menu
+import android.view.MenuItem
+import by.lebedev.miningcalculator.fragments.DashboardFragment
+import kotlinx.android.synthetic.main.dashboard_layout.*
+import kotlinx.android.synthetic.main.main_layout.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,15 +19,18 @@ class MainActivity : AppCompatActivity() {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                textMessage.setText(R.string.title_home)
+
+                val dashboardFragment = DashboardFragment()
+                val ft = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.layoutForInflate, dashboardFragment)
+                ft.commit()
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                textMessage.setText(R.string.title_dashboard)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                textMessage.setText(R.string.title_notifications)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -29,23 +39,50 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.main_layout)
 
-        setTitle(" ");
+        setTitle("  Mining profit calculator");
         getSupportActionBar()?.setDisplayShowHomeEnabled(true)
-        getSupportActionBar()?.setLogo(R.drawable.logo)
+        getSupportActionBar()?.setLogo(R.drawable.logo_activity)
         getSupportActionBar()?.setDisplayUseLogoEnabled(true)
-//        val actionBarBackground = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            getDrawable(R.drawable.background)
-//        } else {
-//            TODO("VERSION.SDK_INT < LOLLIPOP")
-//        }
-//        getSupportActionBar()?.setBackgroundDrawable(actionBarBackground)
 
+        val dashboardFragment = DashboardFragment()
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.layoutForInflate, dashboardFragment)
+        ft.commit()
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        textMessage = findViewById(R.id.message)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        getMenuInflater().inflate(R.menu.dot_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.home -> {
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.about -> {
+
+//                val intent = Intent(this, AboutActivity::class.java)
+//                startActivity(intent)
+                return true
+            }
+            R.id.contacts -> {
+
+//                val intent = Intent(this, ContactsActivity::class.java)
+//                startActivity(intent)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

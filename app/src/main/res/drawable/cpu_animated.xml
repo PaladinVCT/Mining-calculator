@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
     android:oneshot="false">
-    <item android:drawable="@drawable/cpu1" android:duration="100" />
-    <item android:drawable="@drawable/cpu2" android:duration="100" />
-    <item android:drawable="@drawable/cpu3" android:duration="100" />
-    <item android:drawable="@drawable/cpu4" android:duration="100" />
-    <item android:drawable="@drawable/cpu5" android:duration="100" />
-    <item android:drawable="@drawable/cpu6" android:duration="100" />
-    <item android:drawable="@drawable/cpu7" android:duration="100" />
-    <item android:drawable="@drawable/cpu8" android:duration="100" />
-    <item android:drawable="@drawable/cpu9" android:duration="100" />
-    <item android:drawable="@drawable/cpu10" android:duration="100" />
-    <item android:drawable="@drawable/cpu11" android:duration="100" />
-    <item android:drawable="@drawable/cpu12" android:duration="100" />
+    <item android:drawable="@drawable/cpu1" android:duration="300" />
+    <item android:drawable="@drawable/cpu2" android:duration="300" />
+    <item android:drawable="@drawable/cpu3" android:duration="300" />
+    <item android:drawable="@drawable/cpu4" android:duration="300" />
+    <item android:drawable="@drawable/cpu5" android:duration="300" />
+    <item android:drawable="@drawable/cpu6" android:duration="300" />
+    <item android:drawable="@drawable/cpu7" android:duration="300" />
+    <item android:drawable="@drawable/cpu8" android:duration="300" />
+    <item android:drawable="@drawable/cpu9" android:duration="300" />
+    <item android:drawable="@drawable/cpu10" android:duration="300" />
+    <item android:drawable="@drawable/cpu11" android:duration="300" />
+    <item android:drawable="@drawable/cpu12" android:duration="300" />
 
 </animation-list>

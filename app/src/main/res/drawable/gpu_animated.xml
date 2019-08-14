@@ -18,5 +18,12 @@
     <item android:drawable="@drawable/gpu15" android:duration="100" />
     <item android:drawable="@drawable/gpu16" android:duration="100" />
     <item android:drawable="@drawable/gpu17" android:duration="100" />
+    <item android:drawable="@drawable/gpu18" android:duration="100" />
+    <item android:drawable="@drawable/gpu19" android:duration="100" />
+    <item android:drawable="@drawable/gpu20" android:duration="100" />
+    <item android:drawable="@drawable/gpu21" android:duration="100" />
+    <item android:drawable="@drawable/gpu22" android:duration="100" />
+    <item android:drawable="@drawable/gpu23" android:duration="100" />
+    <item android:drawable="@drawable/gpu24" android:duration="100" />
 
 </animation-list>
