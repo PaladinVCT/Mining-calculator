@@ -1,5 +1,6 @@
 package by.lebedev.miningcalculator
 
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
@@ -29,6 +30,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setTitle(" ");
+        getSupportActionBar()?.setDisplayShowHomeEnabled(true)
+        getSupportActionBar()?.setLogo(R.drawable.logo)
+        getSupportActionBar()?.setDisplayUseLogoEnabled(true)
+//        val actionBarBackground = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getDrawable(R.drawable.background)
+//        } else {
+//            TODO("VERSION.SDK_INT < LOLLIPOP")
+//        }
+//        getSupportActionBar()?.setBackgroundDrawable(actionBarBackground)
+
+
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         textMessage = findViewById(R.id.message)

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    android:oneshot="false">
+    <item android:drawable="@drawable/gpu1" android:duration="100" />
+    <item android:drawable="@drawable/gpu2" android:duration="100" />
+    <item android:drawable="@drawable/gpu3" android:duration="100" />
+    <item android:drawable="@drawable/gpu4" android:duration="100" />
+    <item android:drawable="@drawable/gpu5" android:duration="100" />
+    <item android:drawable="@drawable/gpu6" android:duration="100" />
+    <item android:drawable="@drawable/gpu7" android:duration="100" />
+    <item android:drawable="@drawable/gpu8" android:duration="100" />
+    <item android:drawable="@drawable/gpu9" android:duration="100" />
+    <item android:drawable="@drawable/gpu10" android:duration="100" />
+    <item android:drawable="@drawable/gpu11" android:duration="100" />
+    <item android:drawable="@drawable/gpu12" android:duration="100" />
+    <item android:drawable="@drawable/gpu13" android:duration="100" />
+    <item android:drawable="@drawable/gpu14" android:duration="100" />
+    <item android:drawable="@drawable/gpu15" android:duration="100" />
+    <item android:drawable="@drawable/gpu16" android:duration="100" />
+    <item android:drawable="@drawable/gpu17" android:duration="100" />
+
+</animation-list>

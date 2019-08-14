@@ -3,4 +3,16 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="mining_profitability_calculator">Mining profitability calculator</string>
+    <string name="enter_hashrate">Enter hashrate</string>
+    <string name="h_s">H/s</string>
+    <string name="select_your_device">Select your device</string>
+    <string name="hashing_power">Hashing Power</string>
+    <string name="power_consumption">Power consumption</string>
+    <string name="usd">$</string>
+    <string name="usd1">USD</string>
+    <string name="w">W</string>
+    <string name="cost_per_kwh">Cost per KWh</string>
+    <string name="pool_fee">Pool fee</string>
+    <string name="percent">%</string>
 </resources>
