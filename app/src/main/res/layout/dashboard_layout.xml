@@ -1,217 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        android:background="@drawable/background">
 
-    <TextView
-            android:id="@+id/message"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/select_your_device"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"/>
-
-
-    <LinearLayout
-            android:id="@+id/gpuLayout"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:orientation="vertical"
-            android:background="@drawable/edit_text_shape"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/message"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.26">
-
-        <ImageView
-
-                android:id="@+id/gpuImage"
-                android:background="@drawable/gpu_animated"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-        />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-            android:id="@+id/cpuLayout"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/edit_text_shape"
-            app:layout_constraintTop_toBottomOf="@+id/message"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintHorizontal_bias="0.76">
-
-        <ImageView
-                android:id="@+id/cpuImage"
-                android:background="@drawable/cpu_animated"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-        />
-
-    </LinearLayout>
-
-
-    <TextView
-            android:id="@+id/gpuMiningText"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="GPU Mining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/gpuLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintHorizontal_bias="0.28"/>
-
-
-
-
-
-            <TextView
-                    android:id="@+id/cpuMiningText"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:text="CPU Mining"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/gpuLayout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintHorizontal_bias="0.73"/>
-
-
-    <Button
-            android:id="@+id/algoSelectorButton"
-            android:text="Mining Algo"
+    <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/gpuMiningText"/>
+            android:layout_height="wrap_content">
 
 
-    <EditText
-            android:id="@+id/hashrateEditText"
-            android:hint="@string/hashing_power"
-            android:textAlignment="center"
-            android:background="@drawable/edit_text_shape"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/algoSelectorButton"/>
-    <EditText
-            android:id="@+id/powerEditText"
-            android:hint="@string/power_consumption"
-            android:textAlignment="center"
-            android:background="@drawable/edit_text_shape"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/hashrateEditText"/>
-
-    <TextView
-            android:textSize="18sp"
-            android:text="@string/w"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="@+id/powerEditText"
-            app:layout_constraintStart_toEndOf="@+id/hashrateEditText"
-            android:layout_marginStart="8dp"/>
-
-    <EditText
-            android:id="@+id/powerCostEditText"
-            android:hint="@string/cost_per_kwh"
-            android:textAlignment="center"
-            android:background="@drawable/edit_text_shape"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/powerEditText"/>
-
-    <TextView
-            android:textSize="18sp"
-            android:text="@string/usd1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="@+id/powerCostEditText"
-            app:layout_constraintStart_toEndOf="@+id/hashrateEditText"
-            android:layout_marginStart="8dp" android:id="@+id/textView"/>
+        <TextView
+                android:id="@+id/message"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/select_your_device"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"/>
 
 
-    <TextView
-            android:textSize="18sp"
-            android:text="@string/h_s"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="@+id/hashrateEditText"
-            app:layout_constraintStart_toEndOf="@+id/hashrateEditText"
-            android:layout_marginStart="8dp"/>
+        <LinearLayout
+                android:id="@+id/gpuLayout"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:background="@drawable/edit_text_shape"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/message"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.26">
 
-    <EditText
-            android:id="@+id/poolFeeEditText"
-            android:hint="@string/pool_fee"
-            android:textAlignment="center"
-            android:background="@drawable/edit_text_shape"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/powerCostEditText"/>
+            <ImageView
 
-    <TextView
-            android:textSize="18sp"
-            android:text="@string/percent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="@+id/poolFeeEditText"
-            app:layout_constraintStart_toEndOf="@+id/hashrateEditText"
-            android:layout_marginStart="8dp" android:id="@+id/textView2"/>
+                    android:id="@+id/gpuImage"
+                    android:background="@drawable/gpu_animated"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+            />
+
+        </LinearLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+        <LinearLayout
+                android:id="@+id/cpuLayout"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/edit_text_shape"
+                app:layout_constraintTop_toBottomOf="@+id/message"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintHorizontal_bias="0.76">
+
+            <ImageView
+                    android:id="@+id/cpuImage"
+                    android:background="@drawable/cpu_animated"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+            />
+
+        </LinearLayout>
+
+
+        <TextView
+                android:id="@+id/gpuMiningText"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="GPU Mining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/gpuLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintHorizontal_bias="0.28"/>
+
+
+        <TextView
+                android:id="@+id/cpuMiningText"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="CPU Mining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/gpuLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintHorizontal_bias="0.73"/>
+
+
+        <Button
+                android:drawableRight="@drawable/dropdownlist"
+                android:background="@drawable/miningalgo_selector"
+                android:id="@+id/algoSelectorButton"
+                android:text="Mining Algo"
+                android:textStyle="italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                app:layout_constraintTop_toBottomOf="@+id/gpuMiningText"/>
+
+
+        <EditText
+                android:id="@+id/hashrateEditText"
+                android:hint="@string/hashing_power"
+                android:textAlignment="center"
+                android:background="@drawable/edit_text_shape"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/algoSelectorButton"/>
+        <EditText
+                android:id="@+id/powerEditText"
+                android:hint="@string/power_consumption"
+                android:textAlignment="center"
+                android:background="@drawable/edit_text_shape"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/hashrateEditText"/>
+
+        <TextView
+                android:textSize="18sp"
+                android:text="@string/w"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@+id/powerEditText"
+                app:layout_constraintStart_toEndOf="@+id/hashrateEditText"
+                android:layout_marginStart="8dp" android:id="@+id/textView2"/>
+
+        <EditText
+                android:id="@+id/powerCostEditText"
+                android:hint="@string/cost_per_kwh"
+                android:textAlignment="center"
+                android:background="@drawable/edit_text_shape"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/powerEditText"/>
+
+        <TextView
+                android:textSize="18sp"
+                android:text="@string/usd1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@+id/powerCostEditText"
+                app:layout_constraintStart_toEndOf="@+id/hashrateEditText"
+                android:layout_marginStart="8dp" android:id="@+id/usdText"/>
+
+
+        <TextView
+                android:textSize="18sp"
+                android:text="@string/h_s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@+id/hashrateEditText"
+                app:layout_constraintStart_toEndOf="@+id/hashrateEditText"
+                android:layout_marginStart="8dp" android:id="@+id/textView"/>
+
+        <EditText
+                android:id="@+id/poolFeeEditText"
+                android:hint="@string/pool_fee"
+                android:textAlignment="center"
+                android:background="@drawable/edit_text_shape"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/powerCostEditText"/>
+
+        <TextView
+                android:textSize="18sp"
+                android:text="@string/percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@+id/poolFeeEditText"
+                app:layout_constraintStart_toEndOf="@+id/hashrateEditText"
+                android:layout_marginStart="8dp" android:id="@+id/percentText"/>
+
+        <Button
+                android:background="@drawable/calculate_selector"
+                android:id="@+id/calculateButton"
+                android:text="Calculate"
+                android:textStyle="italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/percentText"/>
+
+        <TextView
+                android:layout_marginTop="150dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/calculateButton"
+        />
+    </android.support.constraint.ConstraintLayout>
+
+
+
+
+</ScrollView>
