@@ -126,6 +126,8 @@
         <EditText
                 android:id="@+id/hashrateEditText"
                 android:hint="@string/hashing_power"
+                android:text="@string/_2000"
+                android:inputType="numberDecimal"
                 android:textAlignment="center"
                 android:background="@drawable/edit_text_shape"
                 android:layout_width="200dp"
@@ -138,6 +140,8 @@
                 app:layout_constraintTop_toBottomOf="@id/algoSelectorButton"/>
         <EditText
                 android:id="@+id/powerEditText"
+                android:text="@string/_200"
+                android:inputType="numberDecimal"
                 android:hint="@string/power_consumption"
                 android:textAlignment="center"
                 android:background="@drawable/edit_text_shape"
@@ -163,6 +167,8 @@
         <EditText
                 android:id="@+id/powerCostEditText"
                 android:hint="@string/cost_per_kwh"
+                android:inputType="numberDecimal"
+                android:text="@string/_0_1"
                 android:textAlignment="center"
                 android:background="@drawable/edit_text_shape"
                 android:layout_width="200dp"
@@ -198,6 +204,8 @@
         <EditText
                 android:id="@+id/poolFeeEditText"
                 android:hint="@string/pool_fee"
+                android:inputType="numberDecimal"
+                android:text="@string/_1"
                 android:textAlignment="center"
                 android:background="@drawable/edit_text_shape"
                 android:layout_width="200dp"
@@ -222,7 +230,7 @@
         <Button
                 android:background="@drawable/calculate_selector"
                 android:id="@+id/calculateButton"
-                android:text="Calculate"
+                android:text="@string/calculate"
                 android:textStyle="italic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

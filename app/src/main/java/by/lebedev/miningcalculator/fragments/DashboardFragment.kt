@@ -1,18 +1,21 @@
 package by.lebedev.miningcalculator.fragments
 
 import android.graphics.drawable.AnimationDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import by.lebedev.domain.Algos
 import by.lebedev.miningcalculator.R
 import kotlinx.android.synthetic.main.dashboard_layout.*
-import kotlinx.android.synthetic.main.dashboard_layout.view.*
 
 class DashboardFragment : Fragment() {
+
+    var algos = Algos.instance
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dashboard_layout, container, false)
@@ -22,6 +25,8 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val arrayOfAlgos = arrayOfNulls<String>(algos.list.size)
+        algos.list.toArray(arrayOfAlgos)
 
         gpuMiningText.visibility = View.INVISIBLE
         cpuMiningText.visibility = View.INVISIBLE
@@ -56,6 +61,28 @@ class DashboardFragment : Fragment() {
                     gpuLayout.setBackgroundColor(0)
                 }
             })
+        }
+
+        algoSelectorButton.setOnClickListener {
+            val builder = AlertDialog.Builder(it.context)
+                .setTitle("Select mining algo")
+                .setIcon(R.drawable.algo_icon)
+                .setCancelable(true)
+
+                .setSingleChoiceItems(arrayOfAlgos, -1,
+                    { dialog, item ->
+
+                        coinId = item
+                        setSelectedCoinImage(coinId)
+                        coinName.setText("Selected coin: " + poolCoins.fullName(coinId))
+
+                    })
+
+
+                .setPositiveButton("OK", { dialog, which -> dialog.cancel() })
+                .setNegativeButton("Cancel", { dialog, which -> dialog.cancel() })
+            val alert = builder.create()
+            alert.show()
         }
 
 

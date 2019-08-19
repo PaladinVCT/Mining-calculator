@@ -15,4 +15,9 @@
     <string name="cost_per_kwh">Cost per KWh</string>
     <string name="pool_fee">Pool fee</string>
     <string name="percent">%</string>
+    <string name="calculate">Calculate</string>
+    <string name="_2000">2000</string>
+    <string name="_200">200</string>
+    <string name="_0_1">0.1</string>
+    <string name="_1">1</string>
 </resources>
