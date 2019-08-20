@@ -8,13 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.lebedev.domain.Algos
+import by.lebedev.domain.HashTypeConfigurator
 import by.lebedev.miningcalculator.R
 import kotlinx.android.synthetic.main.dashboard_layout.*
 
 class DashboardFragment : Fragment() {
 
-    var algos = Algos.instance
+    var selectedItem = -1
+    val cryptonight = "Cryptonight"
 
+    var algos = Algos.instance
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,6 +47,9 @@ class DashboardFragment : Fragment() {
                     cpuMiningText.visibility = View.INVISIBLE
                     gpuLayout.setBackgroundResource(R.drawable.edit_text_shape)
                     cpuLayout.setBackgroundColor(0)
+                    algoSelectorButton.setEnabled(true)
+                    algoSelectorButton.text = resources.getText(R.string.select_mining_algo)
+
                 }
             })
         }
@@ -59,6 +65,9 @@ class DashboardFragment : Fragment() {
                     cpuMiningText.visibility = View.VISIBLE
                     cpuLayout.setBackgroundResource(R.drawable.edit_text_shape)
                     gpuLayout.setBackgroundColor(0)
+                    algoSelectorButton.setEnabled(false)
+                    algoSelectorButton.setText(cryptonight)
+                    algos.selectedAlgo = cryptonight
                 }
             })
         }
@@ -72,15 +81,28 @@ class DashboardFragment : Fragment() {
                 .setSingleChoiceItems(arrayOfAlgos, -1,
                     { dialog, item ->
 
-                        coinId = item
-                        setSelectedCoinImage(coinId)
-                        coinName.setText("Selected coin: " + poolCoins.fullName(coinId))
+                        selectedItem = item
 
                     })
 
 
-                .setPositiveButton("OK", { dialog, which -> dialog.cancel() })
-                .setNegativeButton("Cancel", { dialog, which -> dialog.cancel() })
+                .setPositiveButton("OK", { dialog, which ->
+                    if (selectedItem != -1) {
+                        algos.selectedAlgo = arrayOfAlgos[selectedItem]!!
+                        algoSelectorButton.setText(arrayOfAlgos[selectedItem])
+                        hashTypeTextView.setText(HashTypeConfigurator().execute(arrayOfAlgos[selectedItem]!!))
+                    }
+                    if (selectedItem == 0) {
+                        cryptonightInfoTextView.visibility = View.VISIBLE
+                    } else cryptonightInfoTextView.visibility = View.INVISIBLE
+
+                    dialog.cancel()
+                })
+                .setNegativeButton("Cancel", { dialog, which ->
+
+
+                    dialog.cancel()
+                })
             val alert = builder.create()
             alert.show()
         }

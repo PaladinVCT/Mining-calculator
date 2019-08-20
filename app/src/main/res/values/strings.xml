@@ -20,4 +20,8 @@
     <string name="_200">200</string>
     <string name="_0_1">0.1</string>
     <string name="_1">1</string>
+    <string name="select_mining_algo">Select Mining Algo</string>
+    <string name="all_other_cryptonight_algos_will_be_auto_calculated">all other cryptonight algos will be auto
+        calculated
+    </string>
 </resources>
