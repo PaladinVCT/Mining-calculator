@@ -7,7 +7,7 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import by.lebedev.domain.Algos
+import by.lebedev.domain.entities.Algos
 import by.lebedev.domain.HashTypeConfigurator
 import by.lebedev.miningcalculator.R
 import kotlinx.android.synthetic.main.dashboard_layout.*
@@ -48,8 +48,10 @@ class DashboardFragment : Fragment() {
                     gpuLayout.setBackgroundResource(R.drawable.edit_text_shape)
                     cpuLayout.setBackgroundColor(0)
                     algoSelectorButton.setEnabled(true)
+                    calculateButton.setEnabled(false)
                     algoSelectorButton.text = resources.getText(R.string.select_mining_algo)
-
+                    cryptonightInfoTextView.visibility = View.INVISIBLE
+                    algos.selectedAlgo = ""
                 }
             })
         }
@@ -68,6 +70,8 @@ class DashboardFragment : Fragment() {
                     algoSelectorButton.setEnabled(false)
                     algoSelectorButton.setText(cryptonight)
                     algos.selectedAlgo = cryptonight
+                    cryptonightInfoTextView.visibility = View.VISIBLE
+                    calculateButton.setEnabled(true)
                 }
             })
         }
@@ -91,6 +95,7 @@ class DashboardFragment : Fragment() {
                         algos.selectedAlgo = arrayOfAlgos[selectedItem]!!
                         algoSelectorButton.setText(arrayOfAlgos[selectedItem])
                         hashTypeTextView.setText(HashTypeConfigurator().execute(arrayOfAlgos[selectedItem]!!))
+                        calculateButton.setEnabled(true)
                     }
                     if (selectedItem == 0) {
                         cryptonightInfoTextView.visibility = View.VISIBLE

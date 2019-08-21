@@ -1,4 +1,4 @@
-package by.lebedev.domain
+package by.lebedev.domain.entities
 
 import java.util.*
 
