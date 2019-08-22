@@ -2,10 +2,10 @@ package by.lebedev.data.repository.entities
 
 import java.util.*
 
-data class Earning(
+data class EarningResponse(
 
     val hashrate: Double,
     val device: String,
     val updatetime: String,
-    val coins: ArrayList<CoinProfitability>
+    val coins: ArrayList<CoinProfitabilityResponse>
 )

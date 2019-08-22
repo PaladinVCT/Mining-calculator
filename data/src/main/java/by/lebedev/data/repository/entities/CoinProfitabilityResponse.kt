@@ -1,6 +1,6 @@
 package by.lebedev.data.repository.entities
 
-data class CoinProfitability(
+data class CoinProfitabilityResponse(
 
     val coin_id: Int,
     val coin_name: String,

@@ -3,7 +3,7 @@ package by.lebedev.domain
 class HashTypeConfigurator {
 
 
-    fun execute(algo: String): String {
+    fun getHashType(algo: String): String {
         when (algo) {
             "Cryptonight" -> {
                 return "H/s"

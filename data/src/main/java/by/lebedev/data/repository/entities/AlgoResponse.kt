@@ -1,6 +1,6 @@
 package by.lebedev.data.repository.entities
 
-data class Algo(
+data class AlgoResponse(
     val id: Int,
     val name: String,
     val shortname: String,

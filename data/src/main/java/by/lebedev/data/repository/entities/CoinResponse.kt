@@ -1,6 +1,6 @@
 package by.lebedev.data.repository.entities
 
-data class Coin(
+data class CoinResponse(
 
     val id: Int,
     val name: String,

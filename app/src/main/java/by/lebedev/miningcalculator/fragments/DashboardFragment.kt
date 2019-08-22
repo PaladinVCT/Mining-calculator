@@ -94,7 +94,7 @@ class DashboardFragment : Fragment() {
                     if (selectedItem != -1) {
                         algos.selectedAlgo = arrayOfAlgos[selectedItem]!!
                         algoSelectorButton.setText(arrayOfAlgos[selectedItem])
-                        hashTypeTextView.setText(HashTypeConfigurator().execute(arrayOfAlgos[selectedItem]!!))
+                        hashTypeTextView.setText(HashTypeConfigurator().getHashType(arrayOfAlgos[selectedItem]!!))
                         calculateButton.setEnabled(true)
                     }
                     if (selectedItem == 0) {
@@ -111,6 +111,19 @@ class DashboardFragment : Fragment() {
             val alert = builder.create()
             alert.show()
         }
+
+
+        calculateButton.setOnClickListener {
+
+            
+
+        }
+
+
+
+
+
+
 
 
     }

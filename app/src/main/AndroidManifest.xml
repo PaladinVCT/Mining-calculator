@@ -23,6 +23,7 @@
         <activity android:name=".MainActivity"
                   android:screenOrientation="portrait"
                   android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".ResultDashboardAtvity"/>
     </application>
 
 </manifest>
