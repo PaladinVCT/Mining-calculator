@@ -20,6 +20,6 @@ interface CalculatorApi  {
     fun getAllAlgos(): Single<ArrayList<AlgoResponse>>
 
     @GET("earnings/?hashrate={hashrate}&device={device}")
-    fun getGeneralInfo(@Path("hashrate") hashrate: Long, @Path("device") device: String): Single<ArrayList<EarningResponse>>
+    fun getEarningInfo(@Path("hashrate") hashrate: Long, @Path("device") device: String): Single<EarningResponse>
 
 }

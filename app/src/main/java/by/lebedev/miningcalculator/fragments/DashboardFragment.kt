@@ -14,10 +14,14 @@ import kotlinx.android.synthetic.main.dashboard_layout.*
 
 class DashboardFragment : Fragment() {
 
+    val gpu = "GPU"
+    val cpu = "CPU"
+
     var selectedItem = -1
+    var device = " "
     val cryptonight = "Cryptonight"
 
-    var algos = Algos.instance
+    val algos = Algos.instance
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -52,6 +56,7 @@ class DashboardFragment : Fragment() {
                     algoSelectorButton.text = resources.getText(R.string.select_mining_algo)
                     cryptonightInfoTextView.visibility = View.INVISIBLE
                     algos.selectedAlgo = ""
+                    device = gpu
                 }
             })
         }
@@ -70,6 +75,7 @@ class DashboardFragment : Fragment() {
                     algoSelectorButton.setEnabled(false)
                     algoSelectorButton.setText(cryptonight)
                     algos.selectedAlgo = cryptonight
+                    device = cpu
                     cryptonightInfoTextView.visibility = View.VISIBLE
                     calculateButton.setEnabled(true)
                 }
@@ -115,7 +121,7 @@ class DashboardFragment : Fragment() {
 
         calculateButton.setOnClickListener {
 
-            
+            val coinsArray = getProfitableCoins(selectedItem,hashrateEditText.text,device)
 
         }
 

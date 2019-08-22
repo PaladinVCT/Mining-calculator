@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class NetProvider internal fun provideApi(): CalculatorApi {
+class NetProvider fun provideApi(): CalculatorApi {
 
     val apiSource = "https://www.cryptunit.com/api/"
 
