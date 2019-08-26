@@ -4,8 +4,8 @@ import java.util.*
 
 data class EarningResponse(
 
-    val hashrate: Double,
-    val device: String,
-    val updatetime: String,
-    val coins: ArrayList<CoinProfitabilityResponse>
+    var hashrate: Double,
+    var device: String,
+    var updatetime: String,
+    var coins: ArrayList<CoinProfitabilityResponse>
 )

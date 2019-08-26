@@ -1,4 +1,4 @@
-package by.lebedev.miningcalculator.coinresultrecycler
+package by.lebedev.miningcalculator.earningsrecycler
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -7,7 +7,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_coin.view.*
 
 
-class CoinsResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class EarningsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(coinProfitability: CoinProfitability) {
 
@@ -16,7 +16,7 @@ class CoinsResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
         itemView.coinNameTextView.setText(coinProfitability.coinName)
         itemView.algoTextView.setText(coinProfitability.algoName)
-        itemView.hashPowerTextView.setText(coinProfitability.hashrate.toString())
+        itemView.hashPowerTextView.setText(coinProfitability.hashrateAuto.toString())
         itemView.dailyUsdTextView.setText(coinProfitability.rewardDayUsd.toString())
         itemView.dailyCoinsTextView.setText(coinProfitability.rewardDayCoins.toString())
         itemView.monthlyUsdTextView.setText(coinProfitability.rewardMonthUsd.toString())

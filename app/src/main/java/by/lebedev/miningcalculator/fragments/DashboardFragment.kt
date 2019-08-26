@@ -1,5 +1,6 @@
 package by.lebedev.miningcalculator.fragments
 
+import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import by.lebedev.domain.entities.Algos
 import by.lebedev.domain.HashTypeConfigurator
+import by.lebedev.miningcalculator.EarningsActivity
 import by.lebedev.miningcalculator.R
 import kotlinx.android.synthetic.main.dashboard_layout.*
 
@@ -100,7 +102,7 @@ class DashboardFragment : Fragment() {
                     if (selectedItem != -1) {
                         algos.selectedAlgo = arrayOfAlgos[selectedItem]!!
                         algoSelectorButton.setText(arrayOfAlgos[selectedItem])
-                        hashTypeTextView.setText(HashTypeConfigurator().getHashType(arrayOfAlgos[selectedItem]!!))
+                        hashTypeTextView.setText(HashTypeConfigurator().get(arrayOfAlgos[selectedItem]!!))
                         calculateButton.setEnabled(true)
                     }
                     if (selectedItem == 0) {
@@ -121,8 +123,11 @@ class DashboardFragment : Fragment() {
 
         calculateButton.setOnClickListener {
 
-            val coinsArray = getProfitableCoins(selectedItem,hashrateEditText.text,device)
-
+            val intent = Intent(this.context,EarningsActivity::class.java)
+            intent.putExtra("selectedItem",selectedItem)
+            intent.putExtra("hashrate",hashrateEditText.text.toString())
+            intent.putExtra("device",device)
+            it.context.startActivity(intent)
         }
 
 

@@ -2,16 +2,16 @@ package by.lebedev.data.repository.entities
 
 data class CoinProfitabilityResponse(
 
-    val coin_id: Int,
-    val coin_name: String,
-    val coin_ticker: String,
-    val algo_id: Int,
-    val algo_name: String,
-    val algo_asic: Boolean,
-    val hashrate_auto: Double,
-    val reward_day_usd: Double,
-    val reward_month_usd: Double,
-    val reward_day_coins: Double,
-    val reward_month_coins: Double,
-    val volume_24h_usd: Double
+    var coin_id: Int,
+    var coin_name: String,
+    var coin_ticker: String,
+    var algo_id: Int,
+    var algo_name: String,
+    var algo_asic: Boolean,
+    var hashrate_auto: Double,
+    var reward_day_usd: Double,
+    var reward_month_usd: Double,
+    var reward_day_coins: Double,
+    var reward_month_coins: Double,
+    var volume_24h_usd: Double
 )
