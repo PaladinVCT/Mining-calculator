@@ -15,24 +15,12 @@ class GetProfitableCoinsUseCaseCryptonight(
 
     override fun fetch(selectedItem: Int, hashrate: Long, device: String): Single<ArrayList<CoinProfitability>> {
 
-         return provideApi().getEarningInfo(hashrate, device)
+        return provideApi().getEarningInfo(hashrate, device)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-             .map {
-                 CoinProfitabilityResponseTransformator().execute(it.coins)
-             }
-//            .subscribe({ result ->
-//
-//                val coinList: ArrayList<CoinProfitability> = ArrayList()
-//                for (i in 0 until result.coins.size) {
-//                    coinList.add(CoinProfitabilityResponseTransformator().execute(result.coins.get(i)))
-//
-//                }
-//
-//
-//            }, {
-//                Log.e("err", it.message)
-//            })
-
+            .map {
+                Log.e("AAA", it.get(0).toString())
+                CoinProfitabilityResponseTransformator().execute(it.get(0).coins)
+            }
     }
 }

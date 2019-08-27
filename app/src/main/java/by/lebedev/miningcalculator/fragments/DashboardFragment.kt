@@ -125,7 +125,7 @@ class DashboardFragment : Fragment() {
 
             val intent = Intent(this.context,EarningsActivity::class.java)
             intent.putExtra("selectedItem",selectedItem)
-            intent.putExtra("hashrate",hashrateEditText.text.toString())
+            intent.putExtra("hashrate",hashrateEditText.text.toString().toLong())
             intent.putExtra("device",device)
             it.context.startActivity(intent)
         }

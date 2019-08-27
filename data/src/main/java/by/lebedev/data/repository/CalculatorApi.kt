@@ -7,7 +7,9 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 import java.util.*
+import kotlin.collections.ArrayList
 
 interface CalculatorApi  {
 
@@ -17,7 +19,7 @@ interface CalculatorApi  {
     @GET("algos")
     fun getAllAlgos(): Single<ArrayList<AlgoResponse>>
 
-    @GET("earnings/?hashrate={hashrate}&device={device}")
-    fun getEarningInfo(@Path("hashrate") hashrate: Long, @Path("device") device: String): Single<EarningResponse>
+    @GET("earnings/")
+    fun getEarningInfo(@Query("hashrate") hashrate: Long, @Query("device") device: String): Single<ArrayList<EarningResponse>>
 
 }

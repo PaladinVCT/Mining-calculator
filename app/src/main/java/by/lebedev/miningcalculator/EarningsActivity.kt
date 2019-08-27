@@ -17,6 +17,11 @@ class EarningsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.earnings_layout)
 
+        val selectedItem = intent.getIntExtra("selectedItem", -1)
+        val hashrate = intent.getLongExtra("hashrate", -1)
+        val device = intent.getStringExtra("device")
+
+        getEarnings(selectedItem, hashrate, device)
 
     }
 
@@ -26,16 +31,12 @@ class EarningsActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                val coinList: ArrayList<CoinProfitability> = ArrayList()
-                for (i in 0 until result.coins.size) {
-                    coinList.add(CoinProfitabilityResponseTransformator().execute(result.coins.get(i)))
+                Log.e("AAA", result.get(0).toString())
 
-                }
-
-                setupRecycler(coinList)
+                setupRecycler(result)
 
             }, {
-                Log.e("err", it.message)
+                Log.e("AAA", it.message)
             })
 
 

@@ -8,7 +8,7 @@
         android:padding="16dp"
         android:orientation="vertical"
         android:background="@drawable/edit_text_shape"
-        android:layout_margin="2dp"
+        android:layout_margin="8dp"
 >
     <LinearLayout
             android:layout_width="match_parent"
@@ -20,8 +20,11 @@
         <ImageView
                 android:id="@+id/coinIconImageView"
                 android:src="@drawable/bitcoinicon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"/>
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="2.5dp"
+                android:layout_marginTop="2.5dp"
+        />
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -56,6 +59,7 @@
 
                 <TextView
                         android:id="@+id/hashPowerTextView"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10000 Mh/s"
@@ -87,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:text="Daily profit: 10000$"
                     android:gravity="center"
+                    android:textColor="#2B5F2D"
                     android:layout_weight="1"/>
 
             <TextView
@@ -95,6 +100,8 @@
                     android:layout_height="wrap_content"
                     android:text="Daily coins: 99999"
                     android:gravity="center"
+                    android:textColor="#134774"
+
                     android:layout_weight="1"/>
 
         </LinearLayout>
@@ -112,6 +119,7 @@
                     android:layout_height="wrap_content"
                     android:text="Monthly profit: 1000000$"
                     android:gravity="center"
+                    android:textColor="#2B5F2D"
                     android:layout_weight="1"/>
 
             <TextView
@@ -120,6 +128,8 @@
                     android:layout_height="wrap_content"
                     android:text="Monthly coins: 9999999"
                     android:gravity="center"
+                    android:textColor="#134774"
+
                     android:layout_weight="1"/>
 
         </LinearLayout>
@@ -127,14 +137,22 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:gravity="center"
         >
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic|bold"
+                    android:text="Volume in 24h: "
+                    android:layout_gravity="center"/>
 
             <TextView
                     android:id="@+id/volumeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Volume in 24h: 99999999999$"
+                    android:text="99999999999$"
                     android:layout_gravity="center"/>
 
 

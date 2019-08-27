@@ -16,11 +16,11 @@ class EarningsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         itemView.coinNameTextView.setText(coinProfitability.coinName)
         itemView.algoTextView.setText(coinProfitability.algoName)
-        itemView.hashPowerTextView.setText(coinProfitability.hashrateAuto.toString())
-        itemView.dailyUsdTextView.setText(coinProfitability.rewardDayUsd.toString())
-        itemView.dailyCoinsTextView.setText(coinProfitability.rewardDayCoins.toString())
-        itemView.monthlyUsdTextView.setText(coinProfitability.rewardMonthUsd.toString())
-        itemView.monthlyCoinsTextView.setText(coinProfitability.rewardMonthCoins.toString())
-        itemView.volumeTextView.setText(coinProfitability.volumeUsd.toString())
+        itemView.hashPowerTextView.setText(coinProfitability.hashrateAuto)
+        itemView.dailyUsdTextView.setText(coinProfitability.rewardDayUsd)
+        itemView.dailyCoinsTextView.setText(coinProfitability.rewardDayCoins)
+        itemView.monthlyUsdTextView.setText(coinProfitability.rewardMonthUsd)
+        itemView.monthlyCoinsTextView.setText(coinProfitability.rewardMonthCoins)
+        itemView.volumeTextView.setText(coinProfitability.volumeUsd)
     }
 }
