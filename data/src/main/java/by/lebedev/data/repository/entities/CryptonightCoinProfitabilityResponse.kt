@@ -1,6 +1,6 @@
 package by.lebedev.data.repository.entities
 
-data class CoinProfitabilityResponse(
+data class CryptonightCoinProfitabilityResponse(
 
     var coin_id: Int,
     var coin_name: String,

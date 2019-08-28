@@ -1,15 +1,15 @@
 package by.lebedev.domain.usecase
 
-import by.lebedev.data.repository.entities.CoinsResponse
-import by.lebedev.data.repository.provideApi
+import by.lebedev.data.repository.entities.CryptonightCoinsResponse
+import by.lebedev.data.repository.provideApiCryptonight
 import io.reactivex.Single
 
 class GetCoinsUseCaseCryptonight(
 ) : GetCoinsUseCase {
 
-    override fun fetch(): Single<ArrayList<CoinsResponse>> {
+    override fun fetch(): Single<ArrayList<CryptonightCoinsResponse>> {
 
-        return provideApi().getAllCoins()
+        return provideApiCryptonight().getAllCoinsCryptonight()
 
 
     }

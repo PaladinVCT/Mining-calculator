@@ -147,7 +147,7 @@
                 android:layout_marginTop="25dp"
                 app:layout_constraintTop_toBottomOf="@id/algoSelectorButton"/>
         <EditText
-                android:id="@+id/powerEditText"
+                android:id="@+id/energyEditText"
                 android:text="@string/_200"
                 android:inputType="numberDecimal"
                 android:hint="@string/power_consumption"
@@ -168,12 +168,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="@+id/powerEditText"
+                app:layout_constraintTop_toTopOf="@+id/energyEditText"
                 app:layout_constraintStart_toEndOf="@+id/hashrateEditText"
                 android:layout_marginStart="8dp" android:id="@+id/textView2"/>
 
         <EditText
-                android:id="@+id/powerCostEditText"
+                android:id="@+id/energyCostEditText"
                 android:hint="@string/cost_per_kwh"
                 android:inputType="numberDecimal"
                 android:text="@string/_0_1"
@@ -186,15 +186,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/powerEditText"/>
+                app:layout_constraintTop_toBottomOf="@+id/energyEditText"/>
 
         <TextView
                 android:textSize="18sp"
-                android:text="@string/usd1"
+                android:text="$/kWh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="@+id/powerCostEditText"
+                app:layout_constraintTop_toTopOf="@+id/energyCostEditText"
                 app:layout_constraintStart_toEndOf="@+id/hashrateEditText"
                 android:layout_marginStart="8dp" android:id="@+id/usdText"/>
 
@@ -225,7 +225,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/powerCostEditText"/>
+                app:layout_constraintTop_toBottomOf="@+id/energyCostEditText"/>
 
         <TextView
                 android:textSize="18sp"

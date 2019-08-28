@@ -2,10 +2,10 @@ package by.lebedev.data.repository.entities
 
 import java.util.*
 
-data class EarningResponse(
+data class CryptonightEarningResponse(
 
     var hashrate: Double,
     var device: String,
     var updatetime: String,
-    var coins: ArrayList<CoinProfitabilityResponse>
+    var coins: ArrayList<CryptonightCoinProfitabilityResponse>
 )

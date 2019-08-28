@@ -2,25 +2,27 @@ package by.lebedev.miningcalculator.earningsrecycler
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import by.lebedev.domain.entities.CoinProfitability
+import by.lebedev.domain.entities.CoinProfitabilityString
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_coin.view.*
 
 
 class EarningsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(coinProfitability: CoinProfitability) {
+    fun bind(coinProfitabilityString: CoinProfitabilityString) {
 
-        Picasso.get().load(coinProfitability.imageUrl)
+        Picasso.get().load(coinProfitabilityString.imageUrl)
             .into(itemView.coinIconImageView)
 
-        itemView.coinNameTextView.setText(coinProfitability.coinName)
-        itemView.algoTextView.setText(coinProfitability.algoName)
-        itemView.hashPowerTextView.setText(coinProfitability.hashrateAuto)
-        itemView.dailyUsdTextView.setText(coinProfitability.rewardDayUsd)
-        itemView.dailyCoinsTextView.setText(coinProfitability.rewardDayCoins)
-        itemView.monthlyUsdTextView.setText(coinProfitability.rewardMonthUsd)
-        itemView.monthlyCoinsTextView.setText(coinProfitability.rewardMonthCoins)
-        itemView.volumeTextView.setText(coinProfitability.volumeUsd)
+        itemView.coinNameTextView.setText(coinProfitabilityString.coinName)
+        itemView.algoTextView.setText(coinProfitabilityString.algoName)
+        itemView.hashPowerTextView.setText(coinProfitabilityString.hashrateAuto)
+        itemView.dailyUsdTextView.setText(coinProfitabilityString.rewardDayUsd)
+//        itemView.dailyUsdActualTextView.setText(coinProfitabilityString.rewardDayUsdActual)
+        itemView.dailyCoinsTextView.setText(coinProfitabilityString.rewardDayCoins)
+        itemView.monthlyUsdTextView.setText(coinProfitabilityString.rewardMonthUsd)
+//        itemView.monthlyUsdActualTextView.setText(coinProfitabilityString.rewardMonthUsdActual)
+        itemView.monthlyCoinsTextView.setText(coinProfitabilityString.rewardMonthCoins)
+        itemView.volumeTextView.setText(coinProfitabilityString.volumeUsd)
     }
 }

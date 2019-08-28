@@ -13,4 +13,12 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:id="@+id/earningsProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+    />
+
 </FrameLayout>

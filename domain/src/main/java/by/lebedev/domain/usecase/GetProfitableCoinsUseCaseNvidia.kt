@@ -1,24 +1,26 @@
 package by.lebedev.domain.usecase
 
 import android.util.Log
-import by.lebedev.data.repository.provideApiCryptonight
+import by.lebedev.data.repository.provideApiNvidia
+import by.lebedev.domain.entities.Algos
 import by.lebedev.domain.transformators.CoinProfitabilityResponseTransformatorCryptonight
 import by.lebedev.domain.entities.CoinProfitability
+import by.lebedev.domain.transformators.CoinProfitabilityResponseTransformatorNvidia
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class GetProfitableCoinsUseCaseCryptonight(
+class GetProfitableCoinsUseCaseNvidia(
 ) : GetProfitableCoinsUseCase {
 
     override fun fetch(selectedItem: Int, hashrate: Long, device: String): Single<ArrayList<CoinProfitability>> {
 
-        return provideApiCryptonight().getEarningsCryptonight(hashrate, device)
+        return provideApiNvidia().getEarningsNvidia(hashrate, Algos.instance.list.get(selectedItem))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map {
                 Log.e("AAA", it.get(0).toString())
-                CoinProfitabilityResponseTransformatorCryptonight().execute(it.get(0).coins)
+                CoinProfitabilityResponseTransformatorNvidia().execute(it)
             }
     }
 }

@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.lebedev.domain.entities.Algos
-import by.lebedev.domain.HashTypeConfigurator
+import by.lebedev.domain.transformators.HashTypeConfigurator
 import by.lebedev.miningcalculator.EarningsActivity
 import by.lebedev.miningcalculator.R
 import kotlinx.android.synthetic.main.dashboard_layout.*
@@ -58,6 +58,7 @@ class DashboardFragment : Fragment() {
                     algoSelectorButton.text = resources.getText(R.string.select_mining_algo)
                     cryptonightInfoTextView.visibility = View.INVISIBLE
                     algos.selectedAlgo = ""
+                    hashTypeTextView.setText("H/s")
                     device = gpu
                 }
             })
@@ -77,6 +78,8 @@ class DashboardFragment : Fragment() {
                     algoSelectorButton.setEnabled(false)
                     algoSelectorButton.setText(cryptonight)
                     algos.selectedAlgo = cryptonight
+                    selectedItem = 0
+                    hashTypeTextView.setText("H/s")
                     device = cpu
                     cryptonightInfoTextView.visibility = View.VISIBLE
                     calculateButton.setEnabled(true)
@@ -102,7 +105,7 @@ class DashboardFragment : Fragment() {
                     if (selectedItem != -1) {
                         algos.selectedAlgo = arrayOfAlgos[selectedItem]!!
                         algoSelectorButton.setText(arrayOfAlgos[selectedItem])
-                        hashTypeTextView.setText(HashTypeConfigurator().get(arrayOfAlgos[selectedItem]!!))
+                        hashTypeTextView.setText(HashTypeConfigurator().getTypeFromName(arrayOfAlgos[selectedItem]!!))
                         calculateButton.setEnabled(true)
                     }
                     if (selectedItem == 0) {
@@ -127,6 +130,10 @@ class DashboardFragment : Fragment() {
             intent.putExtra("selectedItem",selectedItem)
             intent.putExtra("hashrate",hashrateEditText.text.toString().toLong())
             intent.putExtra("device",device)
+            intent.putExtra("energy",energyEditText.text.toString().toDouble())
+            intent.putExtra("energyCost",energyCostEditText.text.toString().toDouble())
+            intent.putExtra("fee",poolFeeEditText.text.toString().toDouble())
+
             it.context.startActivity(intent)
         }
 

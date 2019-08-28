@@ -7,9 +7,9 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class NetProvider fun provideApi(): CalculatorApi {
+class NetProviderNvidia fun provideApiNvidia(): NvidiaApi {
 
-    val apiSource = "https://www.cryptunit.com/api/"
+    val apiSource = "https://www.coincalculators.io/"
 
     val clientBuilder = Builder()
     if (BuildConfig.DEBUG) {
@@ -26,5 +26,5 @@ class NetProvider fun provideApi(): CalculatorApi {
         .client(okhttp)
         .build()
 
-    return retrofit.create(CalculatorApi::class.java)
+    return retrofit.create(NvidiaApi::class.java)
 }

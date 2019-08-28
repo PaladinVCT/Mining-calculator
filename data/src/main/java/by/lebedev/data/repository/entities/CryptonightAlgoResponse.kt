@@ -1,6 +1,6 @@
 package by.lebedev.data.repository.entities
 
-data class AlgoResponse(
+data class CryptonightAlgoResponse(
     val id: Int,
     val name: String,
     val shortname: String,

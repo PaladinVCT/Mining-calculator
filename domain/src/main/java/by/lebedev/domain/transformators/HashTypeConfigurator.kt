@@ -1,9 +1,9 @@
-package by.lebedev.domain
+package by.lebedev.domain.transformators
 
 class HashTypeConfigurator {
 
 
-    fun get(algo: String): String {
+    fun getTypeFromName(algo: String): String {
         when (algo) {
             "Cryptonight" -> {
                 return "H/s"
@@ -63,4 +63,22 @@ class HashTypeConfigurator {
         }
 
     }
+
+    fun getDigitsFromType(algoType: String): Int {
+        when (algoType) {
+            "H/s" -> {
+                return 1
+            }
+            "Kh/s" -> {
+                return 1000
+            }
+            "Mh/s" -> {
+                return 1000000
+            }
+            else -> return 1
+        }
+
+    }
+
+
 }

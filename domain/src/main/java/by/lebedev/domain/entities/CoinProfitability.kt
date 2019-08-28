@@ -2,14 +2,17 @@ package by.lebedev.domain.entities
 
 data class CoinProfitability(
 
-    val imageUrl:String,
-    val coinName: String,
-    val algoId: Int,
-    val algoName: String,
-    val hashrateAuto: String,
-    var rewardDayUsd: String,
-    val rewardMonthUsd: String,
-    val rewardDayCoins: String,
-    val rewardMonthCoins: String,
-    val volumeUsd: String
+    var imageUrl:String,
+    var coinName: String,
+    var coinTicker: String,
+    var algoId: Int,
+    var algoName: String,
+    var hashrateAuto: String,
+    var rewardDayUsd: Double,
+    var rewardDayUsdActual: Double,
+    var rewardMonthUsd: Double,
+    var rewardMonthUsdActual: Double,
+    var rewardDayCoins: Double,
+    var rewardMonthCoins: Double,
+    var volumeUsd: Double
 )
