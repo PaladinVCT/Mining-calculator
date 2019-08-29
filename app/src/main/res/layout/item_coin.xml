@@ -7,14 +7,16 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/edit_text_shape"
+        android:background="@drawable/item_coin_style"
         android:layout_margin="8dp"
+
 >
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@drawable/edit_text_shape"
+            android:background="@drawable/item_coin_style_inner"
+
     >
 
         <ImageView
@@ -42,7 +44,8 @@
                     android:textColor="@color/cBlack"/>
 
             <LinearLayout
-                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"

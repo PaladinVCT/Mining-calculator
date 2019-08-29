@@ -5,4 +5,5 @@
     <color name="colorAccent">#1E88E5</color>
     <color name="red_info">#BB0707</color>
     <color name="cBlack">#111111</color>
+    <color name="inactive_tab">#979797</color>
 </resources>

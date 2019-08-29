@@ -7,13 +7,13 @@
         android:title="Dashboard" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/hardware"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="Hardware" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/coinRates"
         android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="Info" />
+        android:title="Coins" />
 
 </menu>

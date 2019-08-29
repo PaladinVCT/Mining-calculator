@@ -16,7 +16,7 @@
             android:textSize="24dp"
             android:padding="16dp"
             android:textAlignment="center"
-            android:text="CryptoNight Mining Calculator"
+            android:text="CryptoCurrency Mining Calculator"
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

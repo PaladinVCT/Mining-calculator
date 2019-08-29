@@ -8,7 +8,7 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import by.lebedev.domain.entities.Algos
+import by.lebedev.domain.collections.Algos
 import by.lebedev.domain.transformators.HashTypeConfigurator
 import by.lebedev.miningcalculator.EarningsActivity
 import by.lebedev.miningcalculator.R

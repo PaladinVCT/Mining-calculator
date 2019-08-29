@@ -2,8 +2,7 @@ package by.lebedev.domain.usecase
 
 import android.util.Log
 import by.lebedev.data.repository.provideApiNvidia
-import by.lebedev.domain.entities.Algos
-import by.lebedev.domain.transformators.CoinProfitabilityResponseTransformatorCryptonight
+import by.lebedev.domain.collections.Algos
 import by.lebedev.domain.entities.CoinProfitability
 import by.lebedev.domain.transformators.CoinProfitabilityResponseTransformatorNvidia
 import io.reactivex.Single

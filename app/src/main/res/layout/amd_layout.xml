@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/rigLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+                android:textStyle="bold|italic"
+                android:textSize="18sp"
+                android:text="Build your rig: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"/>
+
+        <TextView
+                android:textStyle="bold|italic"
+                android:textSize="18sp"
+                android:text="0 devices "
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <Button
+            android:id="@+id/calculateRigButton"
+            android:enabled="false"
+            android:background="@drawable/calculate_selector"
+            android:text="@string/calculate"
+            android:textStyle="italic"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/rigLayout"/>
+
+    <ImageView
+            android:id="@+id/lineSeparator"
+            android:layout_width="match_parent"
+            android:background="@drawable/line_razd"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/calculateRigButton"/>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/amdDevicesRecycle"
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/lineSeparator"/>
+
+
+
+</android.support.constraint.ConstraintLayout>
