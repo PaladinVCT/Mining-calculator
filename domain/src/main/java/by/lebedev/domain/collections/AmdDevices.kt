@@ -6,6 +6,8 @@ import java.util.*
 
 class AmdDevices {
 
+    var devicesCount:Int = 0
+
     val list: ArrayList<Device> = arrayListOf(
         Amd(0, "RX 460", 400,0),
         Amd(1, "RX 470", 700,0),

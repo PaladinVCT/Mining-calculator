@@ -3,10 +3,12 @@ package by.lebedev.miningcalculator.recyclers.devicesrecycler
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.RemoteViews
 import by.lebedev.domain.collections.AmdDevices
 import by.lebedev.domain.entities.Device
 import by.lebedev.miningcalculator.R
@@ -30,19 +32,22 @@ class DevicesAdapter(
         plus.setOnClickListener {
             deviceCounter.setText((++AmdDevices.instance.list.get(holder.adapterPosition).count).toString())
             holder.itemView.item_coin.background = it.context.getDrawable(R.drawable.selected_device_shape)
+            ++AmdDevices.instance.devicesCount
+
+            Log.e("AAA", AmdDevices.instance.devicesCount.toString())
         }
 
         minus.setOnClickListener {
             if (AmdDevices.instance.list.get(holder.adapterPosition).count > 0) {
                 deviceCounter.setText((--AmdDevices.instance.list.get(holder.adapterPosition).count).toString())
+                --AmdDevices.instance.devicesCount
+
+                Log.e("AAA", AmdDevices.instance.devicesCount.toString())
             }
             if (AmdDevices.instance.list.get(holder.adapterPosition).count == 0) {
                 holder.itemView.item_coin.background = it.context.getDrawable(R.drawable.device_shape)
             }
-
         }
-
-
         return holder
     }
 
