@@ -1,4 +1,4 @@
-package by.lebedev.miningcalculator.earningsrecycler
+package by.lebedev.miningcalculator.recyclers.earningsrecycler
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

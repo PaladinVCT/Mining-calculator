@@ -6,4 +6,5 @@
     <color name="red_info">#BB0707</color>
     <color name="cBlack">#111111</color>
     <color name="inactive_tab">#979797</color>
+    <color name="selected_green">#E3F1D3</color>
 </resources>

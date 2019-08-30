@@ -6,18 +6,17 @@ import java.util.*
 class AmdImages {
 
     val list: ArrayList<Int> = arrayListOf(
-    R.drawable.RX460,
-    R.drawable.RX470,
-    R.drawable.RX480,
-    R.drawable.RX550,
-    R.drawable.RX560,
-    R.drawable.RX570,
-    R.drawable.RX580,
-    R.drawable.FuryX,
-    R.drawable.Frontier,
-    R.drawable.Vega56,
-    R.drawable.Vega64
-
+        R.drawable.rx460,
+        R.drawable.rx470,
+        R.drawable.rx480,
+        R.drawable.rx550,
+        R.drawable.rx560,
+        R.drawable.rx570,
+        R.drawable.rx580,
+        R.drawable.furyx,
+        R.drawable.frontier,
+        R.drawable.vega56,
+        R.drawable.vega64
 
     )
 

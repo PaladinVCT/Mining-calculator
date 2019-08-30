@@ -15,7 +15,7 @@ import by.lebedev.domain.entities.CoinProfitabilityString
 import by.lebedev.domain.transformators.HashTypeConfigurator
 import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseCryptonight
 import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseNvidia
-import by.lebedev.miningcalculator.earningsrecycler.EarningsAdapter
+import by.lebedev.miningcalculator.recyclers.earningsrecycler.EarningsAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.earnings_layout.*

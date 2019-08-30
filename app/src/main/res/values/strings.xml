@@ -24,4 +24,6 @@
     <string name="all_other_cryptonight_algos_will_be_auto_calculated">all other cryptonight algos will be auto
         calculated
     </string>
+    <string name="calculate_rig">calculate your rig</string>
+    <string name="clear_all">clear all</string>
 </resources>

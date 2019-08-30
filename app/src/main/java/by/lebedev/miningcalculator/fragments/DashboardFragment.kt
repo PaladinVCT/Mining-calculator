@@ -94,14 +94,14 @@ class DashboardFragment : Fragment() {
                 .setCancelable(true)
 
                 .setSingleChoiceItems(arrayOfAlgos, -1,
-                    { dialog, item ->
+                    { _, item ->
 
                         selectedItem = item
 
                     })
 
 
-                .setPositiveButton("OK", { dialog, which ->
+                .setPositiveButton("OK", { dialog, _ ->
                     if (selectedItem != -1) {
                         algos.selectedAlgo = arrayOfAlgos[selectedItem]!!
                         algoSelectorButton.setText(arrayOfAlgos[selectedItem])
@@ -114,7 +114,7 @@ class DashboardFragment : Fragment() {
 
                     dialog.cancel()
                 })
-                .setNegativeButton("Cancel", { dialog, which ->
+                .setNegativeButton("Cancel", { dialog, _ ->
 
 
                     dialog.cancel()
