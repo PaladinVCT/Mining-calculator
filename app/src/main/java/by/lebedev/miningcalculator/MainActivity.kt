@@ -8,14 +8,16 @@ import android.widget.TextView
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import by.lebedev.domain.collections.AmdDevices
 import by.lebedev.miningcalculator.fragments.DashboardFragment
 import by.lebedev.miningcalculator.fragments.DevicesFragment
+import by.lebedev.miningcalculator.recyclers.devicesrecycler.DevicesAdapter
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DevicesAdapter.RigInterface {
+
 
     private var back_pressed: Long = 0
-    private lateinit var textMessage: TextView
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
@@ -104,5 +106,13 @@ class MainActivity : AppCompatActivity() {
 
         back_pressed = System.currentTimeMillis()
     }
+
+    override fun setupRigDevices() {
+        val rigDeviceCounter = findViewById<TextView>(R.id.rigDeviceCounter)
+        rigDeviceCounter.setText(AmdDevices.instance.devicesCount.toString())
+
+    }
+
+
 
 }

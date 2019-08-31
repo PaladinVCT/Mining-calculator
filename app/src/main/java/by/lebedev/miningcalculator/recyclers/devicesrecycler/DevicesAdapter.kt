@@ -1,5 +1,6 @@
 package by.lebedev.miningcalculator.recyclers.devicesrecycler
 
+import android.content.Context
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v7.widget.RecyclerView
@@ -12,14 +13,32 @@ import android.widget.RemoteViews
 import by.lebedev.domain.collections.AmdDevices
 import by.lebedev.domain.entities.Device
 import by.lebedev.miningcalculator.R
+import by.lebedev.miningcalculator.fragments.AmdFragment
 import kotlinx.android.synthetic.main.item_device.view.*
 
-class DevicesAdapter(
+class DevicesAdapter(private val context: Context,
     private val devices: ArrayList<Device>
 ) : RecyclerView.Adapter<DevicesViewHolder>() {
 
+    lateinit var rigInterface:RigInterface
+
+    interface RigInterface {
+        fun setupRigDevices()
+    }
+
+
+
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        rigInterface = context as RigInterface
+        super.onAttachedToRecyclerView(recyclerView)
+    }
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): DevicesViewHolder {
+
+
+
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item_device, viewGroup, false)
         val holder = DevicesViewHolder(view)
@@ -31,8 +50,11 @@ class DevicesAdapter(
 
         plus.setOnClickListener {
             deviceCounter.setText((++AmdDevices.instance.list.get(holder.adapterPosition).count).toString())
-            holder.itemView.item_coin.background = it.context.getDrawable(R.drawable.selected_device_shape)
+            holder.itemView.item_device.background = it.context.getDrawable(R.drawable.selected_device_shape)
             ++AmdDevices.instance.devicesCount
+            rigInterface.setupRigDevices()
+
+            holder.itemView.invalidate()
 
             Log.e("AAA", AmdDevices.instance.devicesCount.toString())
         }
@@ -41,11 +63,18 @@ class DevicesAdapter(
             if (AmdDevices.instance.list.get(holder.adapterPosition).count > 0) {
                 deviceCounter.setText((--AmdDevices.instance.list.get(holder.adapterPosition).count).toString())
                 --AmdDevices.instance.devicesCount
+                rigInterface.setupRigDevices()
+
+                holder.itemView.invalidate()
 
                 Log.e("AAA", AmdDevices.instance.devicesCount.toString())
             }
             if (AmdDevices.instance.list.get(holder.adapterPosition).count == 0) {
-                holder.itemView.item_coin.background = it.context.getDrawable(R.drawable.device_shape)
+                holder.itemView.item_device.background = it.context.getDrawable(R.drawable.device_shape)
+                rigInterface.setupRigDevices()
+
+                holder.itemView.invalidate()
+
             }
         }
         return holder
