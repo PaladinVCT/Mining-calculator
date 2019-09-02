@@ -1,20 +1,25 @@
 package by.lebedev.miningcalculator
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
+import android.view.Gravity
 import android.widget.TextView
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.Toast
 import by.lebedev.domain.collections.AmdDevices
+import by.lebedev.miningcalculator.fragments.AmdFragment
 import by.lebedev.miningcalculator.fragments.DashboardFragment
 import by.lebedev.miningcalculator.fragments.DevicesFragment
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.DevicesAdapter
 
 
-class MainActivity : AppCompatActivity(), DevicesAdapter.RigInterface {
+class MainActivity : AppCompatActivity(), DevicesAdapter.RigInterface,AmdFragment.SetupDevicesAtStartup,AmdFragment.ClearAllDevices {
+
 
 
     private var back_pressed: Long = 0
@@ -108,11 +113,61 @@ class MainActivity : AppCompatActivity(), DevicesAdapter.RigInterface {
     }
 
     override fun setupRigDevices() {
-        val rigDeviceCounter = findViewById<TextView>(R.id.rigDeviceCounter)
-        rigDeviceCounter.setText(AmdDevices.instance.devicesCount.toString())
+        setNumberDevicesInRig()
+        execute()
+    }
+
+    override fun execute() {
+        val deviceNameLayout = findViewById<LinearLayout>(R.id.deviceNameLayout)
+        val deviceCountLayout = findViewById<LinearLayout>(R.id.deviceCountLayout)
+
+        deviceNameLayout.removeAllViews()
+        deviceCountLayout.removeAllViews()
+
+        for (i in 0 until AmdDevices.instance.list.size) {
+            if (AmdDevices.instance.list.get(i).count > 0) {
+                val name = TextView(this)
+                name.setTypeface(null, Typeface.BOLD_ITALIC)
+                name.textSize = 14f
+                name.gravity = Gravity.CENTER
+                name.text = AmdDevices.instance.list.get(i).name
+                deviceNameLayout.addView(name)
+
+                val count = TextView(this)
+                count.setTypeface(null, Typeface.BOLD_ITALIC)
+                count.textSize = 14f
+                count.gravity = Gravity.CENTER
+
+                count.text = "x ".plus(AmdDevices.instance.list.get(i).count.toString())
+
+                deviceCountLayout.addView(count)
+
+                setNumberDevicesInRig()
+            }
+        }
+
 
     }
 
+    fun setNumberDevicesInRig() {
+        val rigDeviceCounter = findViewById<TextView>(R.id.rigDeviceCounter)
+        rigDeviceCounter.setText(AmdDevices.instance.devicesCount.toString().plus(" devices"))
+    }
 
+    override fun clear() {
+        val deviceNameLayout = findViewById<LinearLayout>(R.id.deviceNameLayout)
+        val deviceCountLayout = findViewById<LinearLayout>(R.id.deviceCountLayout)
+
+        deviceNameLayout.removeAllViews()
+        deviceCountLayout.removeAllViews()
+
+        for (i in 0 until AmdDevices.instance.list.size){
+            AmdDevices.instance.list.get(i).count = 0
+        }
+        AmdDevices.instance.devicesCount = 0
+
+        setNumberDevicesInRig()
+
+    }
 
 }

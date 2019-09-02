@@ -26,4 +26,6 @@
     </string>
     <string name="calculate_rig">calculate your rig</string>
     <string name="clear_all">clear all</string>
+    <string name="_0_devices">0 devices</string>
+    <string name="build_your_rig">Build your rig:</string>
 </resources>
