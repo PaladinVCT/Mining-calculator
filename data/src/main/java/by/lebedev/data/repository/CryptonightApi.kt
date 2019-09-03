@@ -17,6 +17,6 @@ interface CryptonightApi  {
     fun getAllAlgos(): Single<ArrayList<CryptonightAlgoResponse>>
 
     @GET("earnings/")
-    fun getEarningsCryptonight(@Query("hashrate") hashrate: Long, @Query("device") device: String): Single<ArrayList<CryptonightEarningResponse>>
+    fun getEarningsCryptonight(@Query("hashrate") hashrate: Double, @Query("device") device: String): Single<ArrayList<CryptonightEarningResponse>>
 
 }

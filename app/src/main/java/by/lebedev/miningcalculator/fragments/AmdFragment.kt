@@ -1,5 +1,6 @@
 package by.lebedev.miningcalculator.fragments
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.annotation.StyleRes
@@ -13,6 +14,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import by.lebedev.domain.collections.AmdDevices
 import by.lebedev.domain.entities.Device
+import by.lebedev.domain.transformators.HashPowerAggregator
+import by.lebedev.miningcalculator.EarningsActivity
 import by.lebedev.miningcalculator.MainActivity
 import by.lebedev.miningcalculator.R
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.DevicesAdapter
@@ -49,6 +52,14 @@ class AmdFragment() : Fragment() {
 
 
         calculateRigButton.setOnClickListener {
+
+            val intent = Intent(this.context, EarningsActivity::class.java)
+            intent.putExtra("selectedItem",0)
+            intent.putExtra("hashrate",HashPowerAggregator().execute(AmdDevices.instance.list))
+            intent.putExtra("device","GPU")
+
+            it.context.startActivity(intent)
+
         }
 
 

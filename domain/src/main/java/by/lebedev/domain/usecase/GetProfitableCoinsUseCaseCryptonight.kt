@@ -11,7 +11,7 @@ import io.reactivex.schedulers.Schedulers
 class GetProfitableCoinsUseCaseCryptonight(
 ) : GetProfitableCoinsUseCase {
 
-    override fun fetch(selectedItem: Int, hashrate: Long, device: String): Single<ArrayList<CoinProfitability>> {
+    override fun fetch(selectedItem: Int, hashrate: Double, device: String): Single<ArrayList<CoinProfitability>> {
 
         return provideApiCryptonight().getEarningsCryptonight(hashrate, device)
             .subscribeOn(Schedulers.io())

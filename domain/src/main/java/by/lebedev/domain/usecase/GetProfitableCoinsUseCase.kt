@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface GetProfitableCoinsUseCase {
 
-    fun fetch(selectedItem:Int, hashrate:Long, device:String): Single<ArrayList<CoinProfitability>>
+    fun fetch(selectedItem:Int, hashrate:Double, device:String): Single<ArrayList<CoinProfitability>>
 }

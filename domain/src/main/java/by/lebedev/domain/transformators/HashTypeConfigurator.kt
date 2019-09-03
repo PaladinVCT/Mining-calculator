@@ -11,9 +11,7 @@ class HashTypeConfigurator {
             "Ethash" -> {
                 return "Mh/s"
             }
-            "Equihash(150,5)" -> {
-                return "H/s"
-            }
+
             "Equihash(210,9)" -> {
                 return "H/s"
             }
@@ -28,6 +26,9 @@ class HashTypeConfigurator {
             }
             "MTP" -> {
                 return "Mh/s"
+            }
+            "BeamHashII" -> {
+                return "H/s"
             }
             "X25X" -> {
                 return "Mh/s"
@@ -59,10 +60,14 @@ class HashTypeConfigurator {
             "TimeTravel10" -> {
                 return "Mh/s"
             }
+            "BCD" -> {
+                return "Mh/s"
+            }
             else -> return "H/s"
         }
 
     }
+
 
     fun getDigitsFromType(algoType: String): Int {
         when (algoType) {

@@ -11,7 +11,11 @@ interface NvidiaApi {
 
     @GET("api")
     fun getEarningsNvidia(
-        @Query("hashrate") hashrate: Long, @Query("algorithm") algo: String
+        @Query("hashrate") hashrate: Double, @Query("algorithm") algo: String
     ): Single<ArrayList<NvidiaCoinProfitabilityResponse>>
 
+    @GET("api")
+    fun getAllEarningsNvidia(
+        @Query("hashrate") hashrate: Double
+    ): Single<ArrayList<NvidiaCoinProfitabilityResponse>>
 }

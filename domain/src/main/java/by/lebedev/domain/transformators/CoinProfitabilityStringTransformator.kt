@@ -1,6 +1,5 @@
 package by.lebedev.domain.transformators
 
-import android.graphics.Color
 import by.lebedev.domain.entities.CoinProfitability
 import by.lebedev.domain.entities.CoinProfitabilityString
 import java.text.DecimalFormat

@@ -28,7 +28,7 @@ class EarningsActivity : AppCompatActivity() {
         val selectedItem = intent.getIntExtra("selectedItem", -1)
 
 
-        val hashrate = intent.getLongExtra("hashrate", -1)*HashTypeConfigurator().getDigitsFromType(HashTypeConfigurator().getTypeFromName(
+        val hashrate = intent.getDoubleExtra("hashrate", -1.0)*HashTypeConfigurator().getDigitsFromType(HashTypeConfigurator().getTypeFromName(
             Algos.instance.list.get(selectedItem)))
         val device = intent.getStringExtra("device")
         val energy = intent.getDoubleExtra("energy", 0.0)
@@ -44,7 +44,7 @@ class EarningsActivity : AppCompatActivity() {
 
     fun getEarningsCryptonight(
         selectedItem: Int,
-        hashrate: Long,
+        hashrate: Double,
         device: String,
         energy: Double,
         energyCost: Double,
@@ -74,7 +74,7 @@ class EarningsActivity : AppCompatActivity() {
 
     fun getEarningsNvidia(
         selectedItem: Int,
-        hashrate: Long,
+        hashrate: Double,
         device: String,
         energy: Double,
         energyCost: Double,
