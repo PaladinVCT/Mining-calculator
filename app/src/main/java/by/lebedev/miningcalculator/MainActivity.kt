@@ -11,14 +11,17 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.Toast
-import by.lebedev.domain.collections.AmdDevices
+import by.lebedev.domain.collections.VendorDevices
 import by.lebedev.miningcalculator.fragments.AmdFragment
 import by.lebedev.miningcalculator.fragments.DashboardFragment
 import by.lebedev.miningcalculator.fragments.DevicesFragment
-import by.lebedev.miningcalculator.recyclers.devicesrecycler.DevicesAdapter
+import by.lebedev.miningcalculator.fragments.NvidiaFragment
+import by.lebedev.miningcalculator.recyclers.devicesrecycler.amd.DevicesAdapterAMD
+import by.lebedev.miningcalculator.recyclers.devicesrecycler.nvidia.DevicesAdapterNvidia
 
 
-class MainActivity : AppCompatActivity(), DevicesAdapter.RigInterface,AmdFragment.SetupDevicesAtStartup,AmdFragment.ClearAllDevices {
+class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup,AmdFragment.SetupDevices,AmdFragment.ClearAllDevices,DevicesAdapterNvidia.InitialRigSetup,
+NvidiaFragment.SetupDevices,NvidiaFragment.ClearAllDevices{
 
 
 
@@ -112,25 +115,25 @@ class MainActivity : AppCompatActivity(), DevicesAdapter.RigInterface,AmdFragmen
         back_pressed = System.currentTimeMillis()
     }
 
-    override fun setupRigDevices() {
-        setNumberDevicesInRig()
-        execute()
+    override fun setupRigDevices(instance: VendorDevices,deviceNameLayoutId:Int,deviceCountLayoutId:Int,counterTextView:Int) {
+        setNumberDevicesInRig(instance,counterTextView)
+        setupAtStartup(instance,deviceNameLayoutId,deviceCountLayoutId,counterTextView)
     }
 
-    override fun execute() {
-        val deviceNameLayout = findViewById<LinearLayout>(R.id.deviceNameLayout)
-        val deviceCountLayout = findViewById<LinearLayout>(R.id.deviceCountLayout)
+    override fun setupAtStartup(instance: VendorDevices,deviceNameLayoutId:Int,deviceCountLayoutId:Int,counterTextView:Int) {
+        val deviceNameLayout = findViewById<LinearLayout>(deviceNameLayoutId)
+        val deviceCountLayout = findViewById<LinearLayout>(deviceCountLayoutId)
 
         deviceNameLayout.removeAllViews()
         deviceCountLayout.removeAllViews()
 
-        for (i in 0 until AmdDevices.instance.list.size) {
-            if (AmdDevices.instance.list.get(i).count > 0) {
+        for (i in 0 until instance.list.size) {
+            if (instance.list.get(i).count > 0) {
                 val name = TextView(this)
                 name.setTypeface(null, Typeface.BOLD_ITALIC)
                 name.textSize = 14f
                 name.gravity = Gravity.CENTER
-                name.text = AmdDevices.instance.list.get(i).name
+                name.text = instance.list.get(i).name
                 deviceNameLayout.addView(name)
 
                 val count = TextView(this)
@@ -138,35 +141,35 @@ class MainActivity : AppCompatActivity(), DevicesAdapter.RigInterface,AmdFragmen
                 count.textSize = 14f
                 count.gravity = Gravity.CENTER
 
-                count.text = "x ".plus(AmdDevices.instance.list.get(i).count.toString())
+                count.text = "x ".plus(instance.list.get(i).count.toString())
 
                 deviceCountLayout.addView(count)
 
-                setNumberDevicesInRig()
+                setNumberDevicesInRig(instance,counterTextView)
             }
         }
 
 
     }
 
-    fun setNumberDevicesInRig() {
-        val rigDeviceCounter = findViewById<TextView>(R.id.rigDeviceCounter)
-        rigDeviceCounter.setText(AmdDevices.instance.devicesCount.toString().plus(" devices"))
+    fun setNumberDevicesInRig(instance: VendorDevices,counterTextView:Int) {
+        val rigDeviceCounter = findViewById<TextView>(counterTextView)
+        rigDeviceCounter.setText(instance.devicesCount.toString().plus(" devices"))
     }
 
-    override fun clear() {
-        val deviceNameLayout = findViewById<LinearLayout>(R.id.deviceNameLayout)
-        val deviceCountLayout = findViewById<LinearLayout>(R.id.deviceCountLayout)
+    override fun clear(instance: VendorDevices, deviceNameLayoutId:Int, deviceCountLayoutId:Int, counterTextView:Int) {
+        val deviceNameLayout = findViewById<LinearLayout>(deviceNameLayoutId)
+        val deviceCountLayout = findViewById<LinearLayout>(deviceCountLayoutId)
 
         deviceNameLayout.removeAllViews()
         deviceCountLayout.removeAllViews()
 
-        for (i in 0 until AmdDevices.instance.list.size){
-            AmdDevices.instance.list.get(i).count = 0
+        for (i in 0 until instance.list.size){
+            instance.list.get(i).count = 0
         }
-        AmdDevices.instance.devicesCount = 0
+        instance.devicesCount = 0
 
-        setNumberDevicesInRig()
+        setNumberDevicesInRig(instance,counterTextView)
 
     }
 

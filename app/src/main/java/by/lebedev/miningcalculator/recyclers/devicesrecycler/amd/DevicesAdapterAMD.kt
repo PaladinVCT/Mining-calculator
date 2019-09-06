@@ -1,4 +1,4 @@
-package by.lebedev.miningcalculator.recyclers.devicesrecycler
+package by.lebedev.miningcalculator.recyclers.devicesrecycler.amd
 
 import android.content.Context
 import android.os.Build
@@ -9,39 +9,38 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.RemoteViews
 import by.lebedev.domain.collections.AmdDevices
+import by.lebedev.domain.collections.VendorDevices
 import by.lebedev.domain.entities.Device
 import by.lebedev.miningcalculator.R
-import by.lebedev.miningcalculator.fragments.AmdFragment
 import kotlinx.android.synthetic.main.item_device.view.*
 
-class DevicesAdapter(private val context: Context,
-    private val devices: ArrayList<Device>
-) : RecyclerView.Adapter<DevicesViewHolder>() {
+class DevicesAdapterAMD(private val context: Context,
+                        private val devices: ArrayList<Device>
+) : RecyclerView.Adapter<DevicesViewHolderAMD>() {
 
-    lateinit var rigInterface:RigInterface
+    lateinit var initialRigSetup: InitialRigSetup
 
-    interface RigInterface {
-        fun setupRigDevices()
+    interface InitialRigSetup {
+        fun setupRigDevices(instance: VendorDevices,deviceNameLayoutId:Int,deviceCountLayoutId:Int,counterTextView:Int)
     }
 
 
 
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        rigInterface = context as RigInterface
+        initialRigSetup = context as InitialRigSetup
         super.onAttachedToRecyclerView(recyclerView)
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): DevicesViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): DevicesViewHolderAMD {
 
 
 
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item_device, viewGroup, false)
-        val holder = DevicesViewHolder(view)
+        val holder = DevicesViewHolderAMD(view)
 
 
         val plus = holder.itemView.findViewById<ImageButton>(R.id.plusButton)
@@ -52,7 +51,7 @@ class DevicesAdapter(private val context: Context,
             deviceCounter.setText((++AmdDevices.instance.list.get(holder.adapterPosition).count).toString())
             holder.itemView.item_device.background = it.context.getDrawable(R.drawable.selected_device_shape)
             ++AmdDevices.instance.devicesCount
-            rigInterface.setupRigDevices()
+            initialRigSetup.setupRigDevices(AmdDevices.instance,R.id.deviceNameLayoutAMD,R.id.deviceCountLayoutAMD,R.id.rigDeviceCounterAMD)
 
             holder.itemView.invalidate()
 
@@ -63,7 +62,7 @@ class DevicesAdapter(private val context: Context,
             if (AmdDevices.instance.list.get(holder.adapterPosition).count > 0) {
                 deviceCounter.setText((--AmdDevices.instance.list.get(holder.adapterPosition).count).toString())
                 --AmdDevices.instance.devicesCount
-                rigInterface.setupRigDevices()
+                initialRigSetup.setupRigDevices(AmdDevices.instance,R.id.deviceNameLayoutAMD,R.id.deviceCountLayoutAMD,R.id.rigDeviceCounterAMD)
 
                 holder.itemView.invalidate()
 
@@ -71,7 +70,7 @@ class DevicesAdapter(private val context: Context,
             }
             if (AmdDevices.instance.list.get(holder.adapterPosition).count == 0) {
                 holder.itemView.item_device.background = it.context.getDrawable(R.drawable.device_shape)
-                rigInterface.setupRigDevices()
+                initialRigSetup.setupRigDevices(AmdDevices.instance,R.id.deviceNameLayoutAMD,R.id.deviceCountLayoutAMD,R.id.rigDeviceCounterAMD)
 
                 holder.itemView.invalidate()
 
@@ -80,9 +79,9 @@ class DevicesAdapter(private val context: Context,
         return holder
     }
 
-    override fun onBindViewHolder(devicesViewHolder: DevicesViewHolder, id: Int) {
+    override fun onBindViewHolder(devicesViewHolderAMD: DevicesViewHolderAMD, id: Int) {
 
-        devicesViewHolder.bind(devices.get(id))
+        devicesViewHolderAMD.bind(devices.get(id))
     }
 
     override fun getItemCount(): Int {

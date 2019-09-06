@@ -16,8 +16,8 @@ class AmdImages {
         R.drawable.furyx,
         R.drawable.frontier,
         R.drawable.vega56,
-        R.drawable.vega64
-
+        R.drawable.vega64,
+        R.drawable.r7
     )
 
 

@@ -7,26 +7,75 @@
         android:background="@drawable/background"
 >
 
-    <android.support.design.widget.TabLayout
-            app:tabGravity="fill"
 
-            android:id="@+id/devicesTab"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            tools:ignore="MissingConstraints"
-            app:tabIndicatorColor="@color/colorPrimaryDark"
-            app:tabSelectedTextColor="@color/colorPrimary"
-            app:tabTextColor="@color/inactive_tab"
+    <LinearLayout
+            android:background="@drawable/vendor_shape"
+            android:id="@+id/amdLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.2"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.014">
+        <ImageView
 
-    />
+                android:background="@drawable/amdlogo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        />
 
-    <android.support.v4.view.ViewPager
+
+    </LinearLayout>
+
+    <LinearLayout
+
+            android:id="@+id/nvidiaLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.800"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="8dp"
-            android:id="@+id/devicesViewpager"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.014"
+            android:orientation="vertical"
+    >
+
+        <ImageView
+
+                android:background="@drawable/nvidialogo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        />
+
+
+    </LinearLayout>
+
+    <ImageView
+            android:id="@+id/lineSeparator"
+            android:layout_width="match_parent"
+            android:background="@drawable/line_razd"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/amdLayout"/>
+
+    <LinearLayout
+            android:id="@+id/rigConstructorLayout"
+            app:layout_constraintTop_toBottomOf="@+id/lineSeparator"
+
+            android:layout_marginTop="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:layout_constraintTop_toBottomOf="@+id/devicesTab"
-            tools:layout_editor_absoluteX="0dp"/>
+            android:orientation="vertical"/>
 
 </android.support.constraint.ConstraintLayout>

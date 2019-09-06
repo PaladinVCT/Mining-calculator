@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import by.lebedev.miningcalculator.DevicesPageAdapter
 import by.lebedev.miningcalculator.R
 import kotlinx.android.synthetic.main.devices_layout.*
 
@@ -20,12 +19,36 @@ class DevicesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val fragmentAdapter = DevicesPageAdapter(childFragmentManager)
+        inflateAmd()
 
-        devicesViewpager.adapter = fragmentAdapter
 
-        devicesTab.setupWithViewPager(devicesViewpager)
+        amdLayout.setOnClickListener {
+            amdLayout.setBackgroundResource(R.drawable.vendor_shape)
+            nvidiaLayout.setBackgroundColor(0)
+            inflateAmd()
+        }
 
+        nvidiaLayout.setOnClickListener {
+            nvidiaLayout.setBackgroundResource(R.drawable.vendor_shape)
+            amdLayout.setBackgroundColor(0)
+            inflateNvidia()
+        }
+
+    }
+
+    fun inflateAmd() {
+        val amdFragment = AmdFragment()
+
+        val ft = childFragmentManager.beginTransaction()
+        ft.replace(R.id.rigConstructorLayout, amdFragment)
+        ft.commit()
+    }
+
+    fun inflateNvidia() {
+        val nvidiaFragment = NvidiaFragment()
+        val ft = childFragmentManager.beginTransaction()
+        ft.replace(R.id.rigConstructorLayout, nvidiaFragment)
+        ft.commit()
     }
 
 }
