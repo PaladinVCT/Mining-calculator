@@ -29,12 +29,13 @@ class EarningsActivity : AppCompatActivity() {
 
         val selectedItem = intent.getIntExtra("selectedItem", -1)
 
-
         val hashrate = intent.getDoubleExtra("hashrate", -1.0) * HashTypeConfigurator().getDigitsFromType(
             HashTypeConfigurator().getTypeFromName(
                 Algos.instance.list.get(selectedItem)
             )
         )
+        Log.e("AAA", hashrate.toString())
+
         val device = intent.getStringExtra("device")
         val energy = intent.getDoubleExtra("energy", 0.0)
         val energyCost = intent.getDoubleExtra("energyCost", 0.0)
@@ -43,6 +44,7 @@ class EarningsActivity : AppCompatActivity() {
         if (selectedItem == 0) {
             getEarningsCryptonight(selectedItem, hashrate, device, energy, energyCost, fee)
         } else if (device.equals("RIG")) {
+            Log.e("AAA", "RIG")
             getEarningsNvidiaRig(selectedItem, hashrate, device, energy, energyCost, fee)
         } else {
             getEarningsNvidia(selectedItem, hashrate, device, energy, energyCost, fee)
@@ -122,12 +124,12 @@ class EarningsActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-
+                Log.e("AAA", result.get(0).toString())
                 earningsProgressBar.visibility = View.INVISIBLE
 
                 val globalProfit = result
 
-                val profit = CoinProfitabilityRigTransformator().execute(globalProfit,hashrate)
+                val profit = CoinProfitabilityRigTransformator().execute(globalProfit, hashrate)
 
                 val profitArrayString = CoinProfitabilityStringTransformator().execute(profit)
                 setupRecycler(profitArrayString)
@@ -139,7 +141,6 @@ class EarningsActivity : AppCompatActivity() {
 
 
     }
-
 
 
     fun setupRecycler(coinList: ArrayList<CoinProfitabilityString>) {

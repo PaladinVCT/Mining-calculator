@@ -49,7 +49,7 @@ class NvidiaFragment : Fragment() {
         calculateRigButtonNvidia.setOnClickListener {
 
             val intent = Intent(this.context, EarningsActivity::class.java)
-            intent.putExtra("selectedItem",-1)
+            intent.putExtra("selectedItem",1)
             intent.putExtra("hashrate", 1000)
             intent.putExtra("device","RIG")
 
