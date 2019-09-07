@@ -6,8 +6,8 @@ import java.text.DecimalFormat
 
 class CoinProfitabilityStringTransformator {
 
-    val nf4 = DecimalFormat("#,###.####")
-    val nf8 = DecimalFormat("#,###.######")
+    val nfUsd = DecimalFormat("#,###.#####")
+    val nfCoin = DecimalFormat("#,###.######")
     val nfVolume = DecimalFormat("##############.##")
 
     fun execute(coinProfitability: ArrayList<CoinProfitability>): ArrayList<CoinProfitabilityString> {
@@ -24,12 +24,12 @@ class CoinProfitabilityStringTransformator {
                     coinProfitability.get(i).algoId,
                     coinProfitability.get(i).algoName,
                     coinProfitability.get(i).hashrateAuto+" "+HashTypeConfigurator().getTypeFromName(coinProfitability.get(i).algoName),
-                    "Daily profit: \n"+nf4.format(coinProfitability.get(i).rewardDayUsd)+" $"+
-                    " \n("+nf4.format(coinProfitability.get(i).rewardDayUsdActual)+")$",
-                    "Monthly profit: \n"+nf4.format(coinProfitability.get(i).rewardMonthUsd)+" $"+
-                     " \n("+nf4.format(coinProfitability.get(i).rewardMonthUsdActual)+")$",
-                    "Daily coins: \n"+nf8.format(coinProfitability.get(i).rewardDayCoins)+" "+coinProfitability.get(i).coinTicker,
-                    "Monthly coins: \n"+nf8.format(coinProfitability.get(i).rewardMonthCoins)+" "+coinProfitability.get(i).coinTicker,
+                    "Daily profit: \n"+nfUsd.format(coinProfitability.get(i).rewardDayUsd)+" $"+
+                    " \n("+nfUsd.format(coinProfitability.get(i).rewardDayUsdActual)+")$",
+                    "Monthly profit: \n"+nfUsd.format(coinProfitability.get(i).rewardMonthUsd)+" $"+
+                     " \n("+nfUsd.format(coinProfitability.get(i).rewardMonthUsdActual)+")$",
+                    "Daily coins: \n"+nfCoin.format(coinProfitability.get(i).rewardDayCoins)+" "+coinProfitability.get(i).coinTicker,
+                    "Monthly coins: \n"+nfCoin.format(coinProfitability.get(i).rewardMonthCoins)+" "+coinProfitability.get(i).coinTicker,
                     nfVolume.format(coinProfitability.get(i).volumeUsd)+" $"
                 )
             )

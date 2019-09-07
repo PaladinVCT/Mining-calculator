@@ -124,7 +124,10 @@ class EarningsActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                Log.e("AAA", result.get(0).toString())
+                Log.e("AAA", result.get(0).coinName)
+                Log.e("AAA", result.get(1).coinName)
+                Log.e("AAA", result.get(2).coinName)
+                Log.e("AAA", result.get(3).coinName)
                 earningsProgressBar.visibility = View.INVISIBLE
 
                 val globalProfit = result

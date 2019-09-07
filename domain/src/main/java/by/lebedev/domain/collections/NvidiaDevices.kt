@@ -144,7 +144,7 @@ class NvidiaDevices : VendorDevices {
                 Pair("Zhash",67.0),
                 Pair("cuckAToo31",0.0),
                 Pair("X16R",23.0),
-                Pair("MTP",21.0),
+                Pair("MTP",2.1),
                 Pair("X25X",5.3),
                 Pair("Lyra2REv3",58.5),
                 Pair("CuckooCycle",5.4),

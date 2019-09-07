@@ -4,17 +4,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.lebedev.domain.collections.NvidiaDevices
 import by.lebedev.domain.collections.VendorDevices
 import by.lebedev.domain.entities.Device
+import by.lebedev.domain.transformators.CoinProfitabilityRigTransformator
+import by.lebedev.domain.transformators.CoinProfitabilityStringTransformator
 import by.lebedev.domain.transformators.HashPowerAggregator
+import by.lebedev.domain.usecase.GetAllProfitableCoinsUseCaseNvidia
 import by.lebedev.miningcalculator.EarningsActivity
 import by.lebedev.miningcalculator.R
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.amd.DevicesAdapterAMD
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.nvidia.DevicesAdapterNvidia
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.earnings_layout.*
 import kotlinx.android.synthetic.main.nvidia_layout.*
 
 class NvidiaFragment : Fragment() {
@@ -48,9 +55,36 @@ class NvidiaFragment : Fragment() {
 
         calculateRigButtonNvidia.setOnClickListener {
 
+
+//            val d = GetAllProfitableCoinsUseCaseNvidia().fetch(1, 1000.0, "GPU")
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({ result ->
+//
+////                    earningsProgressBar.visibility = View.INVISIBLE
+////
+//                    val globalProfit = result
+//
+//                    val profit = CoinProfitabilityRigTransformator().execute(globalProfit, 1000.0)
+//                    Log.e("AAA", profit.get(0).hashrateAuto)
+//                    Log.e("AAA", profit.get(1).hashrateAuto)
+//                    Log.e("AAA", profit.get(2).hashrateAuto)
+//                    Log.e("AAA", profit.get(3).hashrateAuto)
+//
+//
+////                    val profitArrayString = CoinProfitabilityStringTransformator().execute(profit)
+////                    setupRecycler(profitArrayString)
+//
+//
+//                }, {
+//                    Log.e("AAA", it.message)
+//                })
+
+
+
             val intent = Intent(this.context, EarningsActivity::class.java)
             intent.putExtra("selectedItem",1)
-            intent.putExtra("hashrate", 1000)
+            intent.putExtra("hashrate", 1000.0)
             intent.putExtra("device","RIG")
 
             it.context.startActivity(intent)

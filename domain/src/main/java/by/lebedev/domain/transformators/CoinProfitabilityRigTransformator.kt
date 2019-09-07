@@ -8,19 +8,22 @@ class CoinProfitabilityRigTransformator {
 
     private val algos = Algos.instance.list
     private val fullHashrateMap = aggregateHashrateNvidia()
+    private val modifiedList = arrayListOf<CoinProfitability>()
 
     fun execute(
         list: ArrayList<CoinProfitability>,
+
         selectedHashrate: Double
     ): ArrayList<CoinProfitability> {
+
 
         for (i in 0 until list.size) {
 
             for (j in 0 until algos.size) {
                 if (list.get(i).algoName.equals(algos.get(j))) {
 
-                    val coefficient = (fullHashrateMap.get(algos.get(j)))?.times(100.0)?.div(selectedHashrate)
-
+                    val coefficient = (fullHashrateMap.get(algos.get(j)))?.div(selectedHashrate)
+                        ?.times(HashTypeConfigurator().getDigitsFromType(HashTypeConfigurator().getTypeFromName(algos.get(j))))
                     list.get(i).hashrateAuto = fullHashrateMap.get(algos.get(j)).toString()
                     if (coefficient != null) {
                         list.get(i).rewardDayUsd *= coefficient
@@ -29,6 +32,9 @@ class CoinProfitabilityRigTransformator {
                         list.get(i).rewardMonthUsdActual = list.get(i).rewardMonthUsd
                         list.get(i).rewardDayCoins *= coefficient
                         list.get(i).rewardMonthCoins *= coefficient
+
+                        if (fullHashrateMap.get(algos.get(j))!=0.0){
+                        modifiedList.add(list.get(i))}
                     }
 
                 }
@@ -37,11 +43,15 @@ class CoinProfitabilityRigTransformator {
 
         }
 
-        return list
+        modifiedList.sortByDescending {
+            it.rewardMonthUsd
+        }
+
+        return modifiedList
     }
 
 
-   private fun aggregateHashrateNvidia(): HashMap<String, Double> {
+    private fun aggregateHashrateNvidia(): HashMap<String, Double> {
 
         val summMap = hashMapOf<String, Double>()
 
