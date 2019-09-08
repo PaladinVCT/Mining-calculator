@@ -12,17 +12,14 @@ import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.Toast
 import by.lebedev.domain.collections.VendorDevices
-import by.lebedev.miningcalculator.fragments.AmdFragment
-import by.lebedev.miningcalculator.fragments.DashboardFragment
-import by.lebedev.miningcalculator.fragments.DevicesFragment
-import by.lebedev.miningcalculator.fragments.NvidiaFragment
+import by.lebedev.miningcalculator.fragments.*
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.amd.DevicesAdapterAMD
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.nvidia.DevicesAdapterNvidia
 
 
-class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup,AmdFragment.SetupDevices,AmdFragment.ClearAllDevices,DevicesAdapterNvidia.InitialRigSetup,
-NvidiaFragment.SetupDevices,NvidiaFragment.ClearAllDevices{
-
+class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, AmdFragment.SetupDevices,
+    AmdFragment.ClearAllDevices, DevicesAdapterNvidia.InitialRigSetup,
+    NvidiaFragment.SetupDevices, NvidiaFragment.ClearAllDevices {
 
 
     private var back_pressed: Long = 0
@@ -47,6 +44,11 @@ NvidiaFragment.SetupDevices,NvidiaFragment.ClearAllDevices{
                 return@OnNavigationItemSelectedListener true
             }
             R.id.coinRates -> {
+                val coinRatesFragment = CoinRatesFragment()
+                val ft = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.layoutForInflate, coinRatesFragment)
+                ft.commit()
+
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -115,12 +117,22 @@ NvidiaFragment.SetupDevices,NvidiaFragment.ClearAllDevices{
         back_pressed = System.currentTimeMillis()
     }
 
-    override fun setupRigDevices(instance: VendorDevices,deviceNameLayoutId:Int,deviceCountLayoutId:Int,counterTextView:Int) {
-        setNumberDevicesInRig(instance,counterTextView)
-        setupAtStartup(instance,deviceNameLayoutId,deviceCountLayoutId,counterTextView)
+    override fun setupRigDevices(
+        instance: VendorDevices,
+        deviceNameLayoutId: Int,
+        deviceCountLayoutId: Int,
+        counterTextView: Int
+    ) {
+        setNumberDevicesInRig(instance, counterTextView)
+        setupAtStartup(instance, deviceNameLayoutId, deviceCountLayoutId, counterTextView)
     }
 
-    override fun setupAtStartup(instance: VendorDevices,deviceNameLayoutId:Int,deviceCountLayoutId:Int,counterTextView:Int) {
+    override fun setupAtStartup(
+        instance: VendorDevices,
+        deviceNameLayoutId: Int,
+        deviceCountLayoutId: Int,
+        counterTextView: Int
+    ) {
         val deviceNameLayout = findViewById<LinearLayout>(deviceNameLayoutId)
         val deviceCountLayout = findViewById<LinearLayout>(deviceCountLayoutId)
 
@@ -145,31 +157,36 @@ NvidiaFragment.SetupDevices,NvidiaFragment.ClearAllDevices{
 
                 deviceCountLayout.addView(count)
 
-                setNumberDevicesInRig(instance,counterTextView)
+                setNumberDevicesInRig(instance, counterTextView)
             }
         }
 
 
     }
 
-    fun setNumberDevicesInRig(instance: VendorDevices,counterTextView:Int) {
+    fun setNumberDevicesInRig(instance: VendorDevices, counterTextView: Int) {
         val rigDeviceCounter = findViewById<TextView>(counterTextView)
         rigDeviceCounter.setText(instance.devicesCount.toString().plus(" devices"))
     }
 
-    override fun clear(instance: VendorDevices, deviceNameLayoutId:Int, deviceCountLayoutId:Int, counterTextView:Int) {
+    override fun clear(
+        instance: VendorDevices,
+        deviceNameLayoutId: Int,
+        deviceCountLayoutId: Int,
+        counterTextView: Int
+    ) {
         val deviceNameLayout = findViewById<LinearLayout>(deviceNameLayoutId)
         val deviceCountLayout = findViewById<LinearLayout>(deviceCountLayoutId)
 
         deviceNameLayout.removeAllViews()
         deviceCountLayout.removeAllViews()
 
-        for (i in 0 until instance.list.size){
+        for (i in 0 until instance.list.size) {
             instance.list.get(i).count = 0
         }
         instance.devicesCount = 0
 
-        setNumberDevicesInRig(instance,counterTextView)
+        setNumberDevicesInRig(instance, counterTextView)
 
     }
 

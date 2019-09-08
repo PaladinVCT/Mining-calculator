@@ -7,4 +7,7 @@
     <color name="cBlack">#111111</color>
     <color name="inactive_tab">#979797</color>
     <color name="selected_green">#E3F1D3</color>
+    <color name="black">#111111</color>
+    <color name="red_24_hour_percent">#D41611</color>
+    <color name="green_24_hour_percent">#37B110</color>
 </resources>
