@@ -28,4 +28,8 @@
     <string name="clear_all">clear all</string>
     <string name="_0_devices">0 devices</string>
     <string name="build_your_rig">Build your rig:</string>
+    <string name="select_vendor">Select vendor</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="hardware">Hardware</string>
+    <string name="coins">Coins</string>
 </resources>
