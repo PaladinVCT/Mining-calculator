@@ -2,12 +2,13 @@ package by.lebedev.miningcalculator
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+import androidx.recyclerview.widget.RecyclerView
 import by.lebedev.domain.collections.Algos
 import by.lebedev.domain.transformators.CoinProfitabilityEnergyFeeCalculator
 import by.lebedev.domain.transformators.CoinProfitabilityStringTransformator
@@ -148,8 +149,8 @@ class EarningsActivity : AppCompatActivity() {
 
     fun setupRecycler(coinList: ArrayList<CoinProfitabilityString>) {
         earnings_recycle.setHasFixedSize(true)
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+        layoutManager.orientation = RecyclerView.VERTICAL
         earnings_recycle.layoutManager = layoutManager
         earnings_recycle.adapter = EarningsAdapter(coinList)
     }
@@ -175,8 +176,12 @@ class EarningsActivity : AppCompatActivity() {
             }
             R.id.feedback -> {
 
-//                val intent = Intent(this, ContactsActivity::class.java)
-//                startActivity(intent)
+                val Email = Intent(Intent.ACTION_SEND)
+                Email.type = "text/email"
+                Email.putExtra(Intent.EXTRA_EMAIL, arrayOf("developer.alexandr.lebedev@gmail.com"))
+                Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback Mining Calculator App")
+                Email.putExtra(Intent.EXTRA_TEXT, "Dear Alexandr Lebedev," + "\n")
+                startActivity(Intent.createChooser(Email, "Send Feedback:"))
                 return true
             }
         }

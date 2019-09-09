@@ -1,6 +1,6 @@
 package by.lebedev.miningcalculator.recyclers.earningsrecycler
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import by.lebedev.domain.entities.CoinProfitabilityString
@@ -8,7 +8,7 @@ import by.lebedev.miningcalculator.R
 
 class EarningsAdapter(
     private val coins: ArrayList<CoinProfitabilityString>
-) : RecyclerView.Adapter<EarningsViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<EarningsViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): EarningsViewHolder {
         val view = LayoutInflater.from(viewGroup.context)

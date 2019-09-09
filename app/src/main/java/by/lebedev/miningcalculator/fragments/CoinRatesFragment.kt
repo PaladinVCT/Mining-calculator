@@ -1,8 +1,8 @@
 package by.lebedev.miningcalculator.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -57,8 +57,8 @@ class CoinRatesFragment : Fragment() {
 
     fun setupRecycler(coinRateList: ArrayList<CoinRate>) {
         coinRateRecycle.setHasFixedSize(true)
-        val layoutManager = LinearLayoutManager(this.context)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
+        layoutManager.orientation = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
         coinRateRecycle.layoutManager = layoutManager
         coinRateRecycle.adapter = this.context?.let { CoinRateAdapter(it, coinRateList) }
     }

@@ -1,14 +1,14 @@
 package by.lebedev.miningcalculator.recyclers.coinrate
 
 import android.graphics.Color
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import by.lebedev.domain.entities.CoinRate
 import by.lebedev.miningcalculator.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_coinrate.view.*
 
-class CoinRateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class CoinRateViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
 
     fun bind(coinRate: CoinRate) {

@@ -1,7 +1,7 @@
 package by.lebedev.miningcalculator.recyclers.coinrate
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import by.lebedev.domain.entities.CoinRate
@@ -9,7 +9,7 @@ import by.lebedev.miningcalculator.R
 
 class CoinRateAdapter(private val context: Context,
                       private val listCoinRate: ArrayList<CoinRate>
-) : RecyclerView.Adapter<CoinRateViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<CoinRateViewHolder>() {
 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): CoinRateViewHolder {

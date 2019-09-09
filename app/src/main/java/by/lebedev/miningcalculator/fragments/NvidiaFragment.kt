@@ -2,8 +2,8 @@ package by.lebedev.miningcalculator.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -97,8 +97,8 @@ class NvidiaFragment : Fragment() {
 
     fun setupRecycler(devices: ArrayList<Device>) {
         devicesRecycleNvidia.setHasFixedSize(true)
-        val layoutManager = LinearLayoutManager(this.context)
-        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
+        layoutManager.orientation = androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
         devicesRecycleNvidia.layoutManager = layoutManager
         devicesRecycleNvidia.adapter =
             DevicesAdapterNvidia(this.context!!, devices)

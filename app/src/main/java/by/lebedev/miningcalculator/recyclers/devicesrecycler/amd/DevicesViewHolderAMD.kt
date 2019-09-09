@@ -1,8 +1,8 @@
 package by.lebedev.miningcalculator.recyclers.devicesrecycler.amd
 
 import android.os.Build
-import android.support.annotation.RequiresApi
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -14,7 +14,7 @@ import by.lebedev.miningcalculator.fragments.AmdFragment
 import kotlinx.android.synthetic.main.item_device.view.*
 
 
-class DevicesViewHolderAMD(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class DevicesViewHolderAMD(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
 
 

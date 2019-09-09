@@ -2,8 +2,8 @@ package by.lebedev.miningcalculator.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,8 +63,8 @@ class AmdFragment() : Fragment() {
 
     fun setupRecycler(devices: ArrayList<Device>) {
         devicesRecycleAMD.setHasFixedSize(true)
-        val layoutManager = LinearLayoutManager(this.context)
-        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
+        layoutManager.orientation = androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
         devicesRecycleAMD.layoutManager = layoutManager
         devicesRecycleAMD.adapter =
             DevicesAdapterAMD(this.context!!, devices)

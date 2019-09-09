@@ -3,8 +3,8 @@ package by.lebedev.miningcalculator
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Gravity
 import android.widget.TextView
 import android.view.Menu
@@ -15,13 +15,15 @@ import by.lebedev.domain.collections.VendorDevices
 import by.lebedev.miningcalculator.fragments.*
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.amd.DevicesAdapterAMD
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.nvidia.DevicesAdapterNvidia
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
 
 
 class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, AmdFragment.SetupDevices,
     AmdFragment.ClearAllDevices, DevicesAdapterNvidia.InitialRigSetup,
     NvidiaFragment.SetupDevices, NvidiaFragment.ClearAllDevices {
 
-
+    private lateinit var mInterstitialAd: InterstitialAd
     private var back_pressed: Long = 0
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -58,6 +60,11 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
+
+        MobileAds.initialize(this) {}
+
+        mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
 
         setTitle("  Mining profit calculator");
         getSupportActionBar()?.setDisplayShowHomeEnabled(true)

@@ -16,6 +16,7 @@ class NvidiaImages {
         R.drawable.nv1080ti,
         R.drawable.nv2060,
         R.drawable.nv2070,
+        R.drawable.nv2080,
         R.drawable.nv2080ti
 
     )

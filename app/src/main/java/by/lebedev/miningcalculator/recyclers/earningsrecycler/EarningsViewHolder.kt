@@ -1,13 +1,13 @@
 package by.lebedev.miningcalculator.recyclers.earningsrecycler
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import by.lebedev.domain.entities.CoinProfitabilityString
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_coin.view.*
 
 
-class EarningsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class EarningsViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
     fun bind(coinProfitabilityString: CoinProfitabilityString) {
 

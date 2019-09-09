@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintVertical_bias="0.391"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/coinRateRecycle"
             android:foregroundGravity="center"
             android:layout_width="match_parent"
@@ -27,4 +27,4 @@
             tools:listitem="@layout/item_coinrate"
            />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

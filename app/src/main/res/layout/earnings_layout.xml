@@ -4,7 +4,7 @@
              android:layout_height="match_parent"
              android:background="@drawable/background">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/earnings_recycle"
             android:layout_margin="16dp"
             android:layout_width="match_parent"
@@ -12,7 +12,7 @@
             android:layout_marginBottom="50dp"
     >
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar"

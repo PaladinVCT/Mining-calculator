@@ -2,8 +2,8 @@ package by.lebedev.miningcalculator.recyclers.devicesrecycler.nvidia
 
 import android.content.Context
 import android.os.Build
-import android.support.annotation.RequiresApi
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.item_device.view.*
 
 class DevicesAdapterNvidia(private val context: Context,
                            private val devices: ArrayList<Device>
-) : RecyclerView.Adapter<DevicesViewHolderNvidia>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<DevicesViewHolderNvidia>() {
 
     lateinit var initialRigSetup: InitialRigSetup
 
@@ -26,7 +26,7 @@ class DevicesAdapterNvidia(private val context: Context,
     }
 
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+    override fun onAttachedToRecyclerView(recyclerView: androidx.recyclerview.widget.RecyclerView) {
         initialRigSetup = context as InitialRigSetup
         super.onAttachedToRecyclerView(recyclerView)
     }
