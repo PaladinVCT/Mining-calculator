@@ -32,4 +32,7 @@
     <string name="dashboard">Dashboard</string>
     <string name="hardware">Hardware</string>
     <string name="coins">Coins</string>
+    <string name="home">Home</string>
+    <string name="support_project">Support project</string>
+    <string name="feedback">Send feedback</string>
 </resources>

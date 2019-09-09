@@ -5,18 +5,18 @@
 >
         <item
             android:id="@+id/home"
-            android:title="Home"
+            android:title="@string/home"
             android:icon="@drawable/ic_home_black_24dp"
            />
 
     <item
-            android:id="@+id/about"
-            android:title="About"
+            android:id="@+id/support"
+            android:title="@string/support_project"
             app:showAsAction="never"/>
 
     <item
-            android:id="@+id/contacts"
-            android:title="Contacts"
+            android:id="@+id/feedback"
+            android:title="@string/feedback"
             app:showAsAction="never"/>
 
 

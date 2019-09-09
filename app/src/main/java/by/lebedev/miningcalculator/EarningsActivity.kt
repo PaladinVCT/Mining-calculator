@@ -167,13 +167,13 @@ class EarningsActivity : AppCompatActivity() {
                 startActivity(intent)
                 return true
             }
-            R.id.about -> {
+            R.id.support -> {
 
 //                val intent = Intent(this, AboutActivity::class.java)
 //                startActivity(intent)
                 return true
             }
-            R.id.contacts -> {
+            R.id.feedback -> {
 
 //                val intent = Intent(this, ContactsActivity::class.java)
 //                startActivity(intent)

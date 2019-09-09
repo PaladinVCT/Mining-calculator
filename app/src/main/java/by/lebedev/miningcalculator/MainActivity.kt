@@ -88,16 +88,20 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
                 startActivity(intent)
                 return true
             }
-            R.id.about -> {
+            R.id.support -> {
 
 //                val intent = Intent(this, AboutActivity::class.java)
 //                startActivity(intent)
                 return true
             }
-            R.id.contacts -> {
+            R.id.feedback -> {
 
-//                val intent = Intent(this, ContactsActivity::class.java)
-//                startActivity(intent)
+                val Email = Intent(Intent.ACTION_SEND)
+                Email.type = "text/email"
+                Email.putExtra(Intent.EXTRA_EMAIL, arrayOf("developer.alexandr.lebedev@gmail.com"))
+                Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback Mining Calculator App")
+                Email.putExtra(Intent.EXTRA_TEXT, "Dear Alexandr Lebedev," + "\n")
+                startActivity(Intent.createChooser(Email, "Send Feedback:"))
                 return true
             }
         }

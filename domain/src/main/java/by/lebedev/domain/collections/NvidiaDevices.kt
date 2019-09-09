@@ -157,7 +157,111 @@ class NvidiaDevices : VendorDevices {
                 Pair("BeamHashII",28.5)
             ), 0, 0
         )
-
+        ,
+        Nvidia(
+            7, "GTX 1080Ti", hashMapOf(
+                Pair("Ethash",49.5),
+                Pair("Equihash(210,9)",300.0),
+                Pair("Zhash",86.0),
+                Pair("cuckAToo31",1.4),
+                Pair("X16R",29.0),
+                Pair("MTP",1.9),
+                Pair("X25X",6.9),
+                Pair("Lyra2REv3",77.0),
+                Pair("CuckooCycle",7.4),
+                Pair("PHI2",9.2),
+                Pair("NeoScrypt",1900.0),
+                Pair("Skunkhash",50.0),
+                Pair("Cuckarood29",6.3),
+                Pair("TimeTravel10",49.5),
+                Pair("BCD",35.0),
+                Pair("BeamHashII",38.0)
+            ), 0, 0
+        )
+        ,
+        Nvidia(
+            8, "GTX 2060", hashMapOf(
+                Pair("Ethash",27.6),
+                Pair("Equihash(210,9)",220.0),
+                Pair("Zhash",54.0),
+                Pair("cuckAToo31",0.0),
+                Pair("X16R",21.0),
+                Pair("MTP",2.1),
+                Pair("X25X",4.2),
+                Pair("Lyra2REv3",54.0),
+                Pair("CuckooCycle",5.2),
+                Pair("PHI2",7.5),
+                Pair("NeoScrypt",1300.0),
+                Pair("Skunkhash",50.0),
+                Pair("Cuckarood29",4.5),
+                Pair("TimeTravel10",34.0),
+                Pair("BCD",24.2),
+                Pair("BeamHashII",25.0)
+            ), 0, 0
+        )
+        ,
+        Nvidia(
+            9, "GTX 2070", hashMapOf(
+                Pair("Ethash",36.9),
+                Pair("Equihash(210,9)",250.0),
+                Pair("Zhash",60.0),
+                Pair("cuckAToo31",0.0),
+                Pair("X16R",23.5),
+                Pair("MTP",2.6),
+                Pair("X25X",4.8),
+                Pair("Lyra2REv3",60.5),
+                Pair("CuckooCycle",6.7),
+                Pair("PHI2",8.6),
+                Pair("NeoScrypt",1700.0),
+                Pair("Skunkhash",55.0),
+                Pair("Cuckarood29",6.0),
+                Pair("TimeTravel10",38.5),
+                Pair("BCD",27.5),
+                Pair("BeamHashII",29.5)
+            ), 0, 0
+        )
+        ,
+        Nvidia(
+            10, "GTX 2080", hashMapOf(
+                Pair("Ethash",36.9),
+                Pair("Equihash(210,9)",335.0),
+                Pair("Zhash",82.0),
+                Pair("cuckAToo31",0.0),
+                Pair("X16R",31.0),
+                Pair("MTP",3.5),
+                Pair("X25X",6.3),
+                Pair("Lyra2REv3",81.0),
+                Pair("CuckooCycle",8.4),
+                Pair("PHI2",11.4),
+                Pair("NeoScrypt",2350.0),
+                Pair("Skunkhash",50.0),
+                Pair("Cuckarood29",7.6),
+                Pair("TimeTravel10",50.0),
+                Pair("BCD",37.0),
+                Pair("BeamHashII",40.5)
+            ), 0, 0
+        )
+        ,
+        Nvidia(
+            11, "GTX 2080Ti", hashMapOf(
+                Pair("Ethash",52.5),
+                Pair("Equihash(210,9)",375.0),
+                Pair("Zhash",96.0),
+                Pair("cuckAToo31",2.0),
+                Pair("X16R",38.0),
+                Pair("MTP",4.3),
+                Pair("X25X",7.9),
+                Pair("Lyra2REv3",98.5),
+                Pair("CuckooCycle",10.1),
+                Pair("PHI2",14.7),
+                Pair("NeoScrypt",2800.0),
+                Pair("Skunkhash",50.0),
+                Pair("Cuckarood29",9.5),
+                Pair("TimeTravel10",60.0),
+                Pair("BCD",45.55),
+                Pair("BeamHashII",48.2)
+            ), 0, 0
+        )
     )
 
 
