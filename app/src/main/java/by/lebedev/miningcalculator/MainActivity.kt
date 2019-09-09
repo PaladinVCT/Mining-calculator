@@ -3,6 +3,7 @@ package by.lebedev.miningcalculator
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Gravity
@@ -15,6 +16,7 @@ import by.lebedev.domain.collections.VendorDevices
 import by.lebedev.miningcalculator.fragments.*
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.amd.DevicesAdapterAMD
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.nvidia.DevicesAdapterNvidia
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
 
         mInterstitialAd = InterstitialAd(this)
         mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
 
         setTitle("  Mining profit calculator");
         getSupportActionBar()?.setDisplayShowHomeEnabled(true)
@@ -97,8 +100,11 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
             }
             R.id.support -> {
 
-//                val intent = Intent(this, AboutActivity::class.java)
-//                startActivity(intent)
+                if (mInterstitialAd.isLoaded) {
+                    mInterstitialAd.show()
+                } else {
+                    Log.e("AAA", "The interstitial wasn't loaded yet.")
+                }
                 return true
             }
             R.id.feedback -> {

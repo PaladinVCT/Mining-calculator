@@ -19,14 +19,27 @@ import by.lebedev.domain.usecase.GetAllProfitableCoinsUseCaseNvidia
 import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseCryptonight
 import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseNvidia
 import by.lebedev.miningcalculator.recyclers.earningsrecycler.EarningsAdapter
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.earnings_layout.*
 
 class EarningsActivity : AppCompatActivity() {
+
+    private lateinit var mInterstitialAd: InterstitialAd
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.earnings_layout)
+
+        MobileAds.initialize(this) {}
+
+        mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+
 
         val selectedItem = intent.getIntExtra("selectedItem", -1)
 
@@ -65,15 +78,16 @@ class EarningsActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                Log.e("AAA", result.get(0).toString())
+                if (result!=null&&earnings_recycle!=null&&earningsProgressBar!=null) {
+                    Log.e("AAA", result.get(0).toString())
 
-                earningsProgressBar.visibility = View.INVISIBLE
-                val profit = result
-                val profitMinusFee = CoinProfitabilityEnergyFeeCalculator()
-                    .execute(profit, energy, energyCost, fee)
-                val profitArrayString = CoinProfitabilityStringTransformator().execute(profitMinusFee)
-                setupRecycler(profitArrayString)
-
+                    earningsProgressBar.visibility = View.INVISIBLE
+                    val profit = result
+                    val profitMinusFee = CoinProfitabilityEnergyFeeCalculator()
+                        .execute(profit, energy, energyCost, fee)
+                    val profitArrayString = CoinProfitabilityStringTransformator().execute(profitMinusFee)
+                    setupRecycler(profitArrayString)
+                }
 
             }, {
                 Log.e("AAA", it.message)
@@ -95,15 +109,16 @@ class EarningsActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                Log.e("AAA", result.get(0).toString())
+                if (result!=null&&earnings_recycle!=null&&earningsProgressBar!=null) {
+                    Log.e("AAA", result.get(0).toString())
 
-                earningsProgressBar.visibility = View.INVISIBLE
-                val profit = result
-                val profitMinusFee = CoinProfitabilityEnergyFeeCalculator()
-                    .execute(profit, energy, energyCost, fee)
-                val profitArrayString = CoinProfitabilityStringTransformator().execute(profitMinusFee)
-                setupRecycler(profitArrayString)
-
+                    earningsProgressBar.visibility = View.INVISIBLE
+                    val profit = result
+                    val profitMinusFee = CoinProfitabilityEnergyFeeCalculator()
+                        .execute(profit, energy, energyCost, fee)
+                    val profitArrayString = CoinProfitabilityStringTransformator().execute(profitMinusFee)
+                    setupRecycler(profitArrayString)
+                }
 
             }, {
                 Log.e("AAA", it.message)
@@ -125,19 +140,18 @@ class EarningsActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                Log.e("AAA", result.get(0).coinName)
-                Log.e("AAA", result.get(1).coinName)
-                Log.e("AAA", result.get(2).coinName)
-                Log.e("AAA", result.get(3).coinName)
-                earningsProgressBar.visibility = View.INVISIBLE
 
-                val globalProfit = result
+                if (result!=null&&earnings_recycle!=null&&earningsProgressBar!=null) {
 
-                val profit = CoinProfitabilityRigTransformator().execute(globalProfit, hashrate)
+                    earningsProgressBar.visibility = View.INVISIBLE
 
-                val profitArrayString = CoinProfitabilityStringTransformator().execute(profit)
-                setupRecycler(profitArrayString)
+                    val globalProfit = result
 
+                    val profit = CoinProfitabilityRigTransformator().execute(globalProfit, hashrate)
+
+                    val profitArrayString = CoinProfitabilityStringTransformator().execute(profit)
+                    setupRecycler(profitArrayString)
+                }
 
             }, {
                 Log.e("AAA", it.message)
@@ -170,8 +184,11 @@ class EarningsActivity : AppCompatActivity() {
             }
             R.id.support -> {
 
-//                val intent = Intent(this, AboutActivity::class.java)
-//                startActivity(intent)
+                if (mInterstitialAd.isLoaded) {
+                    mInterstitialAd.show()
+                } else {
+                    Log.e("AAA", "The interstitial wasn't loaded yet.")
+                }
                 return true
             }
             R.id.feedback -> {

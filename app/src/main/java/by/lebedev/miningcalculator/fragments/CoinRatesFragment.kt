@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import by.lebedev.domain.entities.CoinProfitabilityString
 import by.lebedev.domain.entities.CoinRate
 import by.lebedev.domain.transformators.CoinProfitabilityEnergyFeeCalculator
@@ -43,13 +44,12 @@ class CoinRatesFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
+                if (result != null && progressCoinRates != null) {
 
-                if (result != null) {
-                    progressCoinRates.visibility = View.INVISIBLE
-                    setupRecycler(result)
+                        progressCoinRates.visibility = View.INVISIBLE
+                        setupRecycler(result)
+
                 }
-
-
             }, {
                 Log.e("AAA", it.message)
             })
@@ -57,8 +57,8 @@ class CoinRatesFragment : Fragment() {
 
     fun setupRecycler(coinRateList: ArrayList<CoinRate>) {
         coinRateRecycle.setHasFixedSize(true)
-        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
-        layoutManager.orientation = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+        val layoutManager = LinearLayoutManager(this.context)
+        layoutManager.orientation = RecyclerView.VERTICAL
         coinRateRecycle.layoutManager = layoutManager
         coinRateRecycle.adapter = this.context?.let { CoinRateAdapter(it, coinRateList) }
     }
