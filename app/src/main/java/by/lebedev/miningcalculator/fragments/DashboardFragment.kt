@@ -12,9 +12,14 @@ import by.lebedev.domain.collections.Algos
 import by.lebedev.domain.transformators.HashTypeConfigurator
 import by.lebedev.miningcalculator.EarningsActivity
 import by.lebedev.miningcalculator.R
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.dashboard_layout.*
 
 class DashboardFragment : Fragment() {
+
+    lateinit var mAdView : AdView
 
     val gpu = "GPU"
     val cpu = "CPU"
@@ -33,6 +38,12 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        MobileAds.initialize(this.context) {}
+
+        mAdView = adViewDashboard
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         val arrayOfAlgos = arrayOfNulls<String>(algos.list.size)
         algos.list.toArray(arrayOfAlgos)

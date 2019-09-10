@@ -186,9 +186,14 @@ class EarningsActivity : AppCompatActivity() {
 
                 if (mInterstitialAd.isLoaded) {
                     mInterstitialAd.show()
+
                 } else {
                     Log.e("AAA", "The interstitial wasn't loaded yet.")
                 }
+
+                val intent = Intent(this, DonationActivity::class.java)
+                startActivity(intent)
+
                 return true
             }
             R.id.feedback -> {
