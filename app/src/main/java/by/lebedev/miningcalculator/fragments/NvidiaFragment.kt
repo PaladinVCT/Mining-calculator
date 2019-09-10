@@ -56,7 +56,7 @@ class NvidiaFragment : Fragment() {
         mAdView = adViewNvidia
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
-        
+
         setupRecycler(NvidiaDevices.instance.list)
         val setupDevicesAtStartup = context as SetupDevices
         setupDevicesAtStartup.setupAtStartup(
