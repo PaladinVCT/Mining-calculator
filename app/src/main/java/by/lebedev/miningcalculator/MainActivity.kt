@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
         MobileAds.initialize(this) {}
 
         mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        mInterstitialAd.adUnitId = resources.getString(R.string.interstitial_id)
         mInterstitialAd.loadAd(AdRequest.Builder().build())
 
         setTitle("  Mining profit calculator");
@@ -99,6 +99,7 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
                 return true
             }
             R.id.support -> {
+                mInterstitialAd.loadAd(AdRequest.Builder().build())
 
                 if (mInterstitialAd.isLoaded) {
                     mInterstitialAd.show()

@@ -13,7 +13,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:3.4.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'com.google.gms:google-services:4.2.0'
+        classpath 'com.google.gms:google-services:4.3.2'
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -65,6 +65,5 @@ ext{
     supportTestEspresso = "com.android.support.test.espresso:espresso-core:3.0.2"
 
     //AdMob
-
     adMob = "com.google.android.gms:play-services-ads:18.2.0"
 }

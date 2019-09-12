@@ -251,23 +251,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/percentText"/>
 
         <com.google.android.gms.ads.AdView
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/adViewDashboard"
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
                 ads:adSize="SMART_BANNER"
-                ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                ads:adUnitId="ca-app-pub-1501215034144631/4742326103"
                 android:layout_marginEnd="8dp"
                 ads:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
                 ads:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="8dp" ads:layout_constraintTop_toBottomOf="@+id/calculateButton">
+                android:layout_marginTop="15dp" ads:layout_constraintTop_toBottomOf="@+id/calculateButton">
         </com.google.android.gms.ads.AdView>
 
         <TextView
                 android:id="@+id/bottomTextView"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/adViewDashboard"/>

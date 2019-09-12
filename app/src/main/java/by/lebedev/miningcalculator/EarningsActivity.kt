@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import androidx.recyclerview.widget.RecyclerView
 import by.lebedev.domain.collections.Algos
 import by.lebedev.domain.transformators.CoinProfitabilityEnergyFeeCalculator
@@ -20,6 +19,7 @@ import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseCryptonight
 import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseNvidia
 import by.lebedev.miningcalculator.recyclers.earningsrecycler.EarningsAdapter
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.earnings_layout.*
 class EarningsActivity : AppCompatActivity() {
 
     private lateinit var mInterstitialAd: InterstitialAd
+    lateinit var mAdView : AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +37,12 @@ class EarningsActivity : AppCompatActivity() {
 
         MobileAds.initialize(this) {}
 
+        mAdView = adViewEarning
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
         mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        mInterstitialAd.adUnitId = getString(R.string.interstitial_id)
         mInterstitialAd.loadAd(AdRequest.Builder().build())
 
 
@@ -183,6 +188,7 @@ class EarningsActivity : AppCompatActivity() {
                 return true
             }
             R.id.support -> {
+                mInterstitialAd.loadAd(AdRequest.Builder().build())
 
                 if (mInterstitialAd.isLoaded) {
                     mInterstitialAd.show()
@@ -209,6 +215,4 @@ class EarningsActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-
 }
