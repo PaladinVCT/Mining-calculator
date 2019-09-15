@@ -10,8 +10,10 @@ import android.view.Gravity
 import android.widget.TextView
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import by.lebedev.domain.collections.VendorDevices
 import by.lebedev.miningcalculator.fragments.*
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.amd.DevicesAdapterAMD
@@ -19,11 +21,14 @@ import by.lebedev.miningcalculator.recyclers.devicesrecycler.nvidia.DevicesAdapt
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
+import android.text.InputType
+import by.lebedev.domain.usecase.SaveAmdConfigUseCase
 
 
 class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, AmdFragment.SetupDevices,
     AmdFragment.ClearAllDevices, DevicesAdapterNvidia.InitialRigSetup,
-    NvidiaFragment.SetupDevices, NvidiaFragment.ClearAllDevices {
+    NvidiaFragment.SetupDevices, NvidiaFragment.ClearAllDevices,AmdFragment.SaveConfigAMD {
+
 
     private lateinit var mInterstitialAd: InterstitialAd
     private var back_pressed: Long = 0
@@ -210,6 +215,36 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
         instance.devicesCount = 0
 
         setNumberDevicesInRig(instance, counterTextView)
+
+    }
+
+    override fun saveAMD(instance: VendorDevices) {
+
+        val input = EditText(this)
+        input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+
+        val builder = AlertDialog.Builder(this)
+            .setTitle("Save this configuration?")
+            .setIcon(R.drawable.rigicon)
+            .setView(input)
+            .setCancelable(true)
+            .setPositiveButton("YES", { dialog, _ ->
+
+                val name = input.text.toString()
+
+                SaveAmdConfigUseCase().execute(this,name)
+                /////
+
+
+                dialog.cancel()
+            })
+            .setNegativeButton("Cancel", { dialog, _ ->
+
+
+                dialog.cancel()
+            })
+        val alert = builder.create()
+        alert.show()
 
     }
 

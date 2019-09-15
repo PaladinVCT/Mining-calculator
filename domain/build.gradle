@@ -66,4 +66,6 @@ dependencies {
     implementation "org.mockito:mockito-inline:2.8.9"
     implementation 'androidx.arch.core:core-testing:2.1.0'
     implementation project(path: ':data')
+    implementation 'androidx.room:room-runtime:2.1.0'
+    annotationProcessor 'androidx.room:room-compiler:2.1.0'
 }

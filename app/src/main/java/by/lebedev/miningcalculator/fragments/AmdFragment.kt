@@ -32,6 +32,10 @@ class AmdFragment() : Fragment() {
         )
     }
 
+    interface SaveConfigAMD{
+        fun saveAMD(instance: VendorDevices)
+    }
+
     interface ClearAllDevices {
         fun clear(instance: VendorDevices, deviceNameLayoutId: Int, deviceCountLayoutId: Int, counterTextView: Int)
     }

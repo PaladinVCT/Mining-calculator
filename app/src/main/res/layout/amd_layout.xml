@@ -121,21 +121,55 @@
 
         </LinearLayout>
 
+        <LinearLayout
 
-        <Button
-                android:id="@+id/clearRigButtonAMD"
-                android:layout_gravity="right"
-                android:layout_marginTop="10dp"
-                android:drawableLeft="@drawable/close"
-                android:drawablePadding="4dp"
-                android:background="@drawable/clearall_selector"
-                android:text="@string/clear_all"
-                android:textStyle="italic"
-                android:textSize="11sp"
-                android:layout_marginRight="35dp"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-        />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/saveRigButtonAMD"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="16dp"
+                    android:drawableLeft="@drawable/save"
+                    android:background="@drawable/clearall_selector"
+                    android:text="@string/save_config"
+                    android:textStyle="italic"
+                    android:textSize="11sp"
+                    android:layout_marginRight="15dp"
+                    android:layout_width="105dp"
+                    android:layout_height="20dp"
+            />
+
+            <Button
+                    android:id="@+id/loadRigButtonAMD"
+                    android:layout_marginTop="10dp"
+                    android:drawableLeft="@drawable/load"
+                    android:background="@drawable/clearall_selector"
+                    android:text="@string/load_config"
+                    android:textStyle="italic"
+                    android:textSize="11sp"
+                    android:layout_marginRight="35dp"
+                    android:layout_width="105dp"
+                    android:layout_height="20dp"
+            />
+
+            <Button
+                    android:id="@+id/clearRigButtonAMD"
+                    android:layout_marginTop="10dp"
+                    android:drawableLeft="@drawable/close"
+                    android:background="@drawable/clearall_selector"
+                    android:text="@string/clear_all"
+                    android:textStyle="italic"
+                    android:textSize="11sp"
+                    android:layout_marginRight="35dp"
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+            />
+
+
+        </LinearLayout>
+
 
         <Button
                 android:id="@+id/calculateRigButtonAMD"
@@ -150,8 +184,8 @@
         />
 
         <com.google.android.gms.ads.AdView
-                android:id="@+id/adViewAmd"
                 xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adViewAmd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 ads:adSize="SMART_BANNER"
