@@ -112,27 +112,27 @@ class DashboardFragment : Fragment() {
                     })
 
 
-                .setPositiveButton("OK", { dialog, _ ->
-                    if (selectedItem != -1) {
-                        algos.selectedAlgo = arrayOfAlgos[selectedItem]!!
-                        algoSelectorButton.setText(arrayOfAlgos[selectedItem])
-                        hashTypeTextView.setText(HashTypeConfigurator().getTypeFromName(arrayOfAlgos[selectedItem]!!))
-                        calculateButton.setEnabled(true)
-                    }
-                    if (selectedItem == 0) {
-                        cryptonightInfoTextView.visibility = View.VISIBLE
-                    } else cryptonightInfoTextView.visibility = View.INVISIBLE
+            .setPositiveButton("OK", { dialog, _ ->
+                if (selectedItem != -1) {
+                    algos.selectedAlgo = arrayOfAlgos[selectedItem]!!
+                    algoSelectorButton.setText(arrayOfAlgos[selectedItem])
+                    hashTypeTextView.setText(HashTypeConfigurator().getTypeFromName(arrayOfAlgos[selectedItem]!!))
+                    calculateButton.setEnabled(true)
+                }
+                if (selectedItem == 0) {
+                    cryptonightInfoTextView.visibility = View.VISIBLE
+                } else cryptonightInfoTextView.visibility = View.INVISIBLE
 
-                    dialog.cancel()
-                })
-                .setNegativeButton("Cancel", { dialog, _ ->
+                dialog.cancel()
+            })
+            .setNegativeButton("Cancel", { dialog, _ ->
 
 
-                    dialog.cancel()
-                })
-            val alert = builder.create()
-            alert.show()
-        }
+                dialog.cancel()
+            })
+        val alert = builder.create()
+        alert.show()
+    }
 
 
         calculateButton.setOnClickListener {
