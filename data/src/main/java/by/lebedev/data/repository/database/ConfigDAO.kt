@@ -4,17 +4,17 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import by.lebedev.data.repository.database.entity.Config
+import by.lebedev.data.repository.database.entity.ConfigResponse
 import io.reactivex.Single
 
 @Dao
 interface ConfigDAO {
-    @Query("SELECT * FROM Config")
-    fun getAll(): Single<ArrayList<Config>>
+    @Query("SELECT * FROM ConfigResponse")
+    fun getAll(): Single<ArrayList<ConfigResponse>>
 
     @Insert
-    fun insert(vararg config: Config)
+    fun insert(vararg configResponse: ConfigResponse)
 
     @Delete
-    fun delete(config: Config)
+    fun delete(configResponse: ConfigResponse)
 }

@@ -27,7 +27,7 @@ import by.lebedev.domain.usecase.SaveAmdConfigUseCase
 
 class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, AmdFragment.SetupDevices,
     AmdFragment.ClearAllDevices, DevicesAdapterNvidia.InitialRigSetup,
-    NvidiaFragment.SetupDevices, NvidiaFragment.ClearAllDevices,AmdFragment.SaveConfigAMD {
+    NvidiaFragment.SetupDevices, NvidiaFragment.ClearAllDevices, AmdFragment.SaveConfigAMD {
 
 
     private lateinit var mInterstitialAd: InterstitialAd
@@ -221,6 +221,7 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
     override fun saveAMD(instance: VendorDevices) {
 
         val input = EditText(this)
+        input.hint = "config name"
         input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
 
         val builder = AlertDialog.Builder(this)
@@ -232,14 +233,11 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
 
                 val name = input.text.toString()
 
-                SaveAmdConfigUseCase().execute(this,name)
-                /////
-
+                SaveAmdConfigUseCase().execute(this, name)
 
                 dialog.cancel()
             })
             .setNegativeButton("Cancel", { dialog, _ ->
-
 
                 dialog.cancel()
             })

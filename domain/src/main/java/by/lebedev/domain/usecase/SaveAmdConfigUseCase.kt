@@ -1,9 +1,8 @@
 package by.lebedev.domain.usecase
 
-import android.accounts.Account
 import android.content.Context
 import by.lebedev.data.repository.database.DataBase
-import by.lebedev.data.repository.database.entity.Config
+import by.lebedev.data.repository.database.entity.ConfigResponse
 import by.lebedev.domain.collections.AmdDevices
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,9 +22,10 @@ class SaveAmdConfigUseCase:SaveConfigUseCase {
 
         val complete = Completable.fromAction {
             DataBase.getInstance(context).db.configDao().insert(
-                Config(
+                ConfigResponse(
                     Calendar.getInstance().timeInMillis,
                     name,
+                    "Amd",
                     array
 
                 )

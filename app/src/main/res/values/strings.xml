@@ -44,6 +44,6 @@
     <string name="app_id">ca-app-pub-1501215034144631~1229746060</string>
     <string name="banner_id">ca-app-pub-1501215034144631/4742326103</string>
     <string name="interstitial_id">ca-app-pub-1501215034144631/8206040347</string>
-    <string name="load_config">load config</string>
-    <string name="save_config">save config</string>
+    <string name="load_config">load configResponse</string>
+    <string name="save_config">save configResponse</string>
 </resources>
