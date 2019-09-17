@@ -23,12 +23,12 @@ import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import android.text.InputType
 import by.lebedev.domain.usecase.SaveAmdConfigUseCase
+import by.lebedev.domain.usecase.SaveNvidiaConfigUseCase
 
 
 class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, AmdFragment.SetupDevices,
     AmdFragment.ClearAllDevices, DevicesAdapterNvidia.InitialRigSetup,
-    NvidiaFragment.SetupDevices, NvidiaFragment.ClearAllDevices, AmdFragment.SaveConfigAMD {
-
+    NvidiaFragment.SetupDevices, NvidiaFragment.ClearAllDevices, AmdFragment.SaveConfigAMD, NvidiaFragment.SaveConfigNvidia {
 
     private lateinit var mInterstitialAd: InterstitialAd
     private var back_pressed: Long = 0
@@ -218,24 +218,31 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
 
     }
 
-    override fun saveAMD(instance: VendorDevices) {
+    override fun saveAMD() {
 
         val input = EditText(this)
-        input.hint = "config name"
-        input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        input.hint = "configuration name"
+        input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE
 
         val builder = AlertDialog.Builder(this)
             .setTitle("Save this configuration?")
             .setIcon(R.drawable.rigicon)
             .setView(input)
             .setCancelable(true)
-            .setPositiveButton("YES", { dialog, _ ->
+            .setPositiveButton("Save", { dialog, _ ->
 
                 val name = input.text.toString()
 
-                SaveAmdConfigUseCase().execute(this, name)
+                if (name.isEmpty()) {
+                    Toast.makeText(
+                        this, "Please enter configuration name",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    SaveAmdConfigUseCase().execute(this, name)
 
-                dialog.cancel()
+                    dialog.cancel()
+                }
             })
             .setNegativeButton("Cancel", { dialog, _ ->
 
@@ -246,4 +253,37 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
 
     }
 
+    override fun saveNvidia() {
+
+        val input = EditText(this)
+        input.hint = "configuration name"
+        input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE
+
+        val builder = AlertDialog.Builder(this)
+            .setTitle("Save this configuration?")
+            .setIcon(R.drawable.rigicon)
+            .setView(input)
+            .setCancelable(true)
+            .setPositiveButton("Save", { dialog, _ ->
+
+                val name = input.text.toString()
+
+                if (name.isEmpty()) {
+                    Toast.makeText(
+                        this, "Please enter configuration name",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    SaveNvidiaConfigUseCase().execute(this, name)
+
+                    dialog.cancel()
+                }
+            })
+            .setNegativeButton("Cancel", { dialog, _ ->
+
+                dialog.cancel()
+            })
+        val alert = builder.create()
+        alert.show()
+    }
 }

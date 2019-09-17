@@ -3,9 +3,9 @@ package by.lebedev.domain.transformators
 import by.lebedev.data.repository.database.entity.ConfigResponse
 import by.lebedev.domain.entities.Config
 
-class AmdConfigArrayResponseTransformator {
+class NvidiaConfigArrayResponseTransformator {
 
-    private val vendor = "Amd"
+    private val vendor = "Nvidia"
 
     fun execute(configArrayResponse: List<ConfigResponse>): ArrayList<Config> {
 

@@ -1,15 +1,14 @@
 package by.lebedev.domain.usecase
 
 import android.content.Context
-import android.util.Log
 import by.lebedev.data.repository.database.DataBase
 import by.lebedev.domain.entities.Config
-import by.lebedev.domain.transformators.AmdConfigArrayResponseTransformator
+import by.lebedev.domain.transformators.NvidiaConfigArrayResponseTransformator
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class GetAmdRigConfigUseCase : GetConfigUseCase {
+class LoadNvidiaRigConfigUseCase : LoadConfigUseCase {
     override fun execute(context: Context, vendor: String): Single<ArrayList<Config>> {
 
         return DataBase.getInstance(context).db.configDao()
@@ -17,7 +16,7 @@ class GetAmdRigConfigUseCase : GetConfigUseCase {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map {
-                AmdConfigArrayResponseTransformator().execute(it)
+                NvidiaConfigArrayResponseTransformator().execute(it)
             }
 
     }

@@ -130,6 +130,7 @@
             <Button
                     android:id="@+id/saveRigButtonAMD"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
                     android:layout_marginLeft="16dp"
                     android:drawableLeft="@drawable/save"
                     android:background="@drawable/clearall_selector"
@@ -138,12 +139,13 @@
                     android:textSize="11sp"
                     android:layout_marginRight="15dp"
                     android:layout_width="105dp"
-                    android:layout_height="20dp"
+                    android:layout_height="30dp"
             />
 
             <Button
                     android:id="@+id/loadRigButtonAMD"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
                     android:drawableLeft="@drawable/load"
                     android:background="@drawable/clearall_selector"
                     android:text="@string/load_config"
@@ -151,12 +153,13 @@
                     android:textSize="11sp"
                     android:layout_marginRight="35dp"
                     android:layout_width="105dp"
-                    android:layout_height="20dp"
+                    android:layout_height="30dp"
             />
 
             <Button
                     android:id="@+id/clearRigButtonAMD"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
                     android:drawableLeft="@drawable/close"
                     android:background="@drawable/clearall_selector"
                     android:text="@string/clear_all"
@@ -164,7 +167,7 @@
                     android:textSize="11sp"
                     android:layout_marginRight="35dp"
                     android:layout_width="80dp"
-                    android:layout_height="20dp"
+                    android:layout_height="30dp"
             />
 
 

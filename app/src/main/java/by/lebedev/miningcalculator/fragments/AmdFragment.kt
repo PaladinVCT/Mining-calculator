@@ -12,10 +12,11 @@ import android.widget.Toast
 import by.lebedev.domain.collections.AmdDevices
 import by.lebedev.domain.collections.VendorDevices
 import by.lebedev.domain.entities.Device
-import by.lebedev.domain.transformators.AmdConfigArrayToStringTransformator
+import by.lebedev.domain.transformators.ConfigArrayToStringTransformator
 import by.lebedev.domain.transformators.RigDevicesCount
 import by.lebedev.domain.transformators.HashPowerAggregator
-import by.lebedev.domain.usecase.GetAmdRigConfigUseCase
+import by.lebedev.domain.usecase.DeleteSelectedConfigUseCase
+import by.lebedev.domain.usecase.LoadAmdRigConfigUseCase
 import by.lebedev.miningcalculator.EarningsActivity
 import by.lebedev.miningcalculator.R
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.amd.DevicesAdapterAMD
@@ -27,6 +28,7 @@ import kotlinx.android.synthetic.main.amd_layout.*
 
 class AmdFragment() : Fragment() {
 
+    private val vendor = "Amd"
     lateinit var mAdView: AdView
 
     interface SetupDevices {
@@ -39,7 +41,7 @@ class AmdFragment() : Fragment() {
     }
 
     interface SaveConfigAMD {
-        fun saveAMD(instance: VendorDevices)
+        fun saveAMD()
     }
 
     interface ClearAllDevices {
@@ -59,6 +61,7 @@ class AmdFragment() : Fragment() {
         mAdView.loadAd(adRequest)
 
         setupRecycler(AmdDevices.instance.list)
+        val saveConfigAMD = context as SaveConfigAMD
         val setupDevicesAtStartup = context as SetupDevices
         setupDevicesAtStartup.setupAtStartup(
             AmdDevices.instance,
@@ -104,57 +107,86 @@ class AmdFragment() : Fragment() {
 
             var selectedItem = -1
 
-            val x = GetAmdRigConfigUseCase().execute(view.context, "Amd")
+            val x = LoadAmdRigConfigUseCase().execute(view.context, vendor)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    val namesArray = AmdConfigArrayToStringTransformator().execute(it)
 
-                    val builder = AlertDialog.Builder(view.context)
-                        .setTitle("Select your Rig config")
-                        .setIcon(R.drawable.algo_icon)
-                        .setCancelable(true)
+                    if (it.size == 0) {
+                        Toast.makeText(
+                            view.context, "Configuration list is empty",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        val namesArray = ConfigArrayToStringTransformator().execute(it)
 
-                        .setSingleChoiceItems(namesArray, -1,
-                            { _, item ->
+                        val builder = AlertDialog.Builder(view.context)
+                            .setTitle("Select your Rig config")
+                            .setIcon(R.drawable.rigicon)
+                            .setCancelable(true)
 
-                                selectedItem = item
+                            .setSingleChoiceItems(namesArray, -1,
+                                { _, item ->
 
-                            })
+                                    selectedItem = item
+
+                                })
 
 
-                        .setPositiveButton("OK", { dialog, _ ->
-                            if (selectedItem != -1) {
+                            .setPositiveButton("Load", { dialog, _ ->
+                                if (selectedItem != -1) {
 
-                                for (i in 0 until AmdDevices.instance.list.size) {
-                                    AmdDevices.instance.list.get(i).count = it.get(selectedItem).numberDevices.get(i)
+                                    for (i in 0 until AmdDevices.instance.list.size) {
+                                        AmdDevices.instance.list.get(i).count =
+                                            it.get(selectedItem).numberDevices.get(i)
+                                    }
+
+                                    AmdDevices.instance.devicesCount =
+                                        RigDevicesCount().execute(AmdDevices.instance.list)
+
+
+                                    setupDevicesAtStartup.setupAtStartup(
+                                        AmdDevices.instance,
+                                        R.id.deviceNameLayoutAMD,
+                                        R.id.deviceCountLayoutAMD,
+                                        R.id.rigDeviceCounterAMD
+                                    )
+
+                                    setupRecycler(AmdDevices.instance.list)
                                 }
-                            }
+                                dialog.cancel()
+                            })
+                            .setNegativeButton("Cancel", { dialog, _ ->
 
-                            setupDevicesAtStartup.setupAtStartup(
-                                AmdDevices.instance,
-                                R.id.deviceNameLayoutAMD,
-                                R.id.deviceCountLayoutAMD,
-                                R.id.rigDeviceCounterAMD
-                            )
+                                dialog.cancel()
+                            })
+                            .setNeutralButton("Delete", { dialog, _ ->
 
-                            dialog.cancel()
-                        })
-                        .setNegativeButton("Cancel", { dialog, _ ->
+                                DeleteSelectedConfigUseCase().execute(view.context, it.get(selectedItem).name, vendor)
 
-                            dialog.cancel()
-                        })
-                    val alert = builder.create()
-                    alert.show()
+                                dialog.cancel()
+
+                                Toast.makeText(
+                                    view.context, "Configuration deleted",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            })
+                        val alert = builder.create()
+                        alert.show()
 
 
+                    }
                 }, {
-
                     Log.e("AAA", it.message)
                 })
-
-
         }
+
+
+        saveRigButtonAMD.setOnClickListener {
+            saveConfigAMD.saveAMD()
+        }
+
+
     }
 
 

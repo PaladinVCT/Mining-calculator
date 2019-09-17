@@ -9,14 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import by.lebedev.domain.collections.NvidiaDevices
 import by.lebedev.domain.collections.VendorDevices
 import by.lebedev.domain.entities.Device
-import by.lebedev.domain.transformators.CoinProfitabilityRigTransformator
-import by.lebedev.domain.transformators.CoinProfitabilityStringTransformator
-import by.lebedev.domain.transformators.HashPowerAggregator
-import by.lebedev.domain.transformators.RigDevicesCount
+import by.lebedev.domain.transformators.*
+import by.lebedev.domain.usecase.DeleteSelectedConfigUseCase
 import by.lebedev.domain.usecase.GetAllProfitableCoinsUseCaseNvidia
+import by.lebedev.domain.usecase.LoadNvidiaRigConfigUseCase
 import by.lebedev.miningcalculator.EarningsActivity
 import by.lebedev.miningcalculator.R
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.amd.DevicesAdapterAMD
@@ -30,6 +30,7 @@ import kotlinx.android.synthetic.main.nvidia_layout.*
 
 class NvidiaFragment : Fragment() {
 
+    private val vendor = "Nvidia"
     lateinit var mAdView : AdView
 
     interface SetupDevices {
@@ -39,6 +40,10 @@ class NvidiaFragment : Fragment() {
             deviceCountLayoutId: Int,
             counterTextView: Int
         )
+    }
+
+    interface SaveConfigNvidia {
+        fun saveNvidia()
     }
 
     interface ClearAllDevices {
@@ -58,6 +63,7 @@ class NvidiaFragment : Fragment() {
         mAdView.loadAd(adRequest)
 
         setupRecycler(NvidiaDevices.instance.list)
+        val saveConfigNvidia = context as SaveConfigNvidia
         val setupDevicesAtStartup = context as SetupDevices
         setupDevicesAtStartup.setupAtStartup(
             NvidiaDevices.instance,
@@ -99,6 +105,92 @@ class NvidiaFragment : Fragment() {
 
         }
 
+        loadRigButtonNvidia.setOnClickListener {
+
+            var selectedItem = -1
+
+            val x = LoadNvidiaRigConfigUseCase().execute(view.context, vendor)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+
+                    if (it.size == 0) {
+                        Toast.makeText(
+                            view.context, "Configuration list is empty",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        val namesArray = ConfigArrayToStringTransformator().execute(it)
+
+                        val builder = AlertDialog.Builder(view.context)
+                            .setTitle("Select your Rig config")
+                            .setIcon(R.drawable.rigicon)
+                            .setCancelable(true)
+
+                            .setSingleChoiceItems(namesArray, -1,
+                                { _, item ->
+
+                                    selectedItem = item
+
+                                })
+
+
+                            .setPositiveButton("Load", { dialog, _ ->
+                                if (selectedItem != -1) {
+
+                                    for (i in 0 until NvidiaDevices.instance.list.size) {
+                                        NvidiaDevices.instance.list.get(i).count =
+                                            it.get(selectedItem).numberDevices.get(i)
+                                    }
+
+                                    NvidiaDevices.instance.devicesCount =
+                                        RigDevicesCount().execute(NvidiaDevices.instance.list)
+
+
+                                    setupDevicesAtStartup.setupAtStartup(
+                                        NvidiaDevices.instance,
+                                        R.id.deviceNameLayoutNvidia,
+                                        R.id.deviceCountLayoutNvidia,
+                                        R.id.rigDeviceCounterNvidia
+                                    )
+
+                                    setupRecycler(NvidiaDevices.instance.list)
+                                }
+                                dialog.cancel()
+                            })
+                            .setNegativeButton("Cancel", { dialog, _ ->
+
+                                dialog.cancel()
+                            })
+                            .setNeutralButton("Delete", { dialog, _ ->
+
+                                DeleteSelectedConfigUseCase().execute(view.context, it.get(selectedItem).name, vendor)
+
+                                dialog.cancel()
+
+                                Toast.makeText(
+                                    view.context, "Configuration deleted",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            })
+                        val alert = builder.create()
+                        alert.show()
+
+
+                    }
+                }, {
+                    Log.e("AAA", it.message)
+                })
+        }
+
+
+
+        saveRigButtonNvidia.setOnClickListener {
+            saveConfigNvidia.saveNvidia()
+        }
+
+
+
     }
 
 
@@ -122,6 +214,8 @@ class NvidiaFragment : Fragment() {
             R.id.rigDeviceCounterNvidia
         )
     }
+
+
 
 
 }

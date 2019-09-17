@@ -10,11 +10,12 @@ import io.reactivex.Single
 @Dao
 interface ConfigDAO {
     @Query("SELECT * FROM ConfigResponse")
-    fun getAll(): Single<ArrayList<ConfigResponse>>
+    fun getAll(): Single<List<ConfigResponse>>
+
+    @Query("DELETE FROM ConfigResponse where name=:name and vendor=:vendor")
+    fun delete(name: String, vendor: String)
 
     @Insert
     fun insert(vararg configResponse: ConfigResponse)
 
-    @Delete
-    fun delete(configResponse: ConfigResponse)
 }

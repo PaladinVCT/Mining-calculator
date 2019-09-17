@@ -3,7 +3,7 @@ package by.lebedev.domain.transformators
 import by.lebedev.data.repository.database.entity.ConfigResponse
 import by.lebedev.domain.entities.Config
 
-class AmdConfigArrayToStringTransformator {
+class ConfigArrayToStringTransformator {
 
     fun execute(configArray: ArrayList<Config>): Array<String> {
 
