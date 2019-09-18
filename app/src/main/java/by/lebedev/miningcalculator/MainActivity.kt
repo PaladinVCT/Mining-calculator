@@ -277,6 +277,11 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
                     SaveNvidiaConfigUseCase().execute(this, name)
 
                     dialog.cancel()
+
+                    Toast.makeText(
+                        this, "Configuration saved",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             })
             .setNegativeButton("Cancel", { dialog, _ ->
