@@ -18,17 +18,20 @@ import by.lebedev.domain.transformators.HashPowerAggregator
 import by.lebedev.domain.usecase.DeleteSelectedConfigUseCase
 import by.lebedev.domain.usecase.LoadAmdRigConfigUseCase
 import by.lebedev.miningcalculator.EarningsActivity
-import by.lebedev.miningcalculator.R
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.amd.DevicesAdapterAMD
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.amd_layout.*
+import androidx.recyclerview.widget.LinearSnapHelper
+import by.lebedev.miningcalculator.R
+
 
 class AmdFragment() : Fragment() {
 
     private val vendor = "Amd"
+    private val snapHelper = LinearSnapHelper()
     lateinit var mAdView: AdView
 
     interface SetupDevices {
@@ -59,6 +62,8 @@ class AmdFragment() : Fragment() {
         mAdView = adViewAmd
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
+
+        snapHelper.attachToRecyclerView(devicesRecycleAMD)
 
         setupRecycler(AmdDevices.instance.list)
         val saveConfigAMD = context as SaveConfigAMD
@@ -107,7 +112,7 @@ class AmdFragment() : Fragment() {
 
             var selectedItem = -1
 
-            val x = LoadAmdRigConfigUseCase().execute(view.context, vendor)
+            LoadAmdRigConfigUseCase().execute(view.context, vendor)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -133,7 +138,7 @@ class AmdFragment() : Fragment() {
                                 })
 
 
-                            .setPositiveButton("Load", { dialog, _ ->
+                            .setPositiveButton("Load") { dialog, _ ->
                                 if (selectedItem != -1) {
 
                                     for (i in 0 until AmdDevices.instance.list.size) {
@@ -154,8 +159,14 @@ class AmdFragment() : Fragment() {
 
                                     setupRecycler(AmdDevices.instance.list)
                                 }
+
+                                Toast.makeText(
+                                    view.context, "Configuration loaded",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
                                 dialog.cancel()
-                            })
+                            }
                             .setNegativeButton("Cancel", { dialog, _ ->
 
                                 dialog.cancel()
@@ -191,6 +202,7 @@ class AmdFragment() : Fragment() {
 
 
     fun setupRecycler(devices: ArrayList<Device>) {
+
         devicesRecycleAMD.setHasFixedSize(true)
         val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
         layoutManager.orientation = androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL

@@ -10,27 +10,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearSnapHelper
 import by.lebedev.domain.collections.NvidiaDevices
 import by.lebedev.domain.collections.VendorDevices
 import by.lebedev.domain.entities.Device
 import by.lebedev.domain.transformators.*
 import by.lebedev.domain.usecase.DeleteSelectedConfigUseCase
-import by.lebedev.domain.usecase.GetAllProfitableCoinsUseCaseNvidia
 import by.lebedev.domain.usecase.LoadNvidiaRigConfigUseCase
 import by.lebedev.miningcalculator.EarningsActivity
 import by.lebedev.miningcalculator.R
-import by.lebedev.miningcalculator.recyclers.devicesrecycler.amd.DevicesAdapterAMD
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.nvidia.DevicesAdapterNvidia
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.earnings_layout.*
 import kotlinx.android.synthetic.main.nvidia_layout.*
 
 class NvidiaFragment : Fragment() {
 
     private val vendor = "Nvidia"
+    private val snapHelper = LinearSnapHelper()
     lateinit var mAdView : AdView
 
     interface SetupDevices {
@@ -61,6 +60,8 @@ class NvidiaFragment : Fragment() {
         mAdView = adViewNvidia
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
+
+        snapHelper.attachToRecyclerView(devicesRecycleNvidia)
 
         setupRecycler(NvidiaDevices.instance.list)
         val saveConfigNvidia = context as SaveConfigNvidia
@@ -156,6 +157,12 @@ class NvidiaFragment : Fragment() {
 
                                     setupRecycler(NvidiaDevices.instance.list)
                                 }
+
+                                Toast.makeText(
+                                    view.context, "Configuration loaded",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
                                 dialog.cancel()
                             })
                             .setNegativeButton("Cancel", { dialog, _ ->

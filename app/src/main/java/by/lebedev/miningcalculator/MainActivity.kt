@@ -216,6 +216,11 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
 
         setNumberDevicesInRig(instance, counterTextView)
 
+        Toast.makeText(
+            this, "Cleared",
+            Toast.LENGTH_SHORT
+        ).show()
+
     }
 
     override fun saveAMD() {
@@ -229,7 +234,7 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
             .setIcon(R.drawable.rigicon)
             .setView(input)
             .setCancelable(true)
-            .setPositiveButton("Save", { dialog, _ ->
+            .setPositiveButton("Save") { dialog, _ ->
 
                 val name = input.text.toString()
 
@@ -241,13 +246,18 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
                 } else {
                     SaveAmdConfigUseCase().execute(this, name)
 
+                    Toast.makeText(
+                        this, "Configuration saved",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
                     dialog.cancel()
                 }
-            })
-            .setNegativeButton("Cancel", { dialog, _ ->
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
 
                 dialog.cancel()
-            })
+            }
         val alert = builder.create()
         alert.show()
 
@@ -276,6 +286,11 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
                 } else {
                     SaveNvidiaConfigUseCase().execute(this, name)
 
+                    Toast.makeText(
+                        this, "Configuration saved",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
                     dialog.cancel()
 
                     Toast.makeText(
@@ -284,10 +299,10 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
                     ).show()
                 }
             })
-            .setNegativeButton("Cancel", { dialog, _ ->
+            .setNegativeButton("Cancel") { dialog, _ ->
 
                 dialog.cancel()
-            })
+            }
         val alert = builder.create()
         alert.show()
     }
