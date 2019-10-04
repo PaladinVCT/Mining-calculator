@@ -148,12 +148,5 @@ class DashboardFragment : Fragment() {
             it.context.startActivity(intent)
         }
 
-
-
-
-
-
-
-
     }
 }

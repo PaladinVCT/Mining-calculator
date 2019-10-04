@@ -26,6 +26,27 @@ class Algos {
         "BeamHashII"
     )
 
+    val asicList: ArrayList<String> = arrayListOf(
+        "SHA-256",
+        "Scrypt",
+        "X11",
+        "Quark",
+        "Qubit",
+        "Blake (2b)",
+        "LBRY",
+        "Blake (14r)",
+        "CryptoNight",
+        "Equihash",
+        "Skein",
+        "Myr-Groestl",
+        "Lyra2REv2",
+        "Keccak",
+        "PHI1612",
+        "Lyra2z",
+        "X13",
+        "Blake (2b-Sia)"
+    )
+
 
     companion object {
         val instance = Algos()
