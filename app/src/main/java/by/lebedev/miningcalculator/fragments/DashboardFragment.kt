@@ -23,6 +23,7 @@ class DashboardFragment : Fragment() {
 
     val gpu = "GPU"
     val cpu = "CPU"
+    val asic = "ASIC"
 
     var selectedItem = -1
     var device = " "
@@ -50,20 +51,27 @@ class DashboardFragment : Fragment() {
 
         gpuMiningText.visibility = View.INVISIBLE
         cpuMiningText.visibility = View.INVISIBLE
+        asicMiningText.visibility = View.INVISIBLE
+
         gpuLayout.setBackgroundColor(0)
         cpuLayout.setBackgroundColor(0)
+        asicLayout.setBackgroundColor(0)
 
         gpuImage.setOnClickListener {
             gpuImage.post(Runnable {
+                val asicAnimation = asicImage.getBackground() as AnimationDrawable
                 val gpuAnimation = gpuImage.getBackground() as AnimationDrawable
                 val cpuAnimation = cpuImage.getBackground() as AnimationDrawable
                 if (!gpuAnimation.isRunning) {
                     gpuAnimation.start()
                     cpuAnimation.stop()
+                    asicAnimation.stop()
                     gpuMiningText.visibility = View.VISIBLE
                     cpuMiningText.visibility = View.INVISIBLE
+                    asicMiningText.visibility = View.INVISIBLE
                     gpuLayout.setBackgroundResource(R.drawable.edit_text_shape)
                     cpuLayout.setBackgroundColor(0)
+                    asicLayout.setBackgroundColor(0)
                     algoSelectorButton.setEnabled(true)
                     calculateButton.setEnabled(false)
                     algoSelectorButton.text = resources.getText(R.string.select_mining_algo)
@@ -77,15 +85,19 @@ class DashboardFragment : Fragment() {
 
         cpuImage.setOnClickListener {
             cpuImage.post(Runnable {
+                val asicAnimation = asicImage.getBackground() as AnimationDrawable
                 val cpuAnimation = cpuImage.getBackground() as AnimationDrawable
                 val gpuAnimation = gpuImage.getBackground() as AnimationDrawable
                 if (!cpuAnimation.isRunning) {
                     cpuAnimation.start()
                     gpuAnimation.stop()
+                    asicAnimation.stop()
                     gpuMiningText.visibility = View.INVISIBLE
+                    asicMiningText.visibility = View.INVISIBLE
                     cpuMiningText.visibility = View.VISIBLE
                     cpuLayout.setBackgroundResource(R.drawable.edit_text_shape)
                     gpuLayout.setBackgroundColor(0)
+                    asicLayout.setBackgroundColor(0)
                     algoSelectorButton.setEnabled(false)
                     algoSelectorButton.setText(cryptonight)
                     algos.selectedAlgo = cryptonight
@@ -94,6 +106,32 @@ class DashboardFragment : Fragment() {
                     device = cpu
                     cryptonightInfoTextView.visibility = View.VISIBLE
                     calculateButton.setEnabled(true)
+                }
+            })
+        }
+
+        asicImage.setOnClickListener {
+            asicImage.post(Runnable {
+                val asicAnimation = asicImage.getBackground() as AnimationDrawable
+                val cpuAnimation = cpuImage.getBackground() as AnimationDrawable
+                val gpuAnimation = gpuImage.getBackground() as AnimationDrawable
+                if (!asicAnimation.isRunning) {
+                    asicAnimation.start()
+                    gpuAnimation.stop()
+                    cpuAnimation.stop()
+                    gpuMiningText.visibility = View.INVISIBLE
+                    cpuMiningText.visibility = View.INVISIBLE
+                    asicMiningText.visibility = View.VISIBLE
+                    asicLayout.setBackgroundResource(R.drawable.edit_text_shape)
+                    gpuLayout.setBackgroundColor(0)
+                    cpuLayout.setBackgroundColor(0)
+                    algoSelectorButton.setEnabled(true)
+                    calculateButton.setEnabled(false)
+                    algoSelectorButton.text = resources.getText(R.string.select_mining_algo)
+                    cryptonightInfoTextView.visibility = View.INVISIBLE
+                    algos.selectedAlgo = ""
+                    hashTypeTextView.setText("H/s")
+                    device = asic
                 }
             })
         }
