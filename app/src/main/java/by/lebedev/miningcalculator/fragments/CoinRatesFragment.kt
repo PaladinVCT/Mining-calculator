@@ -33,8 +33,18 @@ class CoinRatesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         getCoinRates()
 
+        swipeRefreshCoinRates.setColorSchemeResources(
+            R.color.green_24_hour_percent,
+            R.color.colorPrimary,
+            R.color.red_info
+        )
+        swipeRefreshCoinRates.setOnRefreshListener {
+            layoutForRefreshCoinRates.visibility = View.INVISIBLE
+            getCoinRates()
+        }
 
     }
 
@@ -45,9 +55,10 @@ class CoinRatesFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 if (result != null && progressCoinRates != null) {
-
-                        progressCoinRates.visibility = View.INVISIBLE
-                        setupRecycler(result)
+                    layoutForRefreshCoinRates.visibility = View.VISIBLE
+                    swipeRefreshCoinRates.setRefreshing(false)
+                    progressCoinRates.visibility = View.INVISIBLE
+                    setupRecycler(result)
 
                 }
             }, {

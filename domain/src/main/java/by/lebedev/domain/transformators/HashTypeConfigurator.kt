@@ -88,10 +88,10 @@ class HashTypeConfigurator {
                 return "Gh/s"
             }
             "CryptoNight" -> {
-                return "kh/s"
+                return "Kh/s"
             }
             "Equihash" -> {
-                return "kh/s"
+                return "Kh/s"
             }
             "Skein" -> {
                 return "Gh/s"
@@ -115,7 +115,7 @@ class HashTypeConfigurator {
                 return "Mh/s"
             }
             "Blake (2b-Sia)" -> {
-                return "Mh/s"
+                return "Gh/s"
             }
             else -> return "H/s"
         }

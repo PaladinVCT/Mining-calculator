@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import by.lebedev.domain.collections.Algos
+import by.lebedev.domain.entities.CoinProfitability
 import by.lebedev.domain.transformators.CoinProfitabilityEnergyFeeCalculator
 import by.lebedev.domain.transformators.CoinProfitabilityStringTransformator
 import by.lebedev.domain.entities.CoinProfitabilityString
@@ -58,17 +59,22 @@ class EarningsActivity : AppCompatActivity() {
         val energyCost = intent.getDoubleExtra("energyCost", 0.0)
         val fee = intent.getDoubleExtra("fee", 0.0)
 
-        if (selectedItem == 0 && !device.equals("ASIC")) {
-            getEarningsCryptonight(selectedItem, hashrate, device, energy, energyCost, fee)
-        } else if (device.equals("RIG")) {
-            Log.e("AAA", "RIG")
-            getEarningsNvidiaRig(selectedItem, hashrate, device, energy, energyCost, fee)
-        } else if (device.equals("GPU")) {
-            getEarningsNvidia(selectedItem, hashrate, device, energy, energyCost, fee)
-        } else if (device.equals("ASIC")) {
-            Log.e("AAA", "getting asic profitability")
-            getEarningsAsic(selectedItem, hashrate, device, energy, energyCost, fee)
+
+        getEarnings(selectedItem, hashrate, device, energy, energyCost, fee)
+
+
+        swipeRefreshEarnings.setColorSchemeResources(
+            R.color.green_24_hour_percent,
+            R.color.colorPrimary,
+            R.color.red_info
+        )
+        swipeRefreshEarnings.setOnRefreshListener {
+            mAdView.loadAd(adRequest)
+            layoutForRefreshEarnings.visibility = View.INVISIBLE
+            getEarnings(selectedItem, hashrate, device, energy, energyCost, fee)
+
         }
+
     }
 
     fun getEarningsCryptonight(
@@ -84,18 +90,11 @@ class EarningsActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (result != null && earnings_recycle != null && earningsProgressBar != null) {
-                    Log.e("AAA", result.get(0).toString())
-
-                    earningsProgressBar.visibility = View.INVISIBLE
-                    val profit = result
-                    val profitMinusFee = CoinProfitabilityEnergyFeeCalculator()
-                        .execute(profit, energy, energyCost, fee)
-                    val profitArrayString = CoinProfitabilityStringTransformator().execute(profitMinusFee)
-                    setupRecycler(profitArrayString)
-                }
+                processEarningsData(energy, energyCost, fee, result)
 
             }, {
+                textForError.visibility = View.VISIBLE
+                earningsProgressBar.visibility = View.INVISIBLE
                 Log.e("AAA", it.message)
             })
 
@@ -115,18 +114,11 @@ class EarningsActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (result != null && earnings_recycle != null && earningsProgressBar != null) {
-                    Log.e("AAA", result.get(0).toString())
-
-                    earningsProgressBar.visibility = View.INVISIBLE
-                    val profit = result
-                    val profitMinusFee = CoinProfitabilityEnergyFeeCalculator()
-                        .execute(profit, energy, energyCost, fee)
-                    val profitArrayString = CoinProfitabilityStringTransformator().execute(profitMinusFee)
-                    setupRecycler(profitArrayString)
-                }
+                processEarningsData(energy, energyCost, fee, result)
 
             }, {
+                textForError.visibility = View.VISIBLE
+                earningsProgressBar.visibility = View.INVISIBLE
                 Log.e("AAA", it.message)
             })
 
@@ -146,18 +138,11 @@ class EarningsActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (result != null && earnings_recycle != null && earningsProgressBar != null) {
-                    Log.e("AAA", result.get(0).toString())
-
-                    earningsProgressBar.visibility = View.INVISIBLE
-                    val profit = result
-                    val profitMinusFee = CoinProfitabilityEnergyFeeCalculator()
-                        .execute(profit, energy, energyCost, fee)
-                    val profitArrayString = CoinProfitabilityStringTransformator().execute(profitMinusFee)
-                    setupRecycler(profitArrayString)
-                }
+                processEarningsData(energy, energyCost, fee, result)
 
             }, {
+                textForError.visibility = View.VISIBLE
+                earningsProgressBar.visibility = View.INVISIBLE
                 Log.e("AAA", it.message)
             })
 
@@ -167,10 +152,7 @@ class EarningsActivity : AppCompatActivity() {
     fun getEarningsNvidiaRig(
         selectedItem: Int,
         hashrate: Double,
-        device: String,
-        energy: Double,
-        energyCost: Double,
-        fee: Double
+        device: String
     ) {
 
         val d = GetAllProfitableCoinsUseCaseNvidia().fetch(selectedItem, hashrate, device)
@@ -199,6 +181,8 @@ class EarningsActivity : AppCompatActivity() {
 
 
     fun setupRecycler(coinList: ArrayList<CoinProfitabilityString>) {
+        layoutForRefreshEarnings.visibility = View.VISIBLE
+        swipeRefreshEarnings.setRefreshing(false)
         earnings_recycle.setHasFixedSize(true)
         val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         layoutManager.orientation = RecyclerView.VERTICAL
@@ -249,7 +233,7 @@ class EarningsActivity : AppCompatActivity() {
     }
 
     fun getHashrateMultiplier(device: String, selectedItem: Int): Long {
-        if (device.equals("GPU")) {
+        if (device.equals("GPU") || device.equals("CPU")) {
             return HashTypeConfigurator().getDigitsFromType(
                 HashTypeConfigurator().getTypeFromName(
                     Algos.instance.gpuList.get(selectedItem)
@@ -261,6 +245,46 @@ class EarningsActivity : AppCompatActivity() {
                     Algos.instance.asicList.get(selectedItem)
                 )
             )
+        }
+    }
+
+    fun processEarningsData(
+        energy: Double,
+        energyCost: Double,
+        fee: Double,
+        result: ArrayList<CoinProfitability>?
+    ) {
+        if (result != null && earnings_recycle != null && earningsProgressBar != null) {
+
+            earningsProgressBar.visibility = View.INVISIBLE
+            val profit = result
+            val profitMinusFee = CoinProfitabilityEnergyFeeCalculator()
+                .execute(profit, energy, energyCost, fee)
+            val profitArrayString = CoinProfitabilityStringTransformator().execute(profitMinusFee)
+            setupRecycler(profitArrayString)
+        }
+
+    }
+
+    fun getEarnings(
+        selectedItem: Int,
+        hashrate: Double,
+        device: String,
+        energy: Double,
+        energyCost: Double,
+        fee: Double
+    ) {
+
+        if (selectedItem == 0 && !device.equals("ASIC")) {
+            getEarningsCryptonight(selectedItem, hashrate, device, energy, energyCost, fee)
+        } else if (device.equals("RIG")) {
+            Log.e("AAA", "RIG")
+            getEarningsNvidiaRig(selectedItem, hashrate, device)
+        } else if (device.equals("GPU")) {
+            getEarningsNvidia(selectedItem, hashrate, device, energy, energyCost, fee)
+        } else if (device.equals("ASIC")) {
+            Log.e("AAA", "getting asic profitability")
+            getEarningsAsic(selectedItem, hashrate, device, energy, energyCost, fee)
         }
     }
 }

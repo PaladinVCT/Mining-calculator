@@ -46,4 +46,5 @@
     <string name="interstitial_id">ca-app-pub-1501215034144631/8206040347</string>
     <string name="load_config">load</string>
     <string name="save_config">save</string>
+    <string name="coins_not_found">Coins not found</string>
 </resources>
