@@ -63,13 +63,67 @@ class HashTypeConfigurator {
             "BCD" -> {
                 return "Mh/s"
             }
+            "SHA-256" -> {
+                return "Gh/s"
+            }
+            "Scrypt" -> {
+                return "Mh/s"
+            }
+            "X11" -> {
+                return "Gh/s"
+            }
+            "Quark" -> {
+                return "Mh/s"
+            }
+            "Qubit" -> {
+                return "Mh/s"
+            }
+            "Blake (2b)" -> {
+                return "Th/s"
+            }
+            "LBRY" -> {
+                return "Gh/s"
+            }
+            "Blake (14r)" -> {
+                return "Gh/s"
+            }
+            "CryptoNight" -> {
+                return "kh/s"
+            }
+            "Equihash" -> {
+                return "kh/s"
+            }
+            "Skein" -> {
+                return "Gh/s"
+            }
+            "Myr-Groestl" -> {
+                return "Gh/s"
+            }
+            "Lyra2REv2" -> {
+                return "Gh/s"
+            }
+            "Keccak" -> {
+                return "Gh/s"
+            }
+            "PHI1612" -> {
+                return "Mh/s"
+            }
+            "Lyra2z" -> {
+                return "Mh/s"
+            }
+            "X13" -> {
+                return "Mh/s"
+            }
+            "Blake (2b-Sia)" -> {
+                return "Mh/s"
+            }
             else -> return "H/s"
         }
 
     }
 
 
-    fun getDigitsFromType(algoType: String): Int {
+    fun getDigitsFromType(algoType: String): Long {
         when (algoType) {
             "H/s" -> {
                 return 1
@@ -79,6 +133,12 @@ class HashTypeConfigurator {
             }
             "Mh/s" -> {
                 return 1000000
+            }
+            "Gh/s" -> {
+                return 1000000000
+            }
+            "Th/s" -> {
+                return 1000000000000
             }
             else -> return 1
         }

@@ -15,6 +15,7 @@ import by.lebedev.domain.entities.CoinProfitabilityString
 import by.lebedev.domain.transformators.CoinProfitabilityRigTransformator
 import by.lebedev.domain.transformators.HashTypeConfigurator
 import by.lebedev.domain.usecase.GetAllProfitableCoinsUseCaseNvidia
+import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseAsic
 import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseCryptonight
 import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseNvidia
 import by.lebedev.miningcalculator.recyclers.earningsrecycler.EarningsAdapter
@@ -29,7 +30,7 @@ import kotlinx.android.synthetic.main.earnings_layout.*
 class EarningsActivity : AppCompatActivity() {
 
     private lateinit var mInterstitialAd: InterstitialAd
-    lateinit var mAdView : AdView
+    lateinit var mAdView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,25 +49,25 @@ class EarningsActivity : AppCompatActivity() {
 
         val selectedItem = intent.getIntExtra("selectedItem", -1)
 
-        val hashrate = intent.getDoubleExtra("hashrate", -1.0) * HashTypeConfigurator().getDigitsFromType(
-            HashTypeConfigurator().getTypeFromName(
-                Algos.instance.list.get(selectedItem)
-            )
-        )
+        val device = intent.getStringExtra("device")
+
+        val hashrate = intent.getDoubleExtra("hashrate", -1.0) * getHashrateMultiplier(device, selectedItem)
         Log.e("AAA", hashrate.toString())
 
-        val device = intent.getStringExtra("device")
         val energy = intent.getDoubleExtra("energy", 0.0)
         val energyCost = intent.getDoubleExtra("energyCost", 0.0)
         val fee = intent.getDoubleExtra("fee", 0.0)
 
-        if (selectedItem == 0) {
+        if (selectedItem == 0 && !device.equals("ASIC")) {
             getEarningsCryptonight(selectedItem, hashrate, device, energy, energyCost, fee)
         } else if (device.equals("RIG")) {
             Log.e("AAA", "RIG")
             getEarningsNvidiaRig(selectedItem, hashrate, device, energy, energyCost, fee)
-        } else {
+        } else if (device.equals("GPU")) {
             getEarningsNvidia(selectedItem, hashrate, device, energy, energyCost, fee)
+        } else if (device.equals("ASIC")) {
+            Log.e("AAA", "getting asic profitability")
+            getEarningsAsic(selectedItem, hashrate, device, energy, energyCost, fee)
         }
     }
 
@@ -83,7 +84,7 @@ class EarningsActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (result!=null&&earnings_recycle!=null&&earningsProgressBar!=null) {
+                if (result != null && earnings_recycle != null && earningsProgressBar != null) {
                     Log.e("AAA", result.get(0).toString())
 
                     earningsProgressBar.visibility = View.INVISIBLE
@@ -114,7 +115,38 @@ class EarningsActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (result!=null&&earnings_recycle!=null&&earningsProgressBar!=null) {
+                if (result != null && earnings_recycle != null && earningsProgressBar != null) {
+                    Log.e("AAA", result.get(0).toString())
+
+                    earningsProgressBar.visibility = View.INVISIBLE
+                    val profit = result
+                    val profitMinusFee = CoinProfitabilityEnergyFeeCalculator()
+                        .execute(profit, energy, energyCost, fee)
+                    val profitArrayString = CoinProfitabilityStringTransformator().execute(profitMinusFee)
+                    setupRecycler(profitArrayString)
+                }
+
+            }, {
+                Log.e("AAA", it.message)
+            })
+
+
+    }
+
+    fun getEarningsAsic(
+        selectedItem: Int,
+        hashrate: Double,
+        device: String,
+        energy: Double,
+        energyCost: Double,
+        fee: Double
+    ) {
+
+        val d = GetProfitableCoinsUseCaseAsic().fetch(selectedItem, hashrate, device)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ result ->
+                if (result != null && earnings_recycle != null && earningsProgressBar != null) {
                     Log.e("AAA", result.get(0).toString())
 
                     earningsProgressBar.visibility = View.INVISIBLE
@@ -146,7 +178,7 @@ class EarningsActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result!=null&&earnings_recycle!=null&&earningsProgressBar!=null) {
+                if (result != null && earnings_recycle != null && earningsProgressBar != null) {
 
                     earningsProgressBar.visibility = View.INVISIBLE
 
@@ -214,5 +246,21 @@ class EarningsActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun getHashrateMultiplier(device: String, selectedItem: Int): Long {
+        if (device.equals("GPU")) {
+            return HashTypeConfigurator().getDigitsFromType(
+                HashTypeConfigurator().getTypeFromName(
+                    Algos.instance.gpuList.get(selectedItem)
+                )
+            )
+        } else {
+            return HashTypeConfigurator().getDigitsFromType(
+                HashTypeConfigurator().getTypeFromName(
+                    Algos.instance.asicList.get(selectedItem)
+                )
+            )
+        }
     }
 }

@@ -6,7 +6,7 @@ class Algos {
 
     var selectedAlgo = "Cryptonight"
 
-    val list: ArrayList<String> = arrayListOf(
+    val gpuList: ArrayList<String> = arrayListOf(
         "Cryptonight",
         "Ethash",
         "Equihash(210,9)",

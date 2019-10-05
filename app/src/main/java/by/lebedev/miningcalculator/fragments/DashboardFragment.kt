@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.dashboard_layout.*
 
 class DashboardFragment : Fragment() {
 
-    lateinit var mAdView : AdView
+    lateinit var mAdView: AdView
 
     val gpu = "GPU"
     val cpu = "CPU"
@@ -46,8 +46,10 @@ class DashboardFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
 
-        val arrayOfAlgos = arrayOfNulls<String>(algos.list.size)
-        algos.list.toArray(arrayOfAlgos)
+        val arrayOfGpuAlgos = arrayOfNulls<String>(algos.gpuList.size)
+        algos.gpuList.toArray(arrayOfGpuAlgos)
+        val arrayOfAsicAlgos = arrayOfNulls<String>(algos.asicList.size)
+        algos.asicList.toArray(arrayOfAsicAlgos)
 
         gpuMiningText.visibility = View.INVISIBLE
         cpuMiningText.visibility = View.INVISIBLE
@@ -137,27 +139,47 @@ class DashboardFragment : Fragment() {
         }
 
         algoSelectorButton.setOnClickListener {
-            val builder = AlertDialog.Builder(it.context)
-                .setTitle("Select mining algo")
-                .setIcon(R.drawable.algo_icon)
-                .setCancelable(true)
-
-                .setSingleChoiceItems(arrayOfAlgos, -1,
-                    { _, item ->
-
-                        selectedItem = item
-
-                    })
+            if (device.equals(cpu) || device.equals(gpu)) {
+                buildAlgoSelector(arrayOfGpuAlgos)
+            } else {
+                buildAlgoSelector(arrayOfAsicAlgos)
+            }
+        }
 
 
+        calculateButton.setOnClickListener {
+
+            val intent = Intent(this.context, EarningsActivity::class.java)
+            intent.putExtra("selectedItem", selectedItem)
+            intent.putExtra("hashrate", hashrateEditText.text.toString().toDouble())
+            intent.putExtra("device", device)
+            intent.putExtra("energy", energyEditText.text.toString().toDouble())
+            intent.putExtra("energyCost", energyCostEditText.text.toString().toDouble())
+            intent.putExtra("fee", poolFeeEditText.text.toString().toDouble())
+
+            it.context.startActivity(intent)
+        }
+
+    }
+
+    fun buildAlgoSelector(algosArray: Array<String?>) {
+        val builder = AlertDialog.Builder(this.context!!)
+            .setTitle("Select mining algo")
+            .setIcon(R.drawable.algo_icon)
+            .setCancelable(true)
+
+            .setSingleChoiceItems(algosArray, -1,
+                { _, item ->
+                    selectedItem = item
+                })
             .setPositiveButton("OK", { dialog, _ ->
                 if (selectedItem != -1) {
-                    algos.selectedAlgo = arrayOfAlgos[selectedItem]!!
-                    algoSelectorButton.setText(arrayOfAlgos[selectedItem])
-                    hashTypeTextView.setText(HashTypeConfigurator().getTypeFromName(arrayOfAlgos[selectedItem]!!))
+                    algos.selectedAlgo = algosArray[selectedItem]!!
+                    algoSelectorButton.setText(algosArray[selectedItem])
+                    hashTypeTextView.setText(HashTypeConfigurator().getTypeFromName(algosArray[selectedItem]!!))
                     calculateButton.setEnabled(true)
                 }
-                if (selectedItem == 0) {
+                if (selectedItem == 0 && !device.equals(asic)) {
                     cryptonightInfoTextView.visibility = View.VISIBLE
                 } else cryptonightInfoTextView.visibility = View.INVISIBLE
 
@@ -170,21 +192,5 @@ class DashboardFragment : Fragment() {
             })
         val alert = builder.create()
         alert.show()
-    }
-
-
-        calculateButton.setOnClickListener {
-
-            val intent = Intent(this.context,EarningsActivity::class.java)
-            intent.putExtra("selectedItem",selectedItem)
-            intent.putExtra("hashrate",hashrateEditText.text.toString().toDouble())
-            intent.putExtra("device",device)
-            intent.putExtra("energy",energyEditText.text.toString().toDouble())
-            intent.putExtra("energyCost",energyCostEditText.text.toString().toDouble())
-            intent.putExtra("fee",poolFeeEditText.text.toString().toDouble())
-
-            it.context.startActivity(intent)
-        }
-
     }
 }

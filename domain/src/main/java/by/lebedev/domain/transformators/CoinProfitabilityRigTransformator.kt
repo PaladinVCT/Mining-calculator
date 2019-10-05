@@ -6,7 +6,7 @@ import by.lebedev.domain.entities.CoinProfitability
 
 class CoinProfitabilityRigTransformator {
 
-    private val algos = Algos.instance.list
+    private val algos = Algos.instance.gpuList
     private val fullHashrateMap = aggregateHashrateNvidia()
     private val modifiedList = arrayListOf<CoinProfitability>()
 
@@ -55,19 +55,19 @@ class CoinProfitabilityRigTransformator {
 
         val summMap = hashMapOf<String, Double>()
 
-        for (j in 0 until Algos.instance.list.size) {
+        for (j in 0 until Algos.instance.gpuList.size) {
             var tempSumm = 0.0
 
 
             for (i in 0 until NvidiaDevices.instance.list.size) {
-                if (NvidiaDevices.instance.list.get(i).algos.get(Algos.instance.list.get(j)) != null) {
-                    tempSumm += NvidiaDevices.instance.list.get(i).algos.get(Algos.instance.list.get(j))!! * NvidiaDevices.instance.list.get(
+                if (NvidiaDevices.instance.list.get(i).algos.get(Algos.instance.gpuList.get(j)) != null) {
+                    tempSumm += NvidiaDevices.instance.list.get(i).algos.get(Algos.instance.gpuList.get(j))!! * NvidiaDevices.instance.list.get(
                         i
                     ).count
                 }
             }
 
-            summMap.put(Algos.instance.list.get(j), tempSumm)
+            summMap.put(Algos.instance.gpuList.get(j), tempSumm)
 
         }
 
