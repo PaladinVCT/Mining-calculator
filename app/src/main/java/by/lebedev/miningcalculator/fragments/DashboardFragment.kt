@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import by.lebedev.domain.collections.Algos
 import by.lebedev.domain.transformators.HashTypeConfigurator
 import by.lebedev.miningcalculator.EarningsActivity
@@ -149,15 +150,28 @@ class DashboardFragment : Fragment() {
 
         calculateButton.setOnClickListener {
 
-            val intent = Intent(this.context, EarningsActivity::class.java)
-            intent.putExtra("selectedItem", selectedItem)
-            intent.putExtra("hashrate", hashrateEditText.text.toString().toDouble())
-            intent.putExtra("device", device)
-            intent.putExtra("energy", energyEditText.text.toString().toDouble())
-            intent.putExtra("energyCost", energyCostEditText.text.toString().toDouble())
-            intent.putExtra("fee", poolFeeEditText.text.toString().toDouble())
+            if (hashrateEditText.text.isEmpty()||
+                   energyEditText.text.isEmpty()||
+                energyCostEditText.text.isEmpty()||
+                poolFeeEditText.text.isEmpty()){
+                Toast.makeText(
+                    view.context, "Please fill in ALL the fields",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
 
-            it.context.startActivity(intent)
+            else {
+
+                val intent = Intent(this.context, EarningsActivity::class.java)
+                intent.putExtra("selectedItem", selectedItem)
+                intent.putExtra("hashrate", hashrateEditText.text.toString().replace(',', '.').toDouble())
+                intent.putExtra("device", device)
+                intent.putExtra("energy", energyEditText.text.toString().replace(',', '.').toDouble())
+                intent.putExtra("energyCost", energyCostEditText.text.toString().replace(',', '.').toDouble())
+                intent.putExtra("fee", poolFeeEditText.text.toString().replace(',', '.').toDouble())
+
+                it.context.startActivity(intent)
+            }
         }
 
     }

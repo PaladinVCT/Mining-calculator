@@ -22,7 +22,7 @@ class LogoActivity : AppCompatActivity() {
 
         android.os.Handler().postDelayed({ val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.abc_fade_in,  R.anim.abc_fade_out) }, 1500)
+            overridePendingTransition(R.anim.abc_fade_in,  R.anim.abc_fade_out) }, 1000)
 
     }
 }  
