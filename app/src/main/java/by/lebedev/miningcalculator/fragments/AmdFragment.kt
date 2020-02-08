@@ -93,9 +93,11 @@ class AmdFragment() : Fragment() {
 
             if (RigDevicesCount().execute(AmdDevices.instance.list) != 0) {
                 val intent = Intent(this.context, EarningsActivity::class.java)
-                intent.putExtra("selectedItem", 0)
-                intent.putExtra("hashrate", HashPowerAggregator().execute(AmdDevices.instance.list))
-                intent.putExtra("device", "GPU")
+
+                intent.putExtra("selectedItem", 1)
+                intent.putExtra("hashrate", 1000.0)
+                intent.putExtra("device", "RIGAMD")
+
 
                 it.context.startActivity(intent)
             } else {

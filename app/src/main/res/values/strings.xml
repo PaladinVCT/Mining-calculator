@@ -36,14 +36,15 @@
     <string name="support_project">Support project</string>
     <string name="feedback">Send feedback</string>
     <string name="btc_wallet">bc1q77ghqfdkudpz8tgx4sdmfff5vfex7xzpw6rpkc</string>
-    <string name="donation_text">Big thanks to everyone who has supported this free project! If you have made a
-        donation, you can send your name and email in the feedback, your name will be written here in donation list.
+    <string name="donation_text">Big thanks to everyone who has supported this free project! If you want to make a
+        donation, you can send me email in the feedback section or you can help us by watching Ads.
         Your support is hugely appreciated!
     </string>
     <string name="awesome_donators">Awesome Donators:​</string>
     <string name="app_id">ca-app-pub-1501215034144631~1229746060</string>
     <string name="banner_id">ca-app-pub-1501215034144631/4742326103</string>
     <string name="interstitial_id">ca-app-pub-1501215034144631/8206040347</string>
+    <string name="rewarded_id">ca-app-pub-1501215034144631/4203406411</string>
     <string name="load_config">load</string>
     <string name="save_config">save</string>
     <string name="coins_not_found">Coins not found</string>

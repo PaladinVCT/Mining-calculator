@@ -9,12 +9,10 @@ import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import by.lebedev.domain.collections.Algos
+import by.lebedev.domain.collections.AmdDevices
 import by.lebedev.domain.entities.CoinProfitability
-import by.lebedev.domain.transformators.CoinProfitabilityEnergyFeeCalculator
-import by.lebedev.domain.transformators.CoinProfitabilityStringTransformator
 import by.lebedev.domain.entities.CoinProfitabilityString
-import by.lebedev.domain.transformators.CoinProfitabilityRigTransformator
-import by.lebedev.domain.transformators.HashTypeConfigurator
+import by.lebedev.domain.transformators.*
 import by.lebedev.domain.usecase.GetAllProfitableCoinsUseCaseNvidia
 import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseAsic
 import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseCryptonight
@@ -52,7 +50,8 @@ class EarningsActivity : AppCompatActivity() {
 
         val device = intent.getStringExtra("device")
 
-        val hashrate = intent.getDoubleExtra("hashrate", -1.0) * getHashrateMultiplier(device, selectedItem)
+        val hashrate =
+            intent.getDoubleExtra("hashrate", -1.0) * getHashrateMultiplier(device, selectedItem)
         Log.e("AAA", hashrate.toString())
 
         val energy = intent.getDoubleExtra("energy", 0.0)
@@ -166,10 +165,69 @@ class EarningsActivity : AppCompatActivity() {
 
                     val globalProfit = result
 
-                    val profit = CoinProfitabilityRigTransformator().execute(globalProfit, hashrate)
+                    val profit =
+                        CoinProfitabilityNvidiaRigTransformator().execute(globalProfit, hashrate)
 
                     val profitArrayString = CoinProfitabilityStringTransformator().execute(profit)
                     setupRecycler(profitArrayString)
+                }
+
+            }, {
+                Log.e("AAA", it.message)
+            })
+
+
+    }
+
+    fun getEarningsAMDRig(
+        selectedItem: Int,
+        hashrate: Double,
+        device: String
+    ) {
+
+        val summaryProfitableCoins = ArrayList<CoinProfitability>()
+
+
+        val d = GetAllProfitableCoinsUseCaseNvidia().fetch(selectedItem, hashrate, device)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ result ->
+
+                if (result != null && earnings_recycle != null && earningsProgressBar != null) {
+
+                    val globalProfit = result
+
+                    val profitNvidiaAlgos =
+                        CoinProfitabilityAMDRigTransformator().execute(globalProfit, hashrate)
+
+
+                    val x = GetProfitableCoinsUseCaseCryptonight().fetch(selectedItem, HashPowerAggregator().execute(
+                        AmdDevices.instance.list), device)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ profitAMDAlgos ->
+                            earningsProgressBar.visibility = View.INVISIBLE
+
+                            summaryProfitableCoins.addAll(profitAMDAlgos)
+                            summaryProfitableCoins.addAll(profitNvidiaAlgos)
+
+                            summaryProfitableCoins.sortByDescending {
+                                it.rewardDayUsdActual
+                            }
+
+                            val profitArrayString = CoinProfitabilityStringTransformator().execute(summaryProfitableCoins)
+                            setupRecycler(profitArrayString)
+                        }, {
+                            textForError.visibility = View.VISIBLE
+                            earningsProgressBar.visibility = View.INVISIBLE
+                            Log.e("AAA", it.message)
+                        })
+
+
+
+
+
+
                 }
 
             }, {
@@ -285,6 +343,10 @@ class EarningsActivity : AppCompatActivity() {
         } else if (device.equals("ASIC")) {
             Log.e("AAA", "getting asic profitability")
             getEarningsAsic(selectedItem, hashrate, device, energy, energyCost, fee)
+        } else if (device.equals("RIGAMD")) {
+            Log.e("AAA", "getting RIG AMD profitability")
+            getEarningsAMDRig(selectedItem, hashrate, device)
         }
+
     }
 }

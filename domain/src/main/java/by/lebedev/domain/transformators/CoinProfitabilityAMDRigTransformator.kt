@@ -1,18 +1,18 @@
 package by.lebedev.domain.transformators
 
 import by.lebedev.domain.collections.Algos
+import by.lebedev.domain.collections.AmdDevices
 import by.lebedev.domain.collections.NvidiaDevices
 import by.lebedev.domain.entities.CoinProfitability
 
-class CoinProfitabilityRigTransformator {
+class CoinProfitabilityAMDRigTransformator {
 
     private val algos = Algos.instance.gpuList
-    private val fullHashrateMap = aggregateHashrateNvidia()
+    private val fullHashrateMap = aggregateHashrateAMDRigNvidiaAlgos()
     private val modifiedList = arrayListOf<CoinProfitability>()
 
     fun execute(
         list: ArrayList<CoinProfitability>,
-
         selectedHashrate: Double
     ): ArrayList<CoinProfitability> {
 
@@ -51,7 +51,7 @@ class CoinProfitabilityRigTransformator {
     }
 
 
-    private fun aggregateHashrateNvidia(): HashMap<String, Double> {
+    private fun aggregateHashrateAMDRigNvidiaAlgos(): HashMap<String, Double> {
 
         val summMap = hashMapOf<String, Double>()
 
@@ -59,9 +59,9 @@ class CoinProfitabilityRigTransformator {
             var tempSumm = 0.0
 
 
-            for (i in 0 until NvidiaDevices.instance.list.size) {
-                if (NvidiaDevices.instance.list.get(i).algos.get(Algos.instance.gpuList.get(j)) != null) {
-                    tempSumm += NvidiaDevices.instance.list.get(i).algos.get(Algos.instance.gpuList.get(j))!! * NvidiaDevices.instance.list.get(
+            for (i in 0 until AmdDevices.instance.list.size) {
+                if (AmdDevices.instance.list.get(i).algos.get(Algos.instance.gpuList.get(j)) != null) {
+                    tempSumm += AmdDevices.instance.list.get(i).algos.get(Algos.instance.gpuList.get(j))!! * AmdDevices.instance.list.get(
                         i
                     ).count
                 }
