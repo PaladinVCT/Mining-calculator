@@ -10,13 +10,12 @@ class AmdConfigArrayResponseTransformator {
     fun execute(configArrayResponse: List<ConfigResponse>): ArrayList<Config> {
 
         val configArray = arrayListOf<Config>()
-        for (i in 0 until configArrayResponse.size) {
+        for (i in configArrayResponse.indices) {
 
-            if (configArrayResponse.get(i).vendor.equals(vendor)) {
-                configArray.add(Config(configArrayResponse.get(i).name, configArrayResponse.get(i).numberDevices))
+            if (configArrayResponse[i].vendor.equals(vendor)) {
+                configArray.add(Config(configArrayResponse[i].name, configArrayResponse[i].numberDevices))
             }
         }
-
         return configArray
     }
 }

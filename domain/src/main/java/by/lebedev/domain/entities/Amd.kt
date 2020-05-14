@@ -6,6 +6,4 @@ class Amd(
     override val algos: HashMap<String, Double>,
     override val hashrate: Int,
     override var count: Int
-) : Device {
-
-}
+) : Device

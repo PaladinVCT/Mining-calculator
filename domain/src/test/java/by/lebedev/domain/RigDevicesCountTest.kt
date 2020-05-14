@@ -3,8 +3,6 @@ package by.lebedev.domain
 import by.lebedev.domain.entities.Amd
 import by.lebedev.domain.entities.Device
 import by.lebedev.domain.transformators.RigDevicesCount
-import by.lebedev.domain.usecase.GetCoinCapRatesUseCase
-import org.junit.Assert
 import org.junit.Test
 import java.util.ArrayList
 

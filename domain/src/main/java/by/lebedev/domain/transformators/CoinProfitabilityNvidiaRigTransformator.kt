@@ -20,27 +20,24 @@ class CoinProfitabilityNvidiaRigTransformator {
         for (i in 0 until list.size) {
 
             for (j in 0 until algos.size) {
-                if (list.get(i).algoName.equals(algos.get(j))) {
+                if (list[i].algoName == algos[j]) {
 
-                    val coefficient = (fullHashrateMap.get(algos.get(j)))?.div(selectedHashrate)
+                    val coefficient = (fullHashrateMap[algos[j]])?.div(selectedHashrate)
                         ?.times(HashTypeConfigurator().getDigitsFromType(HashTypeConfigurator().getTypeFromName(algos.get(j))))
-                    list.get(i).hashrateAuto = fullHashrateMap.get(algos.get(j)).toString()
+                    list[i].hashrateAuto = fullHashrateMap[algos[j]].toString()
                     if (coefficient != null) {
-                        list.get(i).rewardDayUsd *= coefficient
-                        list.get(i).rewardDayUsdActual = list.get(i).rewardDayUsd
-                        list.get(i).rewardMonthUsd *= coefficient
-                        list.get(i).rewardMonthUsdActual = list.get(i).rewardMonthUsd
-                        list.get(i).rewardDayCoins *= coefficient
-                        list.get(i).rewardMonthCoins *= coefficient
+                        list[i].rewardDayUsd *= coefficient
+                        list[i].rewardDayUsdActual = list[i].rewardDayUsd
+                        list[i].rewardMonthUsd *= coefficient
+                        list[i].rewardMonthUsdActual = list[i].rewardMonthUsd
+                        list[i].rewardDayCoins *= coefficient
+                        list[i].rewardMonthCoins *= coefficient
 
-                        if (fullHashrateMap.get(algos.get(j))!=0.0){
-                        modifiedList.add(list.get(i))}
+                        if (fullHashrateMap[algos[j]] !=0.0){
+                        modifiedList.add(list[i])}
                     }
-
                 }
-
             }
-
         }
 
         modifiedList.sortByDescending {
@@ -60,18 +57,12 @@ class CoinProfitabilityNvidiaRigTransformator {
 
 
             for (i in 0 until NvidiaDevices.instance.list.size) {
-                if (NvidiaDevices.instance.list.get(i).algos.get(Algos.instance.gpuList.get(j)) != null) {
-                    tempSumm += NvidiaDevices.instance.list.get(i).algos.get(Algos.instance.gpuList.get(j))!! * NvidiaDevices.instance.list.get(
-                        i
-                    ).count
+                if (NvidiaDevices.instance.list[i].algos[Algos.instance.gpuList.get(j)] != null) {
+                    tempSumm += NvidiaDevices.instance.list[i].algos[Algos.instance.gpuList[j]]!! * NvidiaDevices.instance.list[i].count
                 }
             }
-
-            summMap.put(Algos.instance.gpuList.get(j), tempSumm)
-
+            summMap[Algos.instance.gpuList[j]] = tempSumm
         }
-
         return summMap
     }
-
 }

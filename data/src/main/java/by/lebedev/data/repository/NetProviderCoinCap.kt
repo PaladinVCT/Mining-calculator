@@ -11,22 +11,20 @@ import java.util.concurrent.TimeUnit
 
 object NetProviderCoinCap {
 
-    private val BASE_URL = "https://pro-api.coinmarketcap.com/"
+    private const val BASE_URL = "https://api.coincap.io/v2/"
+    private const val API_KEY_NAME = "X-CMC_PRO_API_KEY"
+    private const val API_KEY_VALUE = "eb58ea2f-1d43-405f-bb97-ef01946db5fb"
 
-    // выставлены таймауты на соединение с сервером
-    var httpClient = OkHttpClient.Builder()
+    private var httpClient = OkHttpClient.Builder()
         .connectTimeout(10, TimeUnit.SECONDS)
-        .writeTimeout(10, TimeUnit.SECONDS)
         .readTimeout(10, TimeUnit.SECONDS)
-        .addInterceptor(object : Interceptor {
-            override fun intercept(chain: Interceptor.Chain): Response {
-                val request = chain.request().newBuilder().addHeader("x-cmc_pro_api_key", "587a787c-2a32-44f9-8a5a-40470f01ce6f").build()
-                return chain.proceed(request)
-            }
-        })
+        .addInterceptor { chain ->
+            val request =
+                chain.request().newBuilder().addHeader(API_KEY_NAME, API_KEY_VALUE).build()
+            chain.proceed(request)
+        }
 
-    fun create(): CoinCapApi {
-        Log.e("AAA", "api service")
+    fun provideApi(): CoinCapApi {
         val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(httpClient.build())
@@ -34,8 +32,6 @@ object NetProviderCoinCap {
             .baseUrl(BASE_URL)
             .build()
 
-        return retrofit.create(CoinCapApi::class.java);
+        return retrofit.create(CoinCapApi::class.java)
     }
-
-
 }

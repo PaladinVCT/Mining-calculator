@@ -6,5 +6,4 @@ interface Device {
     val algos: HashMap<String, Double>
     val hashrate:Int
     var count:Int
-
 }

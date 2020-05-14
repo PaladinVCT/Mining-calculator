@@ -1,7 +1,6 @@
 package by.lebedev.data.repository.database
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import by.lebedev.data.repository.database.entity.ConfigResponse

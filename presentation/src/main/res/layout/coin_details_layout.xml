@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ScrollView
+                android:id="@+id/scrollViewForRefresh"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:stretchColumns="1"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@+id/coinChartTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableStart="@drawable/ic_arrow_left_24dp"
+                            android:gravity="center"
+                            android:text="@string/coin_chart"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                    <ImageView
+                            android:id="@+id/coinImage"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginEnd="20dp"
+                            tools:background="@drawable/bitcoinicon" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@+id/M1"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_worker_details_black_frame"
+                            android:gravity="center"
+                            android:text="@string/m1"
+                            android:textSize="15sp" />
+
+                    <TextView
+                            android:id="@+id/M5"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/m5"
+                            android:textSize="15sp" />
+
+                    <TextView
+                            android:id="@+id/M15"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/m15"
+                            android:textSize="15sp" />
+
+                    <TextView
+                            android:id="@+id/M30"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/m30"
+                            android:textSize="15sp" />
+
+                    <TextView
+                            android:id="@+id/H1"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/h1"
+                            android:textSize="15sp" />
+
+                    <TextView
+                            android:id="@+id/H6"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/h6"
+                            android:textSize="15sp" />
+
+                    <TextView
+                            android:id="@+id/H12"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/h12"
+                            android:textSize="15sp" />
+
+                    <TextView
+                            android:id="@+id/D1"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/d1"
+                            android:textSize="15sp" />
+                </LinearLayout>
+
+                <FrameLayout
+                        android:id="@+id/coinLineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/rounded_worker_details_black_frame"
+                        android:orientation="vertical" />
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/rounded"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@+id/name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/left_rounded_gray_frame"
+                            android:gravity="center"
+                            android:lineSpacingExtra="5dp"
+                            android:padding="5dp"
+                            android:text="@string/name"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                    <TextView
+                            android:id="@+id/symbol"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lineSpacingExtra="5dp"
+                            android:padding="5dp"
+                            android:text="@string/symbol"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/rounded"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@+id/price"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lineSpacingExtra="5dp"
+                            android:padding="5dp"
+                            android:text="@string/price"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                    <TextView
+                            android:id="@+id/weightedPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/right_rounded_gray_frame"
+                            android:gravity="center"
+                            android:lineSpacingExtra="5dp"
+                            android:padding="5dp"
+                            android:text="@string/average_price"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/rounded"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@+id/supply"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/left_rounded_gray_frame"
+                            android:gravity="center"
+                            android:lineSpacingExtra="5dp"
+                            android:padding="5dp"
+                            android:text="@string/supply"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                    <TextView
+                            android:id="@+id/maxSupply"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lineSpacingExtra="5dp"
+                            android:padding="5dp"
+                            android:text="@string/max_supply"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/rounded"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@+id/marketCapUsd"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lineSpacingExtra="5dp"
+                            android:padding="5dp"
+                            android:text="@string/market_cap_in_usd"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                    <TextView
+                            android:id="@+id/volume24Hours"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/right_rounded_gray_frame"
+                            android:gravity="center"
+                            android:lineSpacingExtra="5dp"
+                            android:padding="5dp"
+                            android:text="@string/volume_in_24h_in_usd"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/rounded"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="50dp">
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/left_rounded_gray_frame"
+                            android:gravity="center"
+                            android:lineSpacingExtra="5dp"
+                            android:padding="5dp"
+                            android:text="@string/percent_change_in_24h"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                    <TextView
+                            android:id="@+id/percentChange24H"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lineSpacingExtra="5dp"
+                            android:padding="5dp"
+                            android:text=""
+                            android:textColor="@color/green_confirm"
+                            android:textSize="16sp" />
+                </LinearLayout>
+
+            </TableLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

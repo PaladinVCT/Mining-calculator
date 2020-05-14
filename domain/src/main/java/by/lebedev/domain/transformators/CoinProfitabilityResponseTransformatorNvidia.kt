@@ -15,23 +15,24 @@ class CoinProfitabilityResponseTransformatorNvidia {
 
             coinList.add(
                 i, CoinProfitability(
-                    "https://www.coincalculators.io/" + nvidiaCoinListProfitabilityResponse.get(i).image,
-                    nvidiaCoinListProfitabilityResponse.get(i).name,
-                    nvidiaCoinListProfitabilityResponse.get(i).symbol,
+                    "https://www.coincalculators.io/" + nvidiaCoinListProfitabilityResponse[i].image,
+                    nvidiaCoinListProfitabilityResponse[i].name,
+                    nvidiaCoinListProfitabilityResponse[i].symbol,
                     -1,
-                    nvidiaCoinListProfitabilityResponse.get(i).algorithm,
-                    nvidiaCoinListProfitabilityResponse.get(i).yourHashrate.div(
+                    nvidiaCoinListProfitabilityResponse[i].algorithm,
+                    nvidiaCoinListProfitabilityResponse[i].yourHashrate.div(
                         HashTypeConfigurator().getDigitsFromType(
-                            HashTypeConfigurator().getTypeFromName(nvidiaCoinListProfitabilityResponse.get(i).algorithm)
+                            HashTypeConfigurator().getTypeFromName(
+                                nvidiaCoinListProfitabilityResponse[i].algorithm)
                         )
                     ).toString(),
-                    nvidiaCoinListProfitabilityResponse.get(i).revenueInDayUSD,
-                    nvidiaCoinListProfitabilityResponse.get(i).revenueInDayUSD,
-                    nvidiaCoinListProfitabilityResponse.get(i).revenueInMonthUSD,
-                    nvidiaCoinListProfitabilityResponse.get(i).revenueInMonthUSD,
-                    nvidiaCoinListProfitabilityResponse.get(i).rewardsInDay,
-                    nvidiaCoinListProfitabilityResponse.get(i).rewardsInMonth,
-                    nvidiaCoinListProfitabilityResponse.get(i).volume_usd
+                    nvidiaCoinListProfitabilityResponse[i].revenueInDayUSD,
+                    nvidiaCoinListProfitabilityResponse[i].revenueInDayUSD,
+                    nvidiaCoinListProfitabilityResponse[i].revenueInMonthUSD,
+                    nvidiaCoinListProfitabilityResponse[i].revenueInMonthUSD,
+                    nvidiaCoinListProfitabilityResponse[i].rewardsInDay,
+                    nvidiaCoinListProfitabilityResponse[i].rewardsInMonth,
+                    nvidiaCoinListProfitabilityResponse[i].volume_usd
                 )
             )
         }

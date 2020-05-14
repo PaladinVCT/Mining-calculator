@@ -21,7 +21,6 @@ class NvidiaImages {
 
     )
 
-
     companion object {
         val instance = NvidiaImages()
     }

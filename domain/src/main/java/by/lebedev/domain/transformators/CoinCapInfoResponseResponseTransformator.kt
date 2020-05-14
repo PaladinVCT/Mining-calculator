@@ -1,27 +1,58 @@
 package by.lebedev.domain.transformators
 
-import by.lebedev.data.repository.entities.CryptonightCoinProfitabilityResponse
-import by.lebedev.data.repository.entities.NvidiaCoinProfitabilityResponse
-import by.lebedev.data.repository.entities.coincap.CoinCapInfoResponse
-import by.lebedev.domain.entities.CoinProfitability
+import androidx.core.content.ContextCompat
+import by.lebedev.data.repository.entities.coincap.CoinCapDataResponse
+import by.lebedev.domain.R
 import by.lebedev.domain.entities.CoinRate
+import java.text.NumberFormat
+import kotlin.math.roundToInt
 
 class CoinCapInfoResponseResponseTransformator {
 
     private val coinRateList: ArrayList<CoinRate> = ArrayList()
+    private val nf = NumberFormat.getInstance()
 
-    fun execute(coinCapInfoResponse: CoinCapInfoResponse): ArrayList<CoinRate> {
+    fun execute(coinCapDataResponse: CoinCapDataResponse): ArrayList<CoinRate> {
+        nf.maximumFractionDigits = 2
+        var changePercent24HrString = ""
+        var url = ""
+        var colorId = 0
+        var priceUsd = 0.0
 
-        for (i in 0 until coinCapInfoResponse.data.size) {
+        for (i in coinCapDataResponse.data.indices) {
+
+            changePercent24HrString = if (coinCapDataResponse.data[i].changePercent24Hr > 0) {
+                "+${nf.format(coinCapDataResponse.data[i].changePercent24Hr)}%"
+            } else {
+                "${nf.format(coinCapDataResponse.data[i].changePercent24Hr)}%"
+            }
+
+            colorId = if (coinCapDataResponse.data[i].changePercent24Hr > 0) {
+                R.color.green_percent_change
+            } else {
+                R.color.red_percent_change
+            }
+
+            priceUsd =((coinCapDataResponse.data[i].priceUsd * 100.0).roundToInt() / 100.0)
+
+            url =
+                "https://static.coincap.io/assets/icons/${coinCapDataResponse.data[i].symbol.toLowerCase()}@2x.png"
 
             coinRateList.add(
                 CoinRate(
-                    coinCapInfoResponse.data.get(i).id,
-                    coinCapInfoResponse.data.get(i).name,
-                    "https://s2.coinmarketcap.com/static/img/coins/32x32/${coinCapInfoResponse.data.get(i).id}.png",
-                    coinCapInfoResponse.data.get(i).symbol,
-                    Math.round(coinCapInfoResponse.data.get(i).quote.USD.price * 100.0) / 100.0,
-                    Math.round(coinCapInfoResponse.data.get(i).quote.USD.percent_change_24h * 100.0) / 100.0
+                    changePercent24HrString,
+                    colorId,
+                    coinCapDataResponse.data[i].id,
+                    coinCapDataResponse.data[i].marketCapUsd,
+                    coinCapDataResponse.data[i].maxSupply,
+                    coinCapDataResponse.data[i].name,
+                    priceUsd,
+                    coinCapDataResponse.data[i].rank,
+                    coinCapDataResponse.data[i].maxSupply,
+                    coinCapDataResponse.data[i].symbol,
+                    coinCapDataResponse.data[i].volumeUsd24Hr,
+                    coinCapDataResponse.data[i].vwap24Hr,
+                    url
                 )
             )
         }

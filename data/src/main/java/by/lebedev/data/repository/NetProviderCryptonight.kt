@@ -11,7 +11,6 @@ class NetProviderCryptonight fun provideApiCryptonight(): CryptonightApi {
 
     val apiSource = "https://www.cryptunit.com/api/"
 
-
     val clientBuilder = Builder()
     if (BuildConfig.DEBUG) {
         val loggingInterceptor = HttpLoggingInterceptor()

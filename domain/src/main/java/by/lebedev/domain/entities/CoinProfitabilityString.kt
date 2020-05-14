@@ -11,5 +11,6 @@ data class CoinProfitabilityString(
     var rewardMonthUsd: String,
     var rewardDayCoins: String,
     var rewardMonthCoins: String,
-    var volumeUsd: String
+    var volumeUsd: String,
+    var showAlert:Boolean
 )

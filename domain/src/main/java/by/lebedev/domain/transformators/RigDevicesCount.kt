@@ -7,7 +7,7 @@ class RigDevicesCount : DevicesCount {
         var count = 0
 
         for (i in 0 until list.size) {
-            count += list.get(i).count
+            count += list[i].count
         }
         return count
     }
