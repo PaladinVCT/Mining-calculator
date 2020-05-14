@@ -8,10 +8,6 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         release {
-            storeFile file('C:\\Users\\admin\\Documents\\GitHub\\Mining-calculator\\key\\calc.jks')
-            storePassword 'Paladin1'
-            keyAlias = 'calc'
-            keyPassword 'Paladin1'
         }
     }
     compileSdkVersion 28
