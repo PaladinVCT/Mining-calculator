@@ -13,13 +13,13 @@ class AmdImages {
         R.drawable.rx560,
         R.drawable.rx570,
         R.drawable.rx580,
-        R.drawable.furyx,
         R.drawable.frontier,
+        R.drawable.furyx,
+        R.drawable.rx5700xt,
         R.drawable.vega56,
         R.drawable.vega64,
         R.drawable.r7
     )
-
 
     companion object {
         val instance = AmdImages()

@@ -17,8 +17,12 @@ class NvidiaImages {
         R.drawable.nv2060,
         R.drawable.nv2070,
         R.drawable.nv2080,
-        R.drawable.nv2080ti
-
+        R.drawable.nv2080ti,
+        R.drawable.gtxtitanx,
+        R.drawable.nv102100,
+        R.drawable.nv104100,
+        R.drawable.nv106100,
+        R.drawable.p100tesla
     )
 
     companion object {

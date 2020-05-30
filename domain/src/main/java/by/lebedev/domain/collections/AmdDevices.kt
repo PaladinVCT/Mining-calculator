@@ -92,7 +92,7 @@ class AmdDevices : VendorDevices {
         ),
         Amd(
             4, "RX 560", hashMapOf(
-                Pair("Ethash", 32.0),
+                Pair("Ethash", 14.5),
                 Pair("Equihash(210,9)", 81.0),
                 Pair("Zhash", 23.0),
                 Pair("cuckAToo31", 0.7),
@@ -191,7 +191,27 @@ class AmdDevices : VendorDevices {
             ), 850, 0
         ),
         Amd(
-            9, "RX Vega 56", hashMapOf(
+            9, "RX 5700XT", hashMapOf(
+                Pair("Ethash", 51.5),
+                Pair("Equihash(210,9)", 0.0),
+                Pair("Zhash", 0.0),
+                Pair("cuckAToo31", 1.1),
+                Pair("X16R", 0.0),
+                Pair("MTP", 2.0),
+                Pair("X25X", 0.0),
+                Pair("Lyra2REv3", 51.0),
+                Pair("CuckooCycle", 0.0),
+                Pair("PHI2", 0.0),
+                Pair("NeoScrypt", 0.0),
+                Pair("Skunkhash", 0.0),
+                Pair("Cuckaroom29", 4.3),
+                Pair("TimeTravel10", 0.0),
+                Pair("BCD", 0.0),
+                Pair("BeamHashII", 28.0)
+            ), 1070, 0
+        ),
+        Amd(
+            10, "RX Vega 56", hashMapOf(
                 Pair("Ethash", 36.5),
                 Pair("Equihash(210,9)", 130.0),
                 Pair("Zhash", 34.0),
@@ -211,7 +231,7 @@ class AmdDevices : VendorDevices {
             ), 1720, 0
         ),
         Amd(
-            10, "RX Vega 64", hashMapOf(
+            11, "RX Vega 64", hashMapOf(
                 Pair("Ethash", 40.0),
                 Pair("Equihash(210,9)", 145.0),
                 Pair("Zhash", 38.0),
@@ -231,7 +251,7 @@ class AmdDevices : VendorDevices {
             ), 1800, 0
         ),
         Amd(
-            11, "RX Vega VII", hashMapOf(
+            12, "RX Vega VII", hashMapOf(
                 Pair("Ethash", 78.0),
                 Pair("Equihash(210,9)", 160.0),
                 Pair("Zhash", 49.0),

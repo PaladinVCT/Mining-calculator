@@ -261,6 +261,106 @@ class NvidiaDevices : VendorDevices {
                 Pair("BCD",45.55),
                 Pair("BeamHashII",48.2)
             ), 0, 0
+        ),
+        Nvidia(
+            12, "GTX Titan X", hashMapOf(
+                Pair("Ethash",74.4),
+                Pair("Equihash(210,9)",425.5),
+                Pair("Zhash",107.4),
+                Pair("cuckAToo31",1.8),
+                Pair("X16R",48.9),
+                Pair("MTP",0.0),
+                Pair("X25X",9.6),
+                Pair("Lyra2REv3",106.8),
+                Pair("CuckooCycle",10.0),
+                Pair("PHI2",17.7),
+                Pair("NeoScrypt",2490.0),
+                Pair("Skunkhash",110.8),
+                Pair("Cuckarood29",0.0),
+                Pair("TimeTravel10",76.0),
+                Pair("BCD",49.3),
+                Pair("BeamHashII",0.0)
+            ), 0, 0
+        ),
+        Nvidia(
+            13, "P102-100", hashMapOf(
+                Pair("Ethash",48.9),
+                Pair("Equihash(210,9)",290.5),
+                Pair("Zhash",69.9),
+                Pair("cuckAToo31",1.37),
+                Pair("X16R",35.0),
+                Pair("MTP",0.0),
+                Pair("X25X",5.57),
+                Pair("Lyra2REv3",48.8),
+                Pair("CuckooCycle",5.17),
+                Pair("PHI2",0.0),
+                Pair("NeoScrypt",0.0),
+                Pair("Skunkhash",58.8),
+                Pair("Cuckarood29",6.38),
+                Pair("TimeTravel10",32.82),
+                Pair("BCD",32.58),
+                Pair("BeamHashII",43.04)
+            ), 904, 0
+        ),
+        Nvidia(
+            14, "P104-100", hashMapOf(
+                Pair("Ethash",36.46),
+                Pair("Equihash(210,9)",209.25),
+                Pair("Zhash",49.4),
+                Pair("cuckAToo31",0.8),
+                Pair("X16R",20.91),
+                Pair("MTP",0.0),
+                Pair("X25X",3.96),
+                Pair("Lyra2REv3",34.03),
+                Pair("CuckooCycle",4.94),
+                Pair("PHI2",6.21),
+                Pair("NeoScrypt",810.0),
+                Pair("Skunkhash",38.26),
+                Pair("Cuckarood29",3.45),
+                Pair("TimeTravel10",25.15),
+                Pair("BCD",20.05),
+                Pair("BeamHashII",33.32)
+            ), 694, 0
+        ),
+        Nvidia(
+            15, "P106-100", hashMapOf(
+                Pair("Ethash", 22.5),
+                Pair("Equihash(210,9)", 120.0),
+                Pair("Zhash", 32.5),
+                Pair("cuckAToo31", 0.0),
+                Pair("X16R", 9.4),
+                Pair("MTP", 1.1),
+                Pair("X25X", 2.4),
+                Pair("Lyra2REv3", 26.5),
+                Pair("CuckooCycle", 3.3),
+                Pair("PHI2", 4.2),
+                Pair("NeoScrypt", 680.0),
+                Pair("Skunkhash", 18.0),
+                Pair("Cuckarood29", 3.0),
+                Pair("TimeTravel10", 16.8),
+                Pair("BCD", 11.8),
+                Pair("BeamHashII", 13.5)
+            ), 370, 0
+        ),
+        Nvidia(
+            16, "P100 Tesla", hashMapOf(
+                Pair("Ethash",44.85),
+                Pair("Equihash(210,9)",293.25),
+                Pair("Zhash",55.25),
+                Pair("cuckAToo31",0.66),
+                Pair("X16R",32.38),
+                Pair("MTP",0.0),
+                Pair("X25X",5.91),
+                Pair("Lyra2REv3",67.39),
+                Pair("CuckooCycle",5.0),
+                Pair("PHI2",8.92),
+                Pair("NeoScrypt",1250.0),
+                Pair("Skunkhash",63.29),
+                Pair("Cuckarood29",3.64),
+                Pair("TimeTravel10",37.48),
+                Pair("BCD",29.39),
+                Pair("BeamHashII",17.03)
+            ), 1630, 0
         )
     )
 
