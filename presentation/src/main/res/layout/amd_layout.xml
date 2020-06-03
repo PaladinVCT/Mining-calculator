@@ -152,7 +152,7 @@
                     android:text="@string/load_config"
                     android:textStyle="italic"
                     android:textSize="11sp"
-                    android:layout_marginEnd="35dp"
+                    android:layout_marginEnd="25dp"
                     android:layout_width="105dp"
                     android:layout_height="30dp"
                     tools:ignore="SmallSp" />
@@ -166,7 +166,6 @@
                     android:text="@string/clear_all"
                     android:textStyle="italic"
                     android:textSize="11sp"
-                    android:layout_marginEnd="35dp"
                     android:layout_width="80dp"
                     android:layout_height="30dp"
                     tools:ignore="SmallSp" />

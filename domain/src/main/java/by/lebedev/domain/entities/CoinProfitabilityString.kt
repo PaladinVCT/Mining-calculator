@@ -4,6 +4,7 @@ data class CoinProfitabilityString(
 
     var imageUrl:String,
     var coinName: String,
+    var coinTicker: String,
     var algoId: Int,
     var algoName: String,
     var hashrateAuto: String,

@@ -1,7 +1,6 @@
 package by.lebedev.domain.entities
 
 
-import com.google.gson.annotations.SerializedName
 
 data class CoinDetails(
     val `data`: Details,

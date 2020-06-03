@@ -3,6 +3,7 @@
 <ScrollView
 
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -131,44 +132,43 @@
                     android:id="@+id/saveRigButtonNvidia"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="16dp"
-                    android:drawableLeft="@drawable/save"
+                    android:layout_marginStart="16dp"
+                    android:drawableStart="@drawable/save"
                     android:background="@drawable/clearall_selector"
                     android:text="@string/save_config"
                     android:textStyle="italic"
                     android:textSize="11sp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:layout_width="105dp"
                     android:layout_height="30dp"
-            />
+                    tools:ignore="SmallSp" />
 
             <Button
                     android:id="@+id/loadRigButtonNvidia"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="4dp"
-                    android:drawableLeft="@drawable/load"
+                    android:drawableStart="@drawable/load"
                     android:background="@drawable/clearall_selector"
                     android:text="@string/load_config"
                     android:textStyle="italic"
                     android:textSize="11sp"
-                    android:layout_marginRight="35dp"
+                    android:layout_marginEnd="25dp"
                     android:layout_width="105dp"
                     android:layout_height="30dp"
-            />
+                    tools:ignore="SmallSp" />
 
             <Button
                     android:id="@+id/clearRigButtonNvidia"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="4dp"
-                    android:drawableLeft="@drawable/close"
+                    android:drawableStart="@drawable/close"
                     android:background="@drawable/clearall_selector"
                     android:text="@string/clear_all"
                     android:textStyle="italic"
                     android:textSize="11sp"
-                    android:layout_marginRight="35dp"
                     android:layout_width="80dp"
                     android:layout_height="30dp"
-            />
+                    tools:ignore="SmallSp" />
 
 
         </LinearLayout>

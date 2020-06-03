@@ -101,6 +101,7 @@
     <string name="h12">H12</string>
     <string name="d1">D1</string>
     <string name="name">name:</string>
+    <string name="name_upper_letter">Name</string>
     <string name="symbol">symbol:</string>
     <string name="price">price:</string>
     <string name="average_price">Average price:</string>
@@ -118,4 +119,20 @@
     <string name="market_cap_chart">Market cap in Usd:</string>
     <string name="volume_in_24h_chart">Volume in 24H in Usd:</string>
     <string name="trading_volume_is_low_better_switch_to_other_coins">Trading volume is low! Better switch to other coins.</string>
+    <string name="look_for_coin">Look for coin…</string>
+    <string name="mining_pools">Mining Pools:</string>
+    <string name="average_pool_fee">Average fee: </string>
+    <string name="pools_not_found">Pools not found</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="fee">Fee</string>
+    <string name="rating">Rating</string>
+    <string name="volume_in_24h">Volume in 24h:\u0020</string>
+    <string name="average_pool_rating">Average pool rating:</string>
+    <string name="pool_supports_mining_of_these_coins">Pool supports mining of these coins:</string>
+    <string name="website">Website:</string>
+    <string name="payment_type">Payment type:</string>
+    <string name="server_location">Server location:</string>
+    <string name="you_can_rate_this_pool">You can rate this pool</string>
+    <string name="contact_us"><u>Contact us via Email</u></string>
+    <string name="did_not_find_your_pool">Did not find your pool?</string>
 </resources>

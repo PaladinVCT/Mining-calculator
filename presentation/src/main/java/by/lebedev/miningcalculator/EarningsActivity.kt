@@ -2,7 +2,6 @@ package by.lebedev.miningcalculator
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -12,17 +11,12 @@ import by.lebedev.domain.collections.Algos
 import by.lebedev.domain.collections.AmdDevices
 import by.lebedev.domain.entities.CoinProfitability
 import by.lebedev.domain.entities.CoinProfitabilityString
+import by.lebedev.domain.repository.CoinTempData
 import by.lebedev.domain.transformators.*
-import by.lebedev.domain.usecase.GetAllProfitableCoinsUseCaseNvidiaImpl
-import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseAsicImpl
-import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseCryptonightImpl
-import by.lebedev.domain.usecase.GetProfitableCoinsUseCaseNvidiaImpl
+import by.lebedev.domain.usecase.*
 import by.lebedev.miningcalculator.fragments.*
 import by.lebedev.miningcalculator.recyclers.earningsrecycler.EarningsAdapter
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.InterstitialAd
-import com.google.android.gms.ads.MobileAds
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -34,26 +28,15 @@ private const val ASIC = "ASIC"
 private const val RIG = "RIG"
 private const val RIGAMD = "RIGAMD"
 
-class EarningsActivity : AppCompatActivity() {
+class EarningsActivity : BaseEarningsActivity() {
 
-    private lateinit var mInterstitialAd: InterstitialAd
-    lateinit var mAdView: AdView
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.earnings_layout)
 
-        MobileAds.initialize(this) {}
-
-        mAdView = adViewEarning
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
-        mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd.adUnitId = getString(R.string.interstitial_id)
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
-
+        loadAllCoinsIntoTempData()
 
         val selectedItem = intent.getIntExtra(SELECTED_ITEM, -1)
 
@@ -61,7 +44,7 @@ class EarningsActivity : AppCompatActivity() {
 
         val hashrate =
             intent.getDoubleExtra(HASHRATE, -1.0) * getHashrateMultiplier(device, selectedItem)
-        Log.e(by.lebedev.miningcalculator.fragments.TAG, hashrate.toString())
+        Log.e(TAG, hashrate.toString())
 
         val energy = intent.getDoubleExtra(ENERGY, 0.0)
         val energyCost = intent.getDoubleExtra(ENERGY_COST, 0.0)
@@ -194,7 +177,6 @@ class EarningsActivity : AppCompatActivity() {
 
         val summaryProfitableCoins = ArrayList<CoinProfitability>()
 
-
         val d = GetAllProfitableCoinsUseCaseNvidiaImpl().fetch(selectedItem, hashrate, device)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -238,12 +220,8 @@ class EarningsActivity : AppCompatActivity() {
             }, {
                 Log.e(TAG, it.localizedMessage)
             })
-
         compositeDisposable.add(d)
-
-
     }
-
 
     private fun setupRecycler(coinList: ArrayList<CoinProfitabilityString>) {
         layoutForRefreshEarnings.visibility = View.VISIBLE
@@ -358,5 +336,19 @@ class EarningsActivity : AppCompatActivity() {
     override fun onDestroy() {
         compositeDisposable.dispose()
         super.onDestroy()
+    }
+
+
+    private fun loadAllCoinsIntoTempData() {
+
+        val disposable = GetCoinCapRatesUseCaseImpl().fetch()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ result ->
+                result?.let { CoinTempData.instance.allCoinList = result }
+            }, {
+                Log.e(TAG, it.localizedMessage)
+            })
+        compositeDisposable.add(disposable)
     }
 }

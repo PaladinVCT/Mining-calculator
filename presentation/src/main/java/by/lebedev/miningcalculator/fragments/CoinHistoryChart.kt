@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import by.lebedev.domain.entities.Data
-import by.lebedev.domain.repo.CoinTempData
+import by.lebedev.domain.repository.CoinTempData
 import by.lebedev.domain.usecase.GetHistoryRatesUseCaseImpl
 import by.lebedev.miningcalculator.R
 import com.github.mikephil.charting.components.AxisBase

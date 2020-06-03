@@ -23,6 +23,7 @@ class CoinProfitabilityStringTransformator {
                 i, CoinProfitabilityString(
                     coinProfitability[i].imageUrl,
                     coinProfitability[i].coinName,
+                    coinProfitability[i].coinTicker,
                     coinProfitability[i].algoId,
                     coinProfitability[i].algoName,
                     coinProfitability[i].hashrateAuto + " " + HashTypeConfigurator().getTypeFromName(

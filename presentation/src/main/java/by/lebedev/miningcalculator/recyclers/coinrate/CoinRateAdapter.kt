@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import by.lebedev.domain.entities.CoinData
 import by.lebedev.domain.entities.CoinRate
+import by.lebedev.domain.repository.CoinTempData
 import by.lebedev.miningcalculator.R
 import by.lebedev.miningcalculator.RatesDetailActivity
 import com.squareup.picasso.Picasso
@@ -62,6 +63,7 @@ class CoinRateAdapter(val list: List<CoinRate>) : RecyclerView.Adapter<CoinRateV
             holder.itemView.setOnClickListener { view ->
                 val intent = Intent(view.context, RatesDetailActivity::class.java)
                 intent.putExtra(COIN_TAG, coin.id)
+                CoinTempData.instance.coinTicker = coin.symbol
                 view.context.startActivity(intent)
 
             }

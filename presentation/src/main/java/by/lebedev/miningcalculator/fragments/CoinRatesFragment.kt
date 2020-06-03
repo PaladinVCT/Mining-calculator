@@ -1,6 +1,8 @@
 package by.lebedev.miningcalculator.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
@@ -8,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import by.lebedev.domain.entities.CoinData
 import by.lebedev.domain.entities.CoinRate
 import by.lebedev.domain.usecase.GetCoinCapRatesUseCaseImpl
 import by.lebedev.miningcalculator.R
@@ -20,6 +21,8 @@ import kotlinx.android.synthetic.main.coinrates_layout.*
 
 class CoinRatesFragment : Fragment() {
 
+    private val startCoinList = ArrayList<CoinRate>()
+    private val searchedCoinList = ArrayList<CoinRate>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.coinrates_layout, container, false)
@@ -40,6 +43,33 @@ class CoinRatesFragment : Fragment() {
             getCoinRates()
         }
 
+        searchCoin.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(enteredText: Editable?) {
+                searchedCoinList.clear()
+
+                if (enteredText.toString().isEmpty()) {
+                    setupRecycler(startCoinList)
+                } else {
+
+                    for (i in 0 until startCoinList.size) {
+                        if (startCoinList[i].name.toLowerCase().contains(enteredText.toString().toLowerCase()) ||
+                            startCoinList[i].symbol.toLowerCase().contains(enteredText.toString().toLowerCase())
+                        ) {
+                            searchedCoinList.add(startCoinList[i])
+                        }
+                    }
+                    setupRecycler(searchedCoinList)
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+        })
+
     }
 
     private fun getCoinRates() {
@@ -52,6 +82,7 @@ class CoinRatesFragment : Fragment() {
                     layoutForRefreshCoinRates.visibility = View.VISIBLE
                     swipeRefreshCoinRates.isRefreshing = false
                     progressCoinRates.visibility = View.INVISIBLE
+                    startCoinList.addAll(result)
                     setupRecycler(result)
 
                 }
