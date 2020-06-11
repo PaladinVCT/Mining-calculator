@@ -58,10 +58,8 @@ class EarningsActivity : BaseEarningsActivity() {
             R.color.red_info
         )
         swipeRefreshEarnings.setOnRefreshListener {
-            mAdView.loadAd(adRequest)
             layoutForRefreshEarnings.visibility = View.INVISIBLE
             getEarnings(selectedItem, hashrate, device, energy, energyCost, fee)
-
         }
 
     }

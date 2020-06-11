@@ -90,7 +90,7 @@
     <string name="ethereum">Ethereum</string>
     <string name="algo_cryptonight_r">Algo: Cryptonight R</string>
     <string name="_10000_mh_s">10000 Mh/s</string>
-    <string name="cryptocurrency_mining_calculator">CryptoCurrency Mining Calculator</string>
+    <string name="cryptocurrency_mining_calculator">CryptoCurrency \n\n Mining Calculator</string>
     <string name="coin_chart">Coin Chart</string>
     <string name="m1">M1</string>
     <string name="m5">M5</string>
@@ -135,4 +135,6 @@
     <string name="you_can_rate_this_pool">You can rate this pool</string>
     <string name="contact_us"><u>Contact us via Email</u></string>
     <string name="did_not_find_your_pool">Did not find your pool?</string>
+    <string name="cryptocurrency">CryptoCurrency</string>
+    <string name="mining_calculator">Mining Calculator</string>
 </resources>

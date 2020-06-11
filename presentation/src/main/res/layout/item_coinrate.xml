@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/item_coin"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:elevation="8dp"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:background="@drawable/rounded"
-        android:orientation="horizontal"
-        android:padding="16dp"
         >
+
+    <LinearLayout
+            android:id="@+id/item_coin"
+            android:layout_margin="6dp"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
     <ImageView
             android:id="@+id/url"
@@ -46,10 +53,10 @@
             android:id="@+id/tvPriceChange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
             android:textColor="@color/black"
-            tools:text="50%" />
+            tools:text="500%" />
 
     <TextView
             android:id="@+id/tvPrice"
@@ -60,4 +67,5 @@
             android:gravity="end"
             android:textColor="@color/black"
             tools:text="20000$" />
-</LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.earnings_layout.*
 abstract class BaseEarningsActivity : AppCompatActivity() {
 
     protected lateinit var mInterstitialAd: InterstitialAd
-    protected lateinit var mAdView: AdView
     protected lateinit var adRequest: AdRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,11 +18,6 @@ abstract class BaseEarningsActivity : AppCompatActivity() {
         setContentView(R.layout.earnings_layout)
 
         MobileAds.initialize(this) {}
-
-        mAdView = adViewEarning
-        adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
         mInterstitialAd = InterstitialAd(this)
         mInterstitialAd.adUnitId = getString(R.string.interstitial_id)
         mInterstitialAd.loadAd(AdRequest.Builder().build())

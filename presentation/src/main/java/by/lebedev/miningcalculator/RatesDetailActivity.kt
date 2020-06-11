@@ -15,10 +15,13 @@ import by.lebedev.domain.usecase.GetCoinDetailsUseCaseImpl
 import by.lebedev.miningcalculator.fragments.CoinHistoryChart
 import by.lebedev.miningcalculator.recyclers.coinrate.COIN_TAG
 import by.lebedev.miningcalculator.recyclers.poolrecycler.PoolAdapter
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.amd_layout.*
 import kotlinx.android.synthetic.main.rate_details_layout.*
 import java.text.NumberFormat
 
@@ -26,11 +29,17 @@ class RatesDetailActivity : AppCompatActivity(), View.OnClickListener {
     private val nf = NumberFormat.getInstance()
     private val nf0 = NumberFormat.getInstance()
     private var coinSpecPools = ArrayList<PoolsItem>()
+    lateinit var mAdView: AdView
 
     private val compositeDisposable = CompositeDisposable()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.rate_details_layout)
+
+        mAdView = adViewCoinRate
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
         M1.setOnClickListener(this)
         M5.setOnClickListener(this)
         M15.setOnClickListener(this)
