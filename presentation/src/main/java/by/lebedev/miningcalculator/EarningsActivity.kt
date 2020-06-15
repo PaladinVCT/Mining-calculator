@@ -339,11 +339,11 @@ class EarningsActivity : BaseEarningsActivity() {
 
     private fun loadAllCoinsIntoTempData() {
 
-        val disposable = GetCoinCapRatesUseCaseImpl().fetch()
+        val disposable = GetCoinGeckoCoinsUseCaseImpl().fetch()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                result?.let { CoinTempData.instance.allCoinList = result }
+                result?.let { CoinTempData.instance.allGeckoCoinList = result }
             }, {
                 Log.e(TAG, it.localizedMessage)
             })

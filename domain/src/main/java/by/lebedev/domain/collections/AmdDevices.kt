@@ -151,7 +151,7 @@ class AmdDevices : VendorDevices {
             ), 830, 0
         ),
         Amd(
-            7, "RX Frontier", hashMapOf(
+            7, "RX frontier", hashMapOf(
                 Pair("Ethash", 30.2),
                 Pair("Equihash(210,9)", 95.0),
                 Pair("Zhash", 21.0),
@@ -171,7 +171,7 @@ class AmdDevices : VendorDevices {
             ), 1720, 0
         ),
         Amd(
-            8, "RX FuryX", hashMapOf(
+            8, "RX furyx", hashMapOf(
                 Pair("Ethash", 29.0),
                 Pair("Equihash(210,9)", 140.0),
                 Pair("Zhash", 32.0),
