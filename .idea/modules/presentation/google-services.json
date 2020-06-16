@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "209958519966-iitbjnq2alen3qm5uj63sil69v3iruas.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "by.lebedev.miningcalculator",
+            "certificate_hash": "a5cce18d7614b6c3bca375b360dcda6e40dfbbb5"
+          }
+        },
+        {
           "client_id": "209958519966-nn79jf4kajeng58bpheevkcktltu6gbs.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -57,7 +65,8 @@
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-1501215034144631~1229746060"
     }
   ],
   "configuration_version": "1"
