@@ -12,6 +12,8 @@ import by.lebedev.domain.repository.CoinTempData
 import by.lebedev.domain.transformators.AllPoolsToCoinSpecificTransformator
 import by.lebedev.domain.usecase.GetAllPoolsUseCaseImpl
 import by.lebedev.domain.usecase.GetCoinDetailsUseCaseImpl
+import by.lebedev.domain.usecase.GetGeckoDetailsUseCase
+import by.lebedev.domain.usecase.GetGeckoDetailsUseCaseImpl
 import by.lebedev.miningcalculator.fragments.CoinHistoryChart
 import by.lebedev.miningcalculator.recyclers.coinrate.COIN_TAG
 import by.lebedev.miningcalculator.recyclers.poolrecycler.PoolAdapter
@@ -21,7 +23,6 @@ import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.amd_layout.*
 import kotlinx.android.synthetic.main.rate_details_layout.*
 import java.text.NumberFormat
 
@@ -56,7 +57,10 @@ class RatesDetailActivity : AppCompatActivity(), View.OnClickListener {
         val coinName = intent.getStringExtra(COIN_TAG)
         val coinTicker = CoinTempData.instance.coinTicker
         CoinTempData.instance.coinChartName = coinName
+
         setupCoinDetails(coinName)
+        inflateChart()
+        setupPoolRecycler(getCoinSpecPools(coinTicker))
 
         coinChartTextView.setOnClickListener {
             coinChartTextView.setCompoundDrawables(
@@ -67,10 +71,6 @@ class RatesDetailActivity : AppCompatActivity(), View.OnClickListener {
             )
             onBackPressed()
         }
-
-        inflateChart()
-
-        setupPoolRecycler(getCoinSpecPools(coinTicker))
     }
 
     private fun setupPoolRecycler(poolsList: ArrayList<PoolsItem>) {
@@ -207,13 +207,36 @@ class RatesDetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setupCoinDetails(coinName: String) {
-        nf.maximumFractionDigits = 2
-        nf0.maximumFractionDigits = 0
+//        nf.maximumFractionDigits = 4
+//        nf0.maximumFractionDigits = 0
 
         val disposable = GetCoinDetailsUseCaseImpl().fetch(coinName)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+
+                when (it.priceUsd) {
+                    in (0.0..0.1) -> {
+                        nf.maximumFractionDigits = 3
+                        nf0.maximumFractionDigits = 3
+                    }
+                    in (0.0..0.001) -> {
+                        nf.maximumFractionDigits = 5
+                        nf0.maximumFractionDigits = 5
+                    }
+                    in (0.0..0.0001) -> {
+                        nf.maximumFractionDigits = 6
+                        nf0.maximumFractionDigits = 6
+                    }
+                    in (0.0..0.000001) -> {
+                        nf.maximumFractionDigits = 8
+                        nf0.maximumFractionDigits = 8
+                    }
+                    in (0.0..1000000000000.0) -> {
+                        nf.maximumFractionDigits = 2
+                        nf0.maximumFractionDigits = 2
+                    }
+                }
 
                 coinChartTextView.text = it.name.plus(" Chart")
                 Picasso.get()
@@ -227,7 +250,7 @@ class RatesDetailActivity : AppCompatActivity(), View.OnClickListener {
                         .plus(" ").plus("$")
                 coinPriceTop.text = nf0.format(it.priceUsd).plus(" $")
                 weightedPrice.text = getString(R.string.daily_average_price_chart).plus("\n")
-                    .plus(nf.format(it.vwap24Hr))
+                    .plus(nf.format(it.vwap24Hr)).plus(" $")
                 supply.text = getString(R.string.supply_chart).plus("\n").plus(nf.format(it.supply))
                 maxSupply.text =
                     getString(R.string.max_supply_chart).plus("\n").plus(nf.format(it.maxSupply))
@@ -260,6 +283,92 @@ class RatesDetailActivity : AppCompatActivity(), View.OnClickListener {
 
             }, {
                 Log.e(by.lebedev.miningcalculator.fragments.TAG, it.localizedMessage)
+
+                val disposableGecko = GetGeckoDetailsUseCaseImpl().fetch(coinName)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ gecko ->
+
+                        when (gecko.marketData.currentPrice.usd) {
+                            in (0.0..0.1) -> {
+                                nf.maximumFractionDigits = 3
+                                nf0.maximumFractionDigits = 3
+                            }
+                            in (0.0..0.001) -> {
+                                nf.maximumFractionDigits = 5
+                                nf0.maximumFractionDigits = 5
+                            }
+                            in (0.0..0.0001) -> {
+                                nf.maximumFractionDigits = 6
+                                nf0.maximumFractionDigits = 6
+                            }
+                            in (0.0..0.000001) -> {
+                                nf.maximumFractionDigits = 8
+                                nf0.maximumFractionDigits = 8
+                            }
+                            in (0.0..1000000000000.0) -> {
+                                nf.maximumFractionDigits = 2
+                                nf0.maximumFractionDigits = 2
+                            }
+                        }
+
+                        coinChartTextView.text = gecko.name.plus(" Chart")
+                        Picasso.get()
+                            .load(gecko.image.large)
+                            .error(R.drawable.nocoinlogo)
+                            .into(coinImage)
+                        name.text = getString(R.string.name_chart).plus("\n").plus(gecko.name)
+                        symbol.text = getString(R.string.symbol_chart).plus("\n").plus(gecko.symbol)
+                        price.text =
+                            getString(R.string.price_chart).plus("\n")
+                                .plus(nf.format(gecko.marketData.currentPrice.usd))
+                                .plus(" ").plus("$")
+                        coinPriceTop.text = nf0.format(gecko.marketData.currentPrice.usd).plus(" $")
+                        weightedPrice.text =
+                            getString(R.string.daily_average_price_chart).plus("\n")
+                                .plus(
+                                    nf.format(
+                                        (gecko.marketData.high24h.usd + gecko.marketData.low24h.usd).div(
+                                            2
+                                        )
+                                    )
+                                ).plus(" $")
+                        supply.text =
+                            getString(R.string.supply_chart).plus("\n")
+                                .plus(nf.format(gecko.marketData.circulatingSupply))
+                        maxSupply.text =
+                            getString(R.string.max_supply_chart).plus("\n")
+                                .plus(nf.format(gecko.marketData.totalSupply))
+                        marketCapUsd.text =
+                            getString(R.string.market_cap_chart).plus("\n")
+                                .plus(nf.format(gecko.marketData.marketCap.usd))
+                        volume24Hours.text =
+                            getString(R.string.volume_in_24h_chart).plus("\n")
+                                .plus(nf.format(gecko.marketData.totalVolume.usd))
+                        percentChange24H.text = if (gecko.marketData.priceChangePercentage24h > 0) {
+                            "+${nf.format(gecko.marketData.priceChangePercentage24h)}%"
+                        } else {
+                            "${nf.format(gecko.marketData.priceChangePercentage24h)}%"
+                        }
+                        if (gecko.marketData.priceChangePercentage24h > 0) {
+                            percentChange24H.setTextColor(
+                                ContextCompat.getColor(
+                                    this,
+                                    R.color.green_percent_change
+                                )
+                            )
+                        } else {
+                            percentChange24H.setTextColor(
+                                ContextCompat.getColor(
+                                    this,
+                                    R.color.red_percent_change
+                                )
+                            )
+                        }
+                    }, {
+                        Log.e(by.lebedev.miningcalculator.fragments.TAG, it.localizedMessage)
+                    })
+                compositeDisposable.add(disposableGecko)
             })
         compositeDisposable.add(disposable)
     }

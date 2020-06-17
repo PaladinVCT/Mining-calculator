@@ -22,6 +22,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.earnings_layout.view.*
 import kotlinx.android.synthetic.main.linechart_layout.*
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -42,13 +43,21 @@ class CoinHistoryChart : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val disposable = GetHistoryRatesUseCaseImpl().fetch(CoinTempData.instance.coinChartName,CoinTempData.instance.coinTimeFrame)
+        val disposable = GetHistoryRatesUseCaseImpl().fetch(
+            CoinTempData.instance.coinChartName,
+            CoinTempData.instance.coinTimeFrame
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                setupLineChart(it, CoinTempData.instance.coinTimeFrame)
+                if (it.size != 0) {
+                    setupLineChart(it, CoinTempData.instance.coinTimeFrame)
+                } else {
+                    lineChart.setNoDataText("Chart not available")
+                }
             }, {
                 Log.e(TAG, it.localizedMessage)
+                lineChart.setNoDataText("Chart not available")
             })
 
         compositeDisposable.add(disposable)

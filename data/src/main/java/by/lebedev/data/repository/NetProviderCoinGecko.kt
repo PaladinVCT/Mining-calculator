@@ -1,14 +1,11 @@
 package by.lebedev.data.repository
 
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import kotlin.math.log
 
 
 object NetProviderCoinGecko {
@@ -26,7 +23,7 @@ object NetProviderCoinGecko {
         .connectTimeout(10, TimeUnit.SECONDS)
         .readTimeout(10, TimeUnit.SECONDS)
 
-    fun provideApi(): CoineckoApi {
+    fun provideApi(): CoingeckoApi {
 
         val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -35,6 +32,6 @@ object NetProviderCoinGecko {
             .baseUrl(BASE_URL)
             .build()
 
-        return retrofit.create(CoineckoApi::class.java)
+        return retrofit.create(CoingeckoApi::class.java)
     }
 }

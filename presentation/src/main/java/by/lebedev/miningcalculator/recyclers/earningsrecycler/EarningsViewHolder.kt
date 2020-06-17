@@ -40,24 +40,12 @@ class EarningsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
         itemView.setOnClickListener {
-            val tempCoinList = ArrayList<CoinGeckoCoin>()
             val intent = Intent(it.context, RatesDetailActivity::class.java)
 
+            val tempCoinList = ArrayList<CoinGeckoCoin>()
             for (i in 0 until CoinTempData.instance.allGeckoCoinList.size) {
-                if (CoinTempData.instance.allGeckoCoinList[i].id.toLowerCase(Locale.ROOT).contains(
-                        coinProfitabilityString.coinTicker.toLowerCase(
-                            Locale.ROOT
-                        )
-                    ) ||CoinTempData.instance.allGeckoCoinList[i].name.toLowerCase(Locale.ROOT).contains(
-                        coinProfitabilityString.coinTicker.toLowerCase(
-                            Locale.ROOT
-                        )
-                    ) ||
-                    CoinTempData.instance.allGeckoCoinList[i].symbol.toLowerCase(Locale.ROOT).contains(
-                        coinProfitabilityString.coinTicker.toLowerCase(
-                            Locale.ROOT
-                        )
-                    )
+                if (CoinTempData.instance.allGeckoCoinList[i].symbol.toLowerCase(Locale.ROOT) ==
+                    (coinProfitabilityString.coinTicker.toLowerCase(Locale.ROOT))
                 ) {
                     tempCoinList.add(CoinTempData.instance.allGeckoCoinList[i])
                 }
@@ -68,7 +56,11 @@ class EarningsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 CoinTempData.instance.coinTicker = tempCoinList[0].symbol.toUpperCase(Locale.ROOT)
                 itemView.context.startActivity(intent)
             } else {
-                Toast.makeText(itemView.context, it.context.getString(R.string.pools_not_found), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    itemView.context,
+                    it.context.getString(R.string.pools_not_found),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
