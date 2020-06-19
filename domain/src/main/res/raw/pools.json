@@ -7926,5 +7926,134 @@
                 "TotalUsers": 0
             },
             "SortOrder": "229"
+        },
+		
+		{
+            "Id": "123456",
+            "LogoUrl": "https://cdn.steemitimages.com/DQmbLrU4cgMAhb2HqJHKgCn1FucWfd7GYdfgfBNKs6KKQ2z/herominers.jpg",
+            "Name": "Hero Miners",
+            "AffiliateURL": "https://herominers.com/",
+            "PoolFeatures": [
+                "Stratum",
+                "Monitoring",
+                "Vardiff"
+            ],
+            "Coins": [
+                "XWP",
+                "AEON",
+                "ARQ",
+                "TUBE",
+                "BLOC",
+                "DERO",
+                "GRFT",
+                "XHV",
+                "LOKI",
+                "MSR",
+                "PGO",
+                "QRL",
+                "QWC",
+                "RYO",
+                "XLA",
+                "SUMO",
+                "TRTL",
+                "UPX",
+                "WOW",
+                "XCASH",
+                "CCX"
+
+            ],
+            "ServerLocations": [
+                "Asia",
+                "Europe",
+                "North America"
+            ],
+            "PaymentType": [
+                "PPS",           
+				"Solo"
+            ],
+            "AverageFee": "0.9%",
+            "Rating": {
+                "Avg": 0
+            },
+            "SortOrder": "230"
         }
+			,
+
+		{
+            "Id": "1234567",
+            "LogoUrl": "https://www.cryptunit.com/poolscovers/miner-rocks_2.jpg",
+            "Name": "Miner Rocks",
+            "AffiliateURL": "https://miner.rocks/",
+            "PoolFeatures": [
+                "Stratum",
+                "Monitoring",
+                "Vardiff"
+            ],
+            "Coins": [
+                "AEON",
+                "TUBE",
+                "DERO",
+                "GRFT",
+                "XHV",
+                "LOKI",
+                "MSR",
+                "RYO",
+                "XLA",
+                "SUMO",
+                "TRTL",
+                "UPX",
+                "XCASH",
+                "KRB",
+                "QWC"
+
+            ],
+            "ServerLocations": [
+                "Asia",
+                "Europe",
+                "Canada"
+            ],
+            "PaymentType": [
+                "PPLNS"
+            ],
+            "AverageFee": "0.9%",
+            "Rating": {
+                "Avg": 0
+            },
+            "SortOrder": "231"
+        },
+
+		{
+            "Id": "12345678",
+            "LogoUrl": "https://pbs.twimg.com/media/Dq3ggHPW4AAVYK2.jpg",
+            "Name": "Icemining pool",
+            "AffiliateURL": "https://icemining.ca/",
+            "PoolFeatures": [
+                "Stratum",
+                "Monitoring",
+                "Vardiff"
+            ],
+            "Coins": [
+                "ARW",
+                "ATOM",
+                "EPIC",
+                "KDA",
+                "MWC",
+                "NIM",
+                "SIN"
+            ],
+            "ServerLocations": [
+                "Asia",
+                "Europe",
+                "Canada"
+            ],
+            "PaymentType": [
+                "PPLNS"
+            ],
+            "AverageFee": "1%",
+            "Rating": {
+                "Avg": 0
+            },
+            "SortOrder": "232"
+        }
+
     ]

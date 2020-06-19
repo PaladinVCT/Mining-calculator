@@ -1,37 +1,21 @@
 {
   "project_info": {
-    "project_number": "209958519966",
-    "firebase_url": "https://mining-calculator-d697a.firebaseio.com",
-    "project_id": "mining-calculator-d697a",
-    "storage_bucket": "mining-calculator-d697a.appspot.com"
+    "project_number": "1053769816565",
+    "firebase_url": "https://mining-calculator-69122.firebaseio.com",
+    "project_id": "mining-calculator-69122",
+    "storage_bucket": "mining-calculator-69122.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:209958519966:android:b1d1a1bec0090db5c3278f",
+        "mobilesdk_app_id": "1:1053769816565:android:1c0f2fb9b17665fc68a8bc",
         "android_client_info": {
           "package_name": "by.lebedev.miningcalculator"
         }
       },
       "oauth_client": [
         {
-          "client_id": "209958519966-iitbjnq2alen3qm5uj63sil69v3iruas.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "by.lebedev.miningcalculator",
-            "certificate_hash": "a5cce18d7614b6c3bca375b360dcda6e40dfbbb5"
-          }
-        },
-        {
-          "client_id": "209958519966-nn79jf4kajeng58bpheevkcktltu6gbs.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "by.lebedev.miningcalculator",
-            "certificate_hash": "c61d2a7f649e1a05effe6eb34ecaf51908688470"
-          }
-        },
-        {
-          "client_id": "209958519966-8pqju1l2d6ikj8pn1tgvtjnhuntefhi2.apps.googleusercontent.com",
+          "client_id": "1053769816565-5697e8j7pq3qq5i88m89jfsfjop0gtdv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "by.lebedev.miningcalculator",
@@ -39,34 +23,25 @@
           }
         },
         {
-          "client_id": "209958519966-g1hpn7madvebn036p4fspm3f0ipaktu0.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "by.lebedev.miningcalculator",
-            "certificate_hash": "9f61e1e8c53401b9617b461f65e3dea8aa0abfbc"
-          }
-        },
-        {
-          "client_id": "209958519966-jv3vht739tivpgpv9e4kampm0i91pva5.apps.googleusercontent.com",
+          "client_id": "1053769816565-kpm4jt44othk2bikhi4r739ev2814ek7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC9L7n9rL8VOB1AyqW0ifurn7cG1OyN0Ms"
+          "current_key": "AIzaSyBGtDO2AHbW5qUJxkUyR7G6msBLsRuE8VY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "209958519966-jv3vht739tivpgpv9e4kampm0i91pva5.apps.googleusercontent.com",
+              "client_id": "1053769816565-kpm4jt44othk2bikhi4r739ev2814ek7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
         }
-      },
-      "admob_app_id": "ca-app-pub-1501215034144631~1229746060"
+      }
     }
   ],
   "configuration_version": "1"

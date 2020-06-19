@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "602398443095",
-    "firebase_url": "https://mining-calculator-53d8e.firebaseio.com",
-    "project_id": "mining-calculator-53d8e",
-    "storage_bucket": "mining-calculator-53d8e.appspot.com"
+    "project_number": "1053769816565",
+    "firebase_url": "https://mining-calculator-69122.firebaseio.com",
+    "project_id": "mining-calculator-69122",
+    "storage_bucket": "mining-calculator-69122.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:602398443095:android:489276ba026873aee90512",
+        "mobilesdk_app_id": "1:1053769816565:android:1c0f2fb9b17665fc68a8bc",
         "android_client_info": {
           "package_name": "by.lebedev.miningcalculator"
         }
       },
       "oauth_client": [
         {
-          "client_id": "602398443095-4cqpm19jp8e4nn2p6b2npt993hovj4jj.apps.googleusercontent.com",
+          "client_id": "1053769816565-5697e8j7pq3qq5i88m89jfsfjop0gtdv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "by.lebedev.miningcalculator",
-            "certificate_hash": "9fe81985938c40361002d56aa84055a0621099df"
+            "certificate_hash": "4239040d08cdc902135787b30cc5d2e74bbef4c3"
           }
         },
         {
-          "client_id": "602398443095-iejd4ddvk9e6an893n8296rh5ulqa36n.apps.googleusercontent.com",
+          "client_id": "1053769816565-kpm4jt44othk2bikhi4r739ev2814ek7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC8jHzQmt_ZLpJcIiORtY9gmOfgLXuR3Ho"
+          "current_key": "AIzaSyBGtDO2AHbW5qUJxkUyR7G6msBLsRuE8VY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "602398443095-iejd4ddvk9e6an893n8296rh5ulqa36n.apps.googleusercontent.com",
+              "client_id": "1053769816565-kpm4jt44othk2bikhi4r739ev2814ek7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
