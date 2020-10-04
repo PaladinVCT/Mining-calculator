@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity(), DevicesAdapterAMD.InitialRigSetup, Amd
                     Log.e(TAG, getString(R.string.interstitial_not_loaded_yet))
                 }
 
-                val intent = Intent(this, DonationActivity::class.java)
+                val intent = Intent(this, WarningActivity::class.java)
                 startActivity(intent)
 
                 return true

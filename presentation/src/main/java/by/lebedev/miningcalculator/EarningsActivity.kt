@@ -32,9 +32,16 @@ class EarningsActivity : BaseEarningsActivity() {
 
     private val compositeDisposable = CompositeDisposable()
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.earnings_layout)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         loadAllCoinsIntoTempData()
 
@@ -254,7 +261,7 @@ class EarningsActivity : BaseEarningsActivity() {
                     Log.e(TAG, getString(R.string.interstitial_not_loaded_yet))
                 }
 
-                val intent = Intent(this, DonationActivity::class.java)
+                val intent = Intent(this, WarningActivity::class.java)
                 startActivity(intent)
 
                 return true

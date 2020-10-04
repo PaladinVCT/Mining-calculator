@@ -25,6 +25,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.amd_layout.*
 import androidx.recyclerview.widget.LinearSnapHelper
 import by.lebedev.miningcalculator.R
+import com.google.android.gms.ads.InterstitialAd
 
 private const val VENDOR = "Amd"
 const val SELECTED_ITEM = "selectedItem"
@@ -33,7 +34,7 @@ const val DEVICE = "device"
 const val TAG = "tag"
 
 class AmdFragment : Fragment() {
-
+    private lateinit var mInterstitialAd: InterstitialAd
     private val snapHelper = LinearSnapHelper()
     lateinit var mAdView: AdView
 
@@ -69,6 +70,10 @@ class AmdFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mInterstitialAd = InterstitialAd(requireContext())
+        mInterstitialAd.adUnitId = resources.getString(R.string.interstitial_id)
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
 
         mAdView = adViewAmd
         val adRequest = AdRequest.Builder().build()
@@ -109,6 +114,7 @@ class AmdFragment : Fragment() {
                 intent.putExtra(HASHRATE, 1000.0)
                 intent.putExtra(DEVICE, getString(R.string.Rigamd))
 
+                mInterstitialAd.show()
 
                 it.context.startActivity(intent)
             } else {
@@ -201,7 +207,6 @@ class AmdFragment : Fragment() {
                         val alert = builder.create()
                         alert.show()
 
-
                     }
                 }, {
                     Log.e(TAG, it.localizedMessage)
@@ -212,8 +217,6 @@ class AmdFragment : Fragment() {
         saveRigButtonAMD.setOnClickListener {
             saveConfigAMD.saveAMD()
         }
-
-
     }
 
 
@@ -225,7 +228,6 @@ class AmdFragment : Fragment() {
         devicesRecycleAMD.layoutManager = layoutManager
         devicesRecycleAMD.adapter =
             DevicesAdapterAMD(this.context!!, devices)
-
     }
 
     override fun onResume() {

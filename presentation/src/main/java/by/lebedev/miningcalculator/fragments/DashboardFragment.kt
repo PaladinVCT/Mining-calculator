@@ -15,6 +15,7 @@ import by.lebedev.miningcalculator.EarningsActivity
 import by.lebedev.miningcalculator.R
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.dashboard_layout.*
 
@@ -27,7 +28,7 @@ const val ENERGY_COST = "energyCost"
 const val FEE = "fee"
 
 class DashboardFragment : Fragment() {
-
+    private lateinit var mInterstitialAd: InterstitialAd
     lateinit var mAdView: AdView
 
     var selectedItem = -1
@@ -48,6 +49,10 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         MobileAds.initialize(this.context) {}
+
+        mInterstitialAd = InterstitialAd(requireContext())
+        mInterstitialAd.adUnitId = resources.getString(R.string.interstitial_id)
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
 
         mAdView = adViewDashboard
         val adRequest = AdRequest.Builder().build()
@@ -183,6 +188,8 @@ class DashboardFragment : Fragment() {
                     energyCostEditText.text.toString().replace(',', '.').toDouble()
                 )
                 intent.putExtra(FEE, poolFeeEditText.text.toString().replace(',', '.').toDouble())
+
+                mInterstitialAd.show()
 
                 it.context.startActivity(intent)
             }

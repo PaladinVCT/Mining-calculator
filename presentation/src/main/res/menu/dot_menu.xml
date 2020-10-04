@@ -11,7 +11,7 @@
 
     <item
             android:id="@+id/support"
-            android:title="@string/support_project"
+            android:title="@string/warning"
             app:showAsAction="never"/>
 
     <item

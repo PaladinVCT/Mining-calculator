@@ -34,7 +34,7 @@
                 android:name=".EarningsActivity"
                 android:screenOrientation="portrait" />
         <activity
-                android:name=".DonationActivity"
+                android:name=".WarningActivity"
                 android:screenOrientation="portrait" />
         <activity
                 android:name=".RatesDetailActivity"

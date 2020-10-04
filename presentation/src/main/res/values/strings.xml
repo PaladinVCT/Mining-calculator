@@ -33,12 +33,10 @@
     <string name="hardware">Hardware</string>
     <string name="coins">Coins</string>
     <string name="home">Home</string>
-    <string name="support_project">Support project</string>
+    <string name="warning">Warning</string>
     <string name="feedback">Send feedback</string>
     <string name="btc_wallet">bc1q77ghqfdkudpz8tgx4sdmfff5vfex7xzpw6rpkc</string>
-    <string name="donation_text">Big thanks to everyone who has supported this free project! If you want to make a
-        donation, you can send me email in the feedback section or you can help us by watching Ads.
-        Your support is hugely appreciated!
+    <string name="donation_text">Always do your own research! Try to analyse the exchanges data, and possibility that you can actually sell mined coins. Some coins might be very high in the ranks, but with zero buy orders and very small trading volume.
     </string>
     <string name="awesome_donators">Awesome Donators:​</string>
     <string name="app_id">ca-app-pub-1501215034144631~1229746060</string>

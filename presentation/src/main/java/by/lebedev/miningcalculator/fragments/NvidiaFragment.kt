@@ -22,6 +22,7 @@ import by.lebedev.miningcalculator.R
 import by.lebedev.miningcalculator.recyclers.devicesrecycler.nvidia.DevicesAdapterNvidia
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.InterstitialAd
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.nvidia_layout.*
@@ -29,7 +30,7 @@ import kotlinx.android.synthetic.main.nvidia_layout.*
 private const val VENDOR = "Nvidia"
 
 class NvidiaFragment : Fragment() {
-
+    private lateinit var mInterstitialAd: InterstitialAd
     private val snapHelper = LinearSnapHelper()
     lateinit var mAdView : AdView
 
@@ -57,6 +58,10 @@ class NvidiaFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mInterstitialAd = InterstitialAd(requireContext())
+        mInterstitialAd.adUnitId = resources.getString(R.string.interstitial_id)
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
 
         mAdView = adViewNvidia
         val adRequest = AdRequest.Builder().build()
@@ -95,6 +100,8 @@ class NvidiaFragment : Fragment() {
                 intent.putExtra(SELECTED_ITEM, 1)
                 intent.putExtra(HASHRATE, 1000.0)
                 intent.putExtra(DEVICE, getString(R.string.RIG))
+
+                mInterstitialAd.show()
 
                 it.context.startActivity(intent)
             } else {
@@ -191,14 +198,9 @@ class NvidiaFragment : Fragment() {
                 })
         }
 
-
-
         saveRigButtonNvidia.setOnClickListener {
             saveConfigNvidia.saveNvidia()
         }
-
-
-
     }
 
 
@@ -209,7 +211,6 @@ class NvidiaFragment : Fragment() {
         devicesRecycleNvidia.layoutManager = layoutManager
         devicesRecycleNvidia.adapter =
             DevicesAdapterNvidia(this.context!!, devices)
-
     }
 
     override fun onResume() {
@@ -222,8 +223,4 @@ class NvidiaFragment : Fragment() {
             R.id.rigDeviceCounterNvidia
         )
     }
-
-
-
-
 }

@@ -23,21 +23,21 @@ class EarningsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         Picasso.get().load(coinProfitabilityString.imageUrl)
             .into(itemView.coinIconImageView)
-
-        itemView.coinNameTextView.text = coinProfitabilityString.coinName
-        itemView.algoTextView.text = coinProfitabilityString.algoName
-        itemView.hashPowerTextView.text = coinProfitabilityString.hashrateAuto
-        itemView.dailyUsdTextView.text = coinProfitabilityString.rewardDayUsd
-        itemView.dailyCoinsTextView.text = coinProfitabilityString.rewardDayCoins
-        itemView.monthlyUsdTextView.text = coinProfitabilityString.rewardMonthUsd
-        itemView.monthlyCoinsTextView.text = coinProfitabilityString.rewardMonthCoins
-        itemView.volumeTextView.text = coinProfitabilityString.volumeUsd
-        if (coinProfitabilityString.showAlert) {
-            itemView.volumeWarning.visibility = View.VISIBLE
-        } else {
-            itemView.volumeWarning.visibility = View.GONE
+        itemView.apply {
+            coinNameTextView.text = coinProfitabilityString.coinName
+            algoTextView.text = coinProfitabilityString.algoName
+            hashPowerTextView.text = coinProfitabilityString.hashrateAuto
+            dailyUsdTextView.text = coinProfitabilityString.rewardDayUsd
+            dailyCoinsTextView.text = coinProfitabilityString.rewardDayCoins
+            monthlyUsdTextView.text = coinProfitabilityString.rewardMonthUsd
+            monthlyCoinsTextView.text = coinProfitabilityString.rewardMonthCoins
+            volumeTextView.text = coinProfitabilityString.volumeUsd
+            if (coinProfitabilityString.showAlert) {
+                volumeWarning.visibility = View.VISIBLE
+            } else {
+                volumeWarning.visibility = View.GONE
+            }
         }
-
 
         itemView.setOnClickListener {
             val intent = Intent(it.context, RatesDetailActivity::class.java)
