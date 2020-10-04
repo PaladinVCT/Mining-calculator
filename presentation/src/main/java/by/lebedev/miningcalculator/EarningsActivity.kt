@@ -47,7 +47,7 @@ class EarningsActivity : BaseEarningsActivity() {
 
         val selectedItem = intent.getIntExtra(SELECTED_ITEM, -1)
 
-        val device = intent.getStringExtra(DEVICE)
+        val device = intent.getStringExtra(DEVICE).toString()
 
         val hashrate =
             intent.getDoubleExtra(HASHRATE, -1.0) * getHashrateMultiplier(device, selectedItem)

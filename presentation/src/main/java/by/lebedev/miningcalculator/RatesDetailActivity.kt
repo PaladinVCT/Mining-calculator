@@ -54,7 +54,7 @@ class RatesDetailActivity : AppCompatActivity(), View.OnClickListener {
         sortRating.setOnClickListener(this)
         contactUsTextView.setOnClickListener(this)
 
-        val coinName = intent.getStringExtra(COIN_TAG)
+        val coinName = intent.getStringExtra(COIN_TAG).toString()
         val coinTicker = CoinTempData.instance.coinTicker
         CoinTempData.instance.coinChartName = coinName
 
