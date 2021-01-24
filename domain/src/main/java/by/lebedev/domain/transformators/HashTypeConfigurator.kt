@@ -11,8 +11,22 @@ class HashTypeConfigurator {
             "Ethash" -> {
                 return "Mh/s"
             }
+            "ProgPowZ" -> {
+                return "Mh/s"
+            }
+            "KawPow" -> {
+                return "Mh/s"
+            }
 
             "Equihash(210,9)" -> {
+                return "H/s"
+            }
+
+            "Equihash(192,7)" -> {
+                return "H/s"
+            }
+
+            "Equihash(125,4)" -> {
                 return "H/s"
             }
             "Zhash" -> {

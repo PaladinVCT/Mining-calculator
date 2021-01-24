@@ -1,5 +1,6 @@
 package by.lebedev.miningcalculator
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -10,12 +11,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.logo_layout.*
 
+const val ADS = "ads"
+const val ADS_PREF = "ads_pref"
 
 class LogoActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.logo_layout)
+
+        val prefs = getSharedPreferences(ADS_PREF, Context.MODE_PRIVATE)
+        prefs.edit().putBoolean(ADS, true).commit()
+
         val mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
         val bundle = Bundle()
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, bundle)
@@ -40,5 +47,4 @@ class LogoActivity : AppCompatActivity() {
     }
 
 
-
-}  
+}

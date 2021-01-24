@@ -22,7 +22,10 @@ class NvidiaImages {
         R.drawable.nv102100,
         R.drawable.nv104100,
         R.drawable.nv106100,
-        R.drawable.p100tesla
+        R.drawable.p100tesla,
+        R.drawable.nv3060ti,
+        R.drawable.nv3070,
+        R.drawable.nv3080
     )
 
     companion object {

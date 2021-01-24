@@ -15,6 +15,7 @@ class AmdImages {
         R.drawable.rx580,
         R.drawable.frontier,
         R.drawable.furyx,
+        R.drawable.rx5700,
         R.drawable.rx5700xt,
         R.drawable.vega56,
         R.drawable.vega64,

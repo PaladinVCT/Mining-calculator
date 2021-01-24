@@ -101,17 +101,13 @@ class NvidiaFragment : Fragment() {
                 intent.putExtra(HASHRATE, 1000.0)
                 intent.putExtra(DEVICE, getString(R.string.RIG))
 
-                mInterstitialAd.show()
-
                 it.context.startActivity(intent)
             } else {
                 Toast.makeText(
                     this.context, getString(R.string.please_add_device),
                     Toast.LENGTH_SHORT
                 ).show()
-
             }
-
         }
 
         loadRigButtonNvidia.setOnClickListener {

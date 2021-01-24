@@ -20,14 +20,13 @@ object NetProviderCoinGecko {
 
     private var httpClient = OkHttpClient.Builder()
         .addInterceptor(logger)
-        .connectTimeout(10, TimeUnit.SECONDS)
-        .readTimeout(10, TimeUnit.SECONDS)
+        .build()
 
     fun provideApi(): CoingeckoApi {
 
         val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(httpClient.build())
+            .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
             .build()

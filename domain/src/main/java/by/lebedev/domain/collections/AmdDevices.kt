@@ -191,7 +191,27 @@ class AmdDevices : VendorDevices {
             ), 850, 0
         ),
         Amd(
-            9, "RX 5700XT", hashMapOf(
+            9, "RX 5700", hashMapOf(
+                Pair("Ethash", 55.0),
+                Pair("Equihash(210,9)", 0.0),
+                Pair("Zhash", 0.0),
+                Pair("cuckAToo31", 1.05),
+                Pair("X16R", 0.0),
+                Pair("MTP", 1.8),
+                Pair("X25X", 0.0),
+                Pair("Lyra2REv3", 46.0),
+                Pair("CuckooCycle", 3.8),
+                Pair("PHI2", 0.0),
+                Pair("NeoScrypt", 0.0),
+                Pair("Skunkhash", 0.0),
+                Pair("Cuckaroom29", 3.9),
+                Pair("TimeTravel10", 0.0),
+                Pair("BCD", 0.0),
+                Pair("BeamHashII", 24.0)
+            ), 1500, 0
+        ),
+        Amd(
+            10, "RX 5700XT", hashMapOf(
                 Pair("Ethash", 51.5),
                 Pair("Equihash(210,9)", 0.0),
                 Pair("Zhash", 0.0),
@@ -208,10 +228,10 @@ class AmdDevices : VendorDevices {
                 Pair("TimeTravel10", 0.0),
                 Pair("BCD", 0.0),
                 Pair("BeamHashII", 28.0)
-            ), 1070, 0
+            ), 1250, 0
         ),
         Amd(
-            10, "RX Vega 56", hashMapOf(
+            11, "RX Vega 56", hashMapOf(
                 Pair("Ethash", 36.5),
                 Pair("Equihash(210,9)", 130.0),
                 Pair("Zhash", 34.0),
@@ -231,7 +251,7 @@ class AmdDevices : VendorDevices {
             ), 1720, 0
         ),
         Amd(
-            11, "RX Vega 64", hashMapOf(
+            12, "RX Vega 64", hashMapOf(
                 Pair("Ethash", 40.0),
                 Pair("Equihash(210,9)", 145.0),
                 Pair("Zhash", 38.0),
@@ -251,7 +271,7 @@ class AmdDevices : VendorDevices {
             ), 1800, 0
         ),
         Amd(
-            12, "RX Vega VII", hashMapOf(
+            13, "RX Vega VII", hashMapOf(
                 Pair("Ethash", 78.0),
                 Pair("Equihash(210,9)", 160.0),
                 Pair("Zhash", 49.0),

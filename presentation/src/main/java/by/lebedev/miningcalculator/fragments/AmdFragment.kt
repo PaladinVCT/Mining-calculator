@@ -114,8 +114,6 @@ class AmdFragment : Fragment() {
                 intent.putExtra(HASHRATE, 1000.0)
                 intent.putExtra(DEVICE, getString(R.string.Rigamd))
 
-                mInterstitialAd.show()
-
                 it.context.startActivity(intent)
             } else {
                 Toast.makeText(

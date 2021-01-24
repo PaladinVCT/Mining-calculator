@@ -18,18 +18,16 @@ object NetProviderCoinCap {
     private const val API_KEY_VALUE = "eb58ea2f-1d43-405f-bb97-ef01946db5fb"
 
     private var httpClient = OkHttpClient.Builder()
-        .connectTimeout(10, TimeUnit.SECONDS)
-        .readTimeout(10, TimeUnit.SECONDS)
         .addInterceptor { chain ->
             val request =
                 chain.request().newBuilder().addHeader(API_KEY_NAME, API_KEY_VALUE).build()
             chain.proceed(request)
-        }
+        }.build()
 
     fun provideApi(): CoinCapApi {
         val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(httpClient.build())
+            .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
             .build()

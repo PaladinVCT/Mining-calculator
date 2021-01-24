@@ -176,20 +176,18 @@ class DashboardFragment : Fragment() {
                 intent.putExtra(SELECTED_ITEM, selectedItem)
                 intent.putExtra(
                     HASHRATE,
-                    hashrateEditText.text.toString().replace(',', '.').toDouble()
+                    hashrateEditText.text.toString().replace(',', '.').toDoubleOrNull()
                 )
                 intent.putExtra(DEVICE, device)
                 intent.putExtra(
                     ENERGY,
-                    energyEditText.text.toString().replace(',', '.').toDouble()
+                    energyEditText.text.toString().replace(',', '.').toDoubleOrNull()
                 )
                 intent.putExtra(
                     ENERGY_COST,
-                    energyCostEditText.text.toString().replace(',', '.').toDouble()
+                    energyCostEditText.text.toString().replace(',', '.').toDoubleOrNull()
                 )
-                intent.putExtra(FEE, poolFeeEditText.text.toString().replace(',', '.').toDouble())
-
-                mInterstitialAd.show()
+                intent.putExtra(FEE, poolFeeEditText.text.toString().replace(',', '.').toDoubleOrNull())
 
                 it.context.startActivity(intent)
             }

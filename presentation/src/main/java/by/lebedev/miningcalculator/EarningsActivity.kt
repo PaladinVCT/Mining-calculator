@@ -17,10 +17,14 @@ import by.lebedev.domain.usecase.*
 import by.lebedev.miningcalculator.fragments.*
 import by.lebedev.miningcalculator.recyclers.earningsrecycler.EarningsAdapter
 import com.google.android.gms.ads.AdRequest
+import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.internal.operators.observable.ObservableBufferTimed
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.earnings_layout.*
+import kotlinx.coroutines.*
 
 private const val GPU = "GPU"
 private const val CPU = "CPU"
@@ -40,6 +44,9 @@ class EarningsActivity : BaseEarningsActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.earnings_layout)
+
+        startAdsTimer()
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
@@ -71,6 +78,19 @@ class EarningsActivity : BaseEarningsActivity() {
 
     }
 
+    private fun startAdsTimer() {
+
+        if (prefs.getBoolean(ADS, false)) {
+            prefs.edit().putBoolean(ADS, false).commit()
+            CoroutineScope(Dispatchers.IO).launch {
+                delay(30000)
+                withContext(Dispatchers.Main) {
+                    mInterstitialAd.show()
+                }
+            }
+        }
+    }
+
     private fun getEarningsCryptonight(
         selectedItem: Int,
         hashrate: Double,
@@ -89,7 +109,7 @@ class EarningsActivity : BaseEarningsActivity() {
             }, {
                 textForError.visibility = View.VISIBLE
                 earningsProgressBar.visibility = View.INVISIBLE
-                Log.e(TAG, it.localizedMessage)
+                Log.e(TAG, it.localizedMessage.orEmpty())
             })
 
         compositeDisposable.add(d)
@@ -114,7 +134,7 @@ class EarningsActivity : BaseEarningsActivity() {
             }, {
                 textForError.visibility = View.VISIBLE
                 earningsProgressBar.visibility = View.INVISIBLE
-                Log.e(TAG, it.localizedMessage)
+                Log.e(TAG, it.localizedMessage.orEmpty())
             })
 
         compositeDisposable.add(d)
@@ -223,7 +243,7 @@ class EarningsActivity : BaseEarningsActivity() {
                 }
 
             }, {
-                Log.e(TAG, it.localizedMessage)
+                Log.e(TAG, it.localizedMessage.orEmpty())
             })
         compositeDisposable.add(d)
     }
@@ -246,34 +266,22 @@ class EarningsActivity : BaseEarningsActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.home -> {
-
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 return true
             }
             R.id.support -> {
-                mInterstitialAd.loadAd(AdRequest.Builder().build())
-
-                if (mInterstitialAd.isLoaded) {
-                    mInterstitialAd.show()
-
-                } else {
-                    Log.e(TAG, getString(R.string.interstitial_not_loaded_yet))
-                }
-
                 val intent = Intent(this, WarningActivity::class.java)
                 startActivity(intent)
-
                 return true
             }
             R.id.feedback -> {
-
-                val Email = Intent(Intent.ACTION_SEND)
-                Email.type = getString(R.string.text_email)
-                Email.putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.my_email)))
-                Email.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback_mining_app))
-                Email.putExtra(Intent.EXTRA_TEXT, getString(R.string.dear_me) + "\n")
-                startActivity(Intent.createChooser(Email, getString(R.string.send_feedback)))
+                val email = Intent(Intent.ACTION_SEND)
+                email.type = getString(R.string.text_email)
+                email.putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.my_email)))
+                email.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback_mining_app))
+                email.putExtra(Intent.EXTRA_TEXT, getString(R.string.dear_me) + "\n")
+                startActivity(Intent.createChooser(email, getString(R.string.send_feedback)))
                 return true
             }
         }
@@ -352,7 +360,7 @@ class EarningsActivity : BaseEarningsActivity() {
             .subscribe({ result ->
                 result?.let { CoinTempData.instance.allGeckoCoinList = result }
             }, {
-                Log.e(TAG, it.localizedMessage)
+                Log.e(TAG, it.localizedMessage.orEmpty())
             })
         compositeDisposable.add(disposable)
     }
